@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:Name="http://www.w3.org/1999/xhtml"
+      th:lang="${#locale.language}">
+<head>
+    <meta charset="utf-8"/>
+    <title>CleanUp</title>
+    <link href="style.css" th:href="@{/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<h1>CleanUp Roßdorf/Gundernhausen</h1>
+<h2>Nächstes Treffen am Sonntag den 6.12. um 11:00</h2>
+
+<h3>An welchen Orten wird Muell gesammelt?</h3>
+<table>
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>Ort</th>
+        <th>booked</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="location : ${locations}">
+        <td th:text="${location.id}"></td>
+        <td th:text="${location.name}"></td>
+        <td th:text="${location.booked}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<h3>Wer ist schon dabei?</h3>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>angemeldet am</th>
+        <th>Ort</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="event : ${events}">
+        <td th:text="${event.name}"></td>
+        <td th:text="${event.date}"></td>
+        <td th:text="${event.sector}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<h3>Sei kein Frosch und mach auch mit!</h3>
+<form method="POST" th:action="@{/addPerson}" enctype="multipart/form-data">
+    <div>
+        Name: <input name="name"/>
+        Location:
+        <select id="id" name="id">
+            <!--                    <select th:field="*{id}">-->
+            <option th:value="''" th:text="Select"></option>
+            <option th:each="location : ${locations}"
+                    th:value="${location.id}"
+                    th:text="${location.name}"></option>
+        </select>
+
+
+        <button type="submit">Anmelden</button>
+    </div>
+
+
+</form>
+
+<p>
+
+</p>
+</body>
+</html>
