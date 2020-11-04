@@ -12,6 +12,6 @@ public class Event {
     private long id;
     private LocalDate date;
     private String name;
-    private Sector sector;
+    private String location;
 
 }
