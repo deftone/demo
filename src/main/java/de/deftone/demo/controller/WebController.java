@@ -31,18 +31,20 @@ public class WebController {
     public java.lang.String showTemplate(Model model) {
         model.addAttribute("events", eventService.getNextEvent());
         model.addAttribute("locations", locationService.getAllLocations());
+        model.addAttribute("participants", participantService.getAllParticipants());
         return "index";
     }
 
     @PostMapping("/addPerson")
-    public java.lang.String addPerson(@RequestParam java.lang.String name,
-                                      @RequestParam Long id,
+    public java.lang.String addPerson(@RequestParam String name,
+                                      @RequestParam Integer id,
                                       Model model) {
         if (name != null && !name.isEmpty() && id != null) {
             Participant participant = new Participant();
             participant.setName(name);
             participant.setAngemeldetAm(LocalDate.now());
             participant.setEvent(eventService.getNextEvent());
+            participant.setLocationName(locationService.getLocationNameById(id));
             participantService.addParticipant(participant);
         }
         model.addAttribute("participants", participantService.getAllParticipants());

@@ -4,6 +4,7 @@ import de.deftone.demo.model.Event;
 import de.deftone.demo.model.Location;
 import de.deftone.demo.service.EventService;
 import de.deftone.demo.service.LocationService;
+import de.deftone.demo.service.ParticipantService;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -14,11 +15,14 @@ public class AdminController {
 
     private final LocationService locationService;
     private final EventService eventService;
+    private final ParticipantService participantService;
 
     public AdminController(LocationService locationService,
-                           EventService eventService) {
+                           EventService eventService,
+                           ParticipantService participantService) {
         this.locationService = locationService;
         this.eventService = eventService;
+        this.participantService = participantService;
     }
 
 
@@ -57,5 +61,9 @@ public class AdminController {
         return eventService.getAllEvents();
     }
 
-    //todo: loeschen
+    //Teilnehmer loeschen
+    @PostMapping(path = "/admin/deleteParticipant")
+    public boolean addEvent(@RequestParam long id) {
+        return participantService.deleteParticipant(id);
+    }
 }

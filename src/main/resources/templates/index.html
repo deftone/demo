@@ -15,14 +15,12 @@
 <table>
     <thead>
     <tr>
-        <th>id</th>
         <th>Ort</th>
-        <th>booked</th>
+        <th>gebucht</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="location : ${locations}">
-        <td th:text="${location.id}"></td>
         <td th:text="${location.name}"></td>
         <td th:text="${location.booked}"></td>
     </tr>
@@ -42,7 +40,7 @@
     <tr th:each="participant : ${participants}">
         <td th:text="${participant.name}"></td>
         <td th:text="${participant.angemeldetAm}"></td>
-        <!--        <td th:text="${participant.location}"></td>-->
+        <td th:text="${participant.locationName}"></td>
     </tr>
     </tbody>
 </table>
@@ -53,7 +51,6 @@
         Name: <input name="name"/>
         Location:
         <select id="id" name="id">
-            <!--                    <select th:field="*{id}">-->
             <option th:value="''" th:text="Select"></option>
             <option th:each="location : ${locations}"
                     th:value="${location.id}"

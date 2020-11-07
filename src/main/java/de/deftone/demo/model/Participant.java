@@ -20,8 +20,7 @@ public class Participant {
     private long id;
     private LocalDate angemeldetAm;
     private String name;
-    @OneToOne(targetEntity=Location.class)
-    private Location location;
+    private String locationName;
     @OneToOne(targetEntity=Event.class)
     private Event event;
 }

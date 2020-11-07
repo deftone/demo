@@ -5,6 +5,7 @@ import de.deftone.demo.repo.ParticipantRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ParticipantService {
@@ -22,5 +23,14 @@ public class ParticipantService {
     public List<Participant> getAllParticipants() {
         //todo: einschraenkung auf naechsten event
         return participantRepo.findAll();
+    }
+
+    public boolean deleteParticipant(long id){
+        Optional<Participant> byId = participantRepo.findById(id);
+        if (byId.isPresent()){
+            participantRepo.delete(byId.get());
+            return true;
+        }
+        return false;
     }
 }
