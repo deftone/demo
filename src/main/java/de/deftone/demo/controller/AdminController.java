@@ -1,22 +1,28 @@
 package de.deftone.demo.controller;
 
+import de.deftone.demo.model.Event;
 import de.deftone.demo.model.Location;
+import de.deftone.demo.service.EventService;
 import de.deftone.demo.service.LocationService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
 public class AdminController {
 
-    @Autowired
-    private LocationService locationService;
+    private final LocationService locationService;
+    private final EventService eventService;
 
-    //das funktioniert! damit koennte man die Locations eingeben
+    public AdminController(LocationService locationService,
+                           EventService eventService) {
+        this.locationService = locationService;
+        this.eventService = eventService;
+    }
+
+
+    //zum erstellen
     @PostMapping(path = "/admin/addLocation", consumes = "application/json")
     public Location addLocation(@RequestBody Location location) {
         return locationService.addLocation(location);
@@ -24,7 +30,7 @@ public class AdminController {
 
     //zum kontrollieren
     @GetMapping("/admin/getLocations")
-    public List<Location> getLocations(){
+    public List<Location> getLocations() {
         return locationService.getAllLocations();
     }
 
@@ -33,4 +39,23 @@ public class AdminController {
     public List<Location> resetAllLocations() {
         return locationService.resetAllLocation();
     }
+
+    //todo: loeschen
+
+    //zum erstellen
+    @PostMapping(path = "/admin/addEvent")
+    public Event addEvent(@RequestParam String datumInDDMMYYYY) {
+        Event event = new Event();
+        //todo: datum nutzen
+        event.setDate(LocalDate.now());
+        return eventService.addEvent(event);
+    }
+
+    //zum kontrollieren
+    @GetMapping("/admin/getEvents")
+    public List<Event> getEvents() {
+        return eventService.getAllEvents();
+    }
+
+    //todo: loeschen
 }

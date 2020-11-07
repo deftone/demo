@@ -39,10 +39,10 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="event : ${events}">
-        <td th:text="${event.name}"></td>
-        <td th:text="${event.date}"></td>
-        <td th:text="${event.location}"></td>
+    <tr th:each="participant : ${participants}">
+        <td th:text="${participant.name}"></td>
+        <td th:text="${participant.angemeldetAm}"></td>
+        <!--        <td th:text="${participant.location}"></td>-->
     </tr>
     </tbody>
 </table>
