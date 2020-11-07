@@ -52,7 +52,7 @@
         Location:
         <select id="id" name="id">
             <option th:value="''" th:text="Select"></option>
-            <option th:each="location : ${locations}"
+            <option th:each="location : ${freeLocations}"
                     th:value="${location.id}"
                     th:text="${location.name}"></option>
         </select>

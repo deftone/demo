@@ -1,5 +1,6 @@
 package de.deftone.demo.controller;
 
+import de.deftone.demo.model.Location;
 import de.deftone.demo.model.Participant;
 import de.deftone.demo.service.EventService;
 import de.deftone.demo.service.LocationService;
@@ -31,6 +32,7 @@ public class WebController {
     public java.lang.String showTemplate(Model model) {
         model.addAttribute("events", eventService.getNextEvent());
         model.addAttribute("locations", locationService.getAllLocations());
+        model.addAttribute("freeLocations", locationService.getFreeLocations());
         model.addAttribute("participants", participantService.getAllParticipants());
         return "index";
     }
@@ -46,9 +48,15 @@ public class WebController {
             participant.setEvent(eventService.getNextEvent());
             participant.setLocationName(locationService.getLocationNameById(id));
             participantService.addParticipant(participant);
+
+            //und anschliessend als gebucht setzen, damit aus auswahlbox verschwindet
+            locationService.setLocationToBooked(id);
+
+            // alle geaenderten Attribute neu holen
+            model.addAttribute("participants", participantService.getAllParticipants());
+            model.addAttribute("locations", locationService.getAllLocations());
+            model.addAttribute("freeLocations", locationService.getFreeLocations());
         }
-        model.addAttribute("participants", participantService.getAllParticipants());
-//        model.addAttribute("locations", l); hat sichnicht geaendert, muss nicht uebergeben werden??
         return "redirect:/index";
     }
 }

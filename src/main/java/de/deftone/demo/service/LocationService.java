@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class LocationService {
@@ -18,6 +19,13 @@ public class LocationService {
 
     public List<Location> getAllLocations() {
         return locationRepo.findAll();
+    }
+
+    public List<Location> getFreeLocations() {
+        return locationRepo.findAll()
+                .stream()
+                .filter(l -> !l.getBooked())
+                .collect(Collectors.toList());
     }
 
     public Location addLocation(Location location) {
@@ -39,5 +47,13 @@ public class LocationService {
             return byId.get().getName();
         }
         return "no location with id " + id;
+    }
+
+    public void setLocationToBooked(int id){
+        Location location = locationRepo.findById(id)
+                //todo: bessere exception
+                .orElseThrow(() -> new RuntimeException("Keine Location mit id " + id));
+        location.setBooked(true);
+        locationRepo.save(location);
     }
 }
