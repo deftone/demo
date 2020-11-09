@@ -18,9 +18,13 @@ public class Participant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private LocalDate angemeldetAm;
+
     private String name;
+
     private String locationName;
+
     @OneToOne(targetEntity=Event.class)
     private Event event;
 }

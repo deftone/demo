@@ -1,6 +1,5 @@
 package de.deftone.demo.controller;
 
-import de.deftone.demo.model.Location;
 import de.deftone.demo.model.Participant;
 import de.deftone.demo.service.EventService;
 import de.deftone.demo.service.LocationService;

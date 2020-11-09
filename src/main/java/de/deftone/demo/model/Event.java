@@ -16,10 +16,19 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Event {
+public class Event implements Comparable<Event> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private LocalDate date;  //eingabe mit postman bekomme ich nicht hin
+
+    @Override
+    public int compareTo(Event o) {
+        //zum sortieren nach Datum sortieren
+        return this.getDate().compareTo(o.date);
+    }
+
+    //todo: equals und hashcode ueberschreiben
 }
