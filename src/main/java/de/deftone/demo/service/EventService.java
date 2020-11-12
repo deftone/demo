@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,8 +16,29 @@ public class EventService {
 
     private final EventRepo eventRepo;
 
-    public Event addEvent(Event event) {
-        return eventRepo.save(event);
+    //todo: bessere exceptions!
+    public Event addEvent(String dateString) {
+        //zuerst das pattern pruefen
+        try {
+            //default, ISO_LOCAL_DATE
+            LocalDate localDate = LocalDate.parse(dateString);
+            Event event = new Event();
+            event.setDate(localDate);
+
+            //pruefen ob es das event schon gibt (kein doppeltes datum!)
+            long count = eventRepo.findAll().stream()
+                    .filter(e -> e.getDate().equals(localDate))
+                    .count();
+            if (count == 0) {
+                return eventRepo.save(event);
+            } else {
+                throw new RuntimeException("Event an diesem Event existiert schon!");
+            }
+        } catch (DateTimeParseException e) {
+            throw new RuntimeException("Falsches Datumformat! " +
+                    "Bitte Datum so eingeben: YYYY-MM-DD. zB 2021-01-15");
+        }
+
     }
 
     //todo: bessere Exception!

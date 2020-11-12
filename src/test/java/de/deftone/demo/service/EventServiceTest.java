@@ -4,17 +4,18 @@ import de.deftone.demo.model.Event;
 import de.deftone.demo.repo.EventRepo;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
-
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 // ohne diese Annotation @RunWith ist der eventRepoMock null
@@ -31,6 +32,40 @@ public class EventServiceTest {
     @Before
     public void setUp() {
         service = new EventService(eventRepoMock);
+    }
+
+    @Test
+    public void addEventSuccess() {
+        when(eventRepoMock.save(any()))
+                .thenReturn(new Event(1L, LocalDate.of(2020, 12, 1)));
+        Event event = service.addEvent("2020-12-01");
+        assertEquals(LocalDate.of(2020, 12, 1), event.getDate());
+    }
+
+    @Test
+    public void addEventWrongDatePattern() {
+        when(eventRepoMock.save(any()))
+                .thenReturn(new Event(1L, LocalDate.of(2020, 12, 1)));
+        try {
+            service.addEvent("2020.12.01");
+            fail();
+        } catch (RuntimeException e) {
+            assertEquals("Falsches Datumformat! " +
+                    "Bitte Datum so eingeben: YYYY-MM-DD. zB 2021-01-15", e.getMessage());
+        }
+    }
+
+    @Test
+    public void addEventDatumExistiertSchon() {
+        when(eventRepoMock.findAll())
+                .thenReturn(Collections.singletonList(
+                        new Event(1L, LocalDate.of(2020, 12, 1))));
+        try {
+            service.addEvent("2020-12-01");
+            fail();
+        } catch (RuntimeException e) {
+            assertEquals("Event an diesem Event existiert schon!", e.getMessage());
+        }
     }
 
     @Test

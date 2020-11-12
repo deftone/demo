@@ -5,26 +5,18 @@ import de.deftone.demo.model.Location;
 import de.deftone.demo.service.EventService;
 import de.deftone.demo.service.LocationService;
 import de.deftone.demo.service.ParticipantService;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 public class AdminController {
 
     private final LocationService locationService;
     private final EventService eventService;
     private final ParticipantService participantService;
-
-    public AdminController(LocationService locationService,
-                           EventService eventService,
-                           ParticipantService participantService) {
-        this.locationService = locationService;
-        this.eventService = eventService;
-        this.participantService = participantService;
-    }
-
 
     //zum erstellen
     @PostMapping(path = "/admin/addLocation", consumes = "application/json")
@@ -48,11 +40,8 @@ public class AdminController {
 
     //zum erstellen
     @PostMapping(path = "/admin/addEvent")
-    public Event addEvent(@RequestParam String datumInDDMMYYYY) {
-        Event event = new Event();
-        //todo: datum nutzen
-        event.setDate(LocalDate.now());
-        return eventService.addEvent(event);
+    public Event addEvent(@RequestParam String datumInYYYY_MM_DD) {
+        return eventService.addEvent(datumInYYYY_MM_DD);
     }
 
     //zum kontrollieren
