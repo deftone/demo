@@ -2,6 +2,7 @@ package de.deftone.demo.service;
 
 import de.deftone.demo.model.Location;
 import de.deftone.demo.repo.LocationRepo;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,13 +10,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class LocationService {
 
     private final LocationRepo locationRepo;
-
-    public LocationService(LocationRepo locationRepo) {
-        this.locationRepo = locationRepo;
-    }
 
     public List<Location> getAllLocations() {
         return locationRepo.findAll();
@@ -38,7 +36,7 @@ public class LocationService {
             return locationRepo.save(location);
         } else {
             //todo: bessere Exception!
-            throw new RuntimeException("Location " + location.getName() + " already exists!");
+            throw new RuntimeException("Location " + location.getName().trim() + " already exists!");
         }
     }
 
