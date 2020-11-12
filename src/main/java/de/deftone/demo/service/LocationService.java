@@ -29,8 +29,17 @@ public class LocationService {
     }
 
     public Location addLocation(Location location) {
-        //todo: pruefen, dass nicht doppelt
-        return locationRepo.save(location);
+        long count = locationRepo.findAll()
+                .stream()
+                .filter(l -> l.getName().equalsIgnoreCase(location.getName().trim()))
+                .count();
+        if (count == 0L) {
+            location.setName(location.getName().trim());
+            return locationRepo.save(location);
+        } else {
+            //todo: bessere Exception!
+            throw new RuntimeException("Location " + location.getName() + " already exists!");
+        }
     }
 
     public List<Location> resetAllLocation() {
@@ -49,7 +58,7 @@ public class LocationService {
         return "no location with id " + id;
     }
 
-    public void setLocationToBooked(int id){
+    public void setLocationToBooked(int id) {
         Location location = locationRepo.findById(id)
                 //todo: bessere exception
                 .orElseThrow(() -> new RuntimeException("Keine Location mit id " + id));
