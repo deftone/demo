@@ -36,7 +36,11 @@ public class AdminController {
         return locationService.resetAllLocation();
     }
 
-    //todo: loeschen
+    //zum loeschen
+    @PostMapping(path = "/admin/deleteLocation")
+    public void deleteLocation(@RequestParam long id) {
+        locationService.deleteLocation(id);
+    }
 
     //zum erstellen
     @PostMapping(path = "/admin/addEvent")

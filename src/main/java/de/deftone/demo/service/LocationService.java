@@ -48,7 +48,7 @@ public class LocationService {
         return locationRepo.findAll();
     }
 
-    public String getLocationNameById(int id) {
+    public String getLocationNameById(long id) {
         Optional<Location> byId = locationRepo.findById(id);
         if (byId.isPresent()) {
             return byId.get().getName();
@@ -56,11 +56,18 @@ public class LocationService {
         return "no location with id " + id;
     }
 
-    public void setLocationToBooked(int id) {
+    public void setLocationToBooked(long id) {
         Location location = locationRepo.findById(id)
                 //todo: bessere exception
                 .orElseThrow(() -> new RuntimeException("Keine Location mit id " + id));
         location.setBooked(true);
         locationRepo.save(location);
+    }
+
+    public void deleteLocation(long id) {
+        Location location = locationRepo.findById(id)
+                //todo: bessere exception
+                .orElseThrow(() -> new RuntimeException("Keine Location mit id " + id));
+        locationRepo.delete(location);
     }
 }
