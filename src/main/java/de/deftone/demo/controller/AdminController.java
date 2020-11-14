@@ -18,6 +18,7 @@ public class AdminController {
     private final EventService eventService;
     private final ParticipantService participantService;
 
+    // ****** Location ******
     //zum erstellen
     @PostMapping(path = "/admin/addLocation", consumes = "application/json")
     public Location addLocation(@RequestBody Location location) {
@@ -42,6 +43,7 @@ public class AdminController {
         locationService.deleteLocation(id);
     }
 
+    // ****** Event *******
     //zum erstellen
     @PostMapping(path = "/admin/addEvent")
     public Event addEvent(@RequestParam String datumInYYYY_MM_DD) {
@@ -54,9 +56,10 @@ public class AdminController {
         return eventService.getAllEvents();
     }
 
+    // ***** Participant *******
     //Teilnehmer loeschen
     @PostMapping(path = "/admin/deleteParticipant")
-    public boolean addEvent(@RequestParam long id) {
+    public boolean deleteParticipant(@RequestParam long id) {
         return participantService.deleteParticipant(id);
     }
 }

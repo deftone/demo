@@ -32,7 +32,7 @@ public class WebController {
         model.addAttribute("events", eventService.getNextEvent());
         model.addAttribute("locations", locationService.getAllLocations());
         model.addAttribute("freeLocations", locationService.getFreeLocations());
-        model.addAttribute("participants", participantService.getAllParticipants());
+        model.addAttribute("participants", participantService.getAllParticipantsForNextEvent());
         return "index";
     }
 
@@ -52,7 +52,7 @@ public class WebController {
             locationService.setLocationToBooked(id);
 
             // alle geaenderten Attribute neu holen
-            model.addAttribute("participants", participantService.getAllParticipants());
+            model.addAttribute("participants", participantService.getAllParticipantsForNextEvent());
             model.addAttribute("locations", locationService.getAllLocations());
             model.addAttribute("freeLocations", locationService.getFreeLocations());
         }
