@@ -28,7 +28,8 @@
         <h2> Wir machen Roßdorf und Gundernhausen sauber!</h2>
         <h5> Wir treffen uns jeden ersten Sonntag im Monat und sammeln
             von ca. 11:00 bis 13:00 Müll auf. <br>
-            Wir sorgen für ein Transport der "Beute" zum Wertstoffhof.<br></h5>
+            Wir sorgen für ein Transport der "Beute" zum Wertstoffhof.
+            Euch entstehen keine Kosten.<br></h5>
         <a href="#mitmachen" role="button"> Mitmachen</a>
     </div>
 </section>
@@ -43,109 +44,83 @@
             <p>Damit möglichst viele Stellen - und nichts doppelt - abgesammelt werden haben wir eine Liste
                 mit Orten erstellt, für welche ihr euch anmelden könnt.</p>
 
+
             <table>
                 <thead>
                 <tr>
-                    <th>Ort</th>
-                    <th>booked</th>
+                    <th class="tablerow">Ort</th>
+                    <th class="tablerow">frei</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="location : ${locations}">
-                    <td th:text="${location.name}"></td>
-                    <td th:text="${location.booked}"></td>
+                    <td class="tablerow" th:text="${location.name}"></td>
+                    <!--                    todo: logik umdrehen!!!-->
+                    <td class="tablerow" th:text="${location.booked}"></td>
                 </tr>
                 </tbody>
             </table>
 
+            <div class="mitmachen_form">
+                <h3>Mach auch mit! Gebe deinen Namen (gerne auch nur Vornamen) ein und
+                    wähle einen Ort aus, wo du Müll sammeln möchtest, damit wir uns nicht ins Gehege kommen :)</h3>
+                <form method="POST" th:action="@{/addPerson}" enctype="multipart/form-data">
+                    <div class="mitmachen_form">
+                        Name: <input name="name"/>
+                        Location:
+                        <select id="id" name="id">
+                            <option th:value="''" th:text="Select"></option>
+                            <option th:each="location : ${freeLocations}"
+                                    th:value="${location.id}"
+                                    th:text="${location.name}"></option>
+                        </select>
 
-            <h3>mach auch mit!</h3>
-            <form method="POST" th:action="@{/addPerson}" enctype="multipart/form-data">
-                <div>
-                    Name: <input name="name"/>
-                    Location:
-                    <select id="id" name="id">
-                        <option th:value="''" th:text="Select"></option>
-                        <option th:each="location : ${freeLocations}"
-                                th:value="${location.id}"
-                                th:text="${location.name}"></option>
-                    </select>
-
-
-                    <button type="submit">Anmelden</button>
-                </div>
-
-
-            </form>
+                        <button type="submit">Anmelden</button>
+                    </div>
+                </form>
+            </div>
 
         </div>
-        <div class="container_side_40" id="hidden_mobile">
+        <div class="container_side_50" id="hidden_mobile">
             <a href="" class="container_mitmachen_box">
-                <div class="container_media_35">
+                <div class="container_media_100">
                     <img src="images/rossdorf.png" alt="">
-                </div>
-                <div class="container_side_65">
-                    <h2> Roßdorf </h2>
                 </div>
             </a>
 
             <a href="" class="container_mitmachen_box">
-                <div class="container_media_35">
+                <div class="container_media_100">
                     <img src="images/gundernhausen.png" alt="">
-                </div>
-                <div class="container_side_65">
-                    <h2>Gundernhause</h2>
                 </div>
             </a>
         </div>
     </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
-    <p>&copy 2016 Colmar Academy. All rights reserved</p>
-    <nav id="hidden_mobile">
-        <a href="#">Terms</a>
-        <a href="#">Privacy</a>
-    </nav>
-</footer>
+<!-- Mitmacher -->
+<section class="container_mitmacher" id="mitmacher">
+    <h1 class="title"> Mitmacher </h1>
 
-
-<div class="container_text_thesis" id="hidden_mobile" role="complementary">
-    <h3>An welchen Orten wird Müll gesammelt?</h3>
-    <table>
-        <thead>
-        <tr>
-            <th>Ort</th>
-            <th>booked</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="location : ${locations}">
-            <td th:text="${location.name}"></td>
-            <td th:text="${location.booked}"></td>
-        </tr>
-        </tbody>
-    </table>
-
-    <h3>Wer ist schon dabei?</h3>
-    <table>
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>angemeldet am</th>
-            <th>Ort</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="participant : ${participants}">
-            <td th:text="${participant.name}"></td>
-            <td th:text="${participant.angemeldetAm}"></td>
-            <td th:text="${participant.locationName}"></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+    <div class="subcontainer_mitmacher">
+<!--        <h2>Wer ist schon dabei?</h2>-->
+        <table>
+            <thead>
+            <tr>
+                <th class="tablerow">Name</th>
+                <th class="tablerow">angemeldet am</th>
+                <th class="tablerow">Ort</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="participant : ${participants}">
+                <td class="tablerow" th:text="${participant.name}"></td>
+                <td class="tablerow" th:text="${participant.angemeldetAm}"></td>
+                <td class="tablerow" th:text="${participant.locationName}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
 
 
 </body>
