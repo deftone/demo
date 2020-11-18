@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @Setter
@@ -22,7 +23,7 @@ public class Event implements Comparable<Event> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDate date;  //eingabe mit postman bekomme ich nicht hin
+    private LocalDate date;
 
     @Override
     public int compareTo(Event o) {
@@ -31,4 +32,9 @@ public class Event implements Comparable<Event> {
     }
 
     //todo: equals und hashcode ueberschreiben
+
+    public String getFormattedDate() {
+        DateTimeFormatter formatters = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        return this.date.format(formatters);
+    }
 }

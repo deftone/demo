@@ -29,7 +29,7 @@ public class WebController {
 
     @GetMapping("/index")
     public java.lang.String showTemplate(Model model) {
-        model.addAttribute("events", eventService.getNextEvent());
+        model.addAttribute("nextEvent", eventService.getNextEvent().getFormattedDate());
         model.addAttribute("locations", locationService.getAllLocations());
         model.addAttribute("freeLocations", locationService.getFreeLocations());
         model.addAttribute("participants", participantService.getAllParticipantsForNextEvent());

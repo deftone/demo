@@ -38,10 +38,9 @@
     <h1 class="title"> Mitmachen </h1>
     <div class="subcontainer_mitmachen">
 
-        <div class="thesis_main">
-            <!-- todo: hier datum aus nextEvent uebergeben -->
-            <h2>Nächste Aktion ist am Sonntag den 6.12. um 11:00</h2>
-            <p>Damit möglichst viele Stellen abgesammelt werden haben wir eine Liste
+        <div class="mitmachen_text">
+            <h2>Nächste Aktion ist am Sonntag den <span th:text="${nextEvent}"></span> um 11:00</h2>
+            <p>Damit möglichst viele Stellen - und nichts doppelt - abgesammelt werden haben wir eine Liste
                 mit Orten erstellt, für welche ihr euch anmelden könnt.</p>
 
             <table>
