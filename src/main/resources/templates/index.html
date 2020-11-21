@@ -14,114 +14,114 @@
     <link rel="icon" href="images/ic-logo.ico"/>
 </head>
 <body>
-
-<!-- BANNER -->
-<section class="container_banner" role="banner">
-    <div class="container_main_60">
-        <div class="container_media_padding">
-            <img src="images/cleanUpBanner.jpg">
+<div class="main">
+    <!-- BANNER -->
+    <section class="container_banner" role="banner">
+        <div class="container_main_60">
+            <div class="container_media_padding">
+                <img src="images/cleanUpBanner.jpg">
+            </div>
         </div>
-    </div>
 
-    <div class="container_side_40">
-        <h1> CleanUp Roßdorf - Gundernhausen</h1>
-        <h2> Wir machen Roßdorf und Gundernhausen sauber!</h2>
-        <h5> Wir treffen uns jeden ersten Sonntag im Monat und sammeln
-            von ca. 11:00 bis 13:00 Müll auf. <br>
-            Wir sorgen für ein Transport der "Beute" zum Wertstoffhof.
-            Euch entstehen keine Kosten.<br></h5>
-        <a href="#mitmachen" role="button"> Mitmachen</a>
-    </div>
-</section>
+        <div class="container_side_40">
+            <h1> CleanUp Roßdorf - Gundernhausen</h1>
+            <h2> Wir machen Roßdorf und Gundernhausen sauber!</h2>
+            <h5> Wir treffen uns jeden ersten Sonntag im Monat und sammeln
+                von ca. 11:00 bis 13:00 Müll auf. <br>
+                Wir sorgen für ein Transport der "Beute" zum Wertstoffhof.
+                Euch entstehen keine Kosten.<br></h5>
+            <a href="#mitmachen" role="button"> Mitmachen</a>
+        </div>
+    </section>
 
-<!-- MITMACHEN -->
-<section class="container_mitmachen" id="mitmachen">
-    <h1 class="title"> Mitmachen </h1>
-    <div class="subcontainer_mitmachen">
+    <!-- MITMACHEN -->
+    <section class="container_mitmachen" id="mitmachen">
+        <h1 class="title"> Mitmachen </h1>
+        <div class="subcontainer_mitmachen">
 
-        <div class="mitmachen_text">
-            <h2>Nächste Aktion ist am Sonntag den <span th:text="${nextEvent}"></span> um 11:00</h2>
-            <p>Damit möglichst viele Stellen - und nichts doppelt - abgesammelt werden haben wir eine Liste
-                mit Orten erstellt, für welche ihr euch anmelden könnt.</p>
+            <div class="mitmachen_text">
+                <h2>Nächste Aktion ist am Sonntag den <span th:text="${nextEvent}"></span> um 11:00</h2>
+                <p>Damit möglichst viele Stellen - und nichts doppelt - abgesammelt werden haben wir eine Liste
+                    mit Orten erstellt, für welche ihr euch anmelden könnt.</p>
 
 
+                <table>
+                    <thead>
+                    <tr>
+                        <th class="tablerow">Ort</th>
+                        <th class="tablerow">frei</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="location : ${locations}">
+                        <td class="tablerow" th:text="${location.name}"></td>
+                        <!--                    todo: logik umdrehen!!!-->
+                        <td class="tablerow" th:text="${location.booked}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="mitmachen_form">
+                    <h3>Mach auch mit! Gebe deinen Namen (gerne auch nur Vornamen) ein und
+                        wähle einen Ort aus, wo du Müll sammeln möchtest, damit wir uns nicht ins Gehege kommen :)</h3>
+                    <form method="POST" th:action="@{/addPerson}" enctype="multipart/form-data">
+                        <div class="mitmachen_form">
+                            Name: <input name="name"/>
+                            Location:
+                            <select id="id" name="id">
+                                <option th:value="''" th:text="Select"></option>
+                                <option th:each="location : ${freeLocations}"
+                                        th:value="${location.id}"
+                                        th:text="${location.name}"></option>
+                            </select>
+
+                            <button type="submit">Anmelden</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            <div class="container_side_50" id="hidden_mobile">
+                <a href="" class="container_mitmachen_box">
+                    <div class="container_media_100">
+                        <img src="images/rossdorf.png" alt="">
+                    </div>
+                </a>
+
+                <a href="" class="container_mitmachen_box">
+                    <div class="container_media_100">
+                        <img src="images/gundernhausen.png" alt="">
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mitmacher -->
+    <section class="container_mitmacher" id="mitmacher">
+        <h1 class="title"> Mitmacher </h1>
+
+        <div class="subcontainer_mitmacher">
+            <!--        <h2>Wer ist schon dabei?</h2>-->
             <table>
                 <thead>
                 <tr>
+                    <th class="tablerow">Name</th>
+                    <th class="tablerow">angemeldet am</th>
                     <th class="tablerow">Ort</th>
-                    <th class="tablerow">frei</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="location : ${locations}">
-                    <td class="tablerow" th:text="${location.name}"></td>
-                    <!--                    todo: logik umdrehen!!!-->
-                    <td class="tablerow" th:text="${location.booked}"></td>
+                <tr th:each="participant : ${participants}">
+                    <td class="tablerow" th:text="${participant.name}"></td>
+                    <td class="tablerow" th:text="${participant.angemeldetAm}"></td>
+                    <td class="tablerow" th:text="${participant.locationName}"></td>
                 </tr>
                 </tbody>
             </table>
-
-            <div class="mitmachen_form">
-                <h3>Mach auch mit! Gebe deinen Namen (gerne auch nur Vornamen) ein und
-                    wähle einen Ort aus, wo du Müll sammeln möchtest, damit wir uns nicht ins Gehege kommen :)</h3>
-                <form method="POST" th:action="@{/addPerson}" enctype="multipart/form-data">
-                    <div class="mitmachen_form">
-                        Name: <input name="name"/>
-                        Location:
-                        <select id="id" name="id">
-                            <option th:value="''" th:text="Select"></option>
-                            <option th:each="location : ${freeLocations}"
-                                    th:value="${location.id}"
-                                    th:text="${location.name}"></option>
-                        </select>
-
-                        <button type="submit">Anmelden</button>
-                    </div>
-                </form>
-            </div>
-
         </div>
-        <div class="container_side_50" id="hidden_mobile">
-            <a href="" class="container_mitmachen_box">
-                <div class="container_media_100">
-                    <img src="images/rossdorf.png" alt="">
-                </div>
-            </a>
-
-            <a href="" class="container_mitmachen_box">
-                <div class="container_media_100">
-                    <img src="images/gundernhausen.png" alt="">
-                </div>
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- Mitmacher -->
-<section class="container_mitmacher" id="mitmacher">
-    <h1 class="title"> Mitmacher </h1>
-
-    <div class="subcontainer_mitmacher">
-<!--        <h2>Wer ist schon dabei?</h2>-->
-        <table>
-            <thead>
-            <tr>
-                <th class="tablerow">Name</th>
-                <th class="tablerow">angemeldet am</th>
-                <th class="tablerow">Ort</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="participant : ${participants}">
-                <td class="tablerow" th:text="${participant.name}"></td>
-                <td class="tablerow" th:text="${participant.angemeldetAm}"></td>
-                <td class="tablerow" th:text="${participant.locationName}"></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</section>
-
+    </section>
+</div>
 
 </body>
 </html>
