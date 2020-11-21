@@ -40,6 +40,7 @@ public class WebController {
     public java.lang.String addPerson(@RequestParam String name,
                                       @RequestParam Integer id,
                                       Model model) {
+        // was ist die id bei auswaehlen?? null?
         if (name != null && !name.isEmpty() && id != null) {
             Participant participant = new Participant();
             participant.setName(name);
@@ -56,6 +57,6 @@ public class WebController {
             model.addAttribute("locations", locationService.getAllLocations());
             model.addAttribute("freeLocations", locationService.getFreeLocations());
         }
-        return "redirect:/index";
+        return "redirect:/index#mitmacher";
     }
 }

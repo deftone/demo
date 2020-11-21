@@ -44,7 +44,6 @@
                 <p>Damit möglichst viele Stellen - und nichts doppelt - abgesammelt werden haben wir eine Liste
                     mit Orten erstellt, für welche ihr euch anmelden könnt.</p>
 
-
                 <table>
                     <thead>
                     <tr>
@@ -61,22 +60,25 @@
                     </tbody>
                 </table>
 
+                <p class="padding-top">Mach auch mit! Gebe deinen Namen (gerne auch nur Vornamen) ein und
+                    wähle einen Ort aus, wo du Müll sammeln möchtest, damit wir uns nicht ins Gehege kommen :)</p>
+
                 <div class="mitmachen_form">
-                    <h3>Mach auch mit! Gebe deinen Namen (gerne auch nur Vornamen) ein und
-                        wähle einen Ort aus, wo du Müll sammeln möchtest, damit wir uns nicht ins Gehege kommen :)</h3>
+
                     <form method="POST" th:action="@{/addPerson}" enctype="multipart/form-data">
                         <div class="mitmachen_form">
                             Name: <input name="name"/>
-                            Location:
+                            Ort:
                             <select id="id" name="id">
-                                <option th:value="''" th:text="Select"></option>
+<!--                                todo: warum gehen nicht 2 worte mit leerzeichen in text?-->
+                                <option th:value="''" th:text="bitte_auswählen"></option>
                                 <option th:each="location : ${freeLocations}"
                                         th:value="${location.id}"
                                         th:text="${location.name}"></option>
                             </select>
-
-                            <button type="submit">Anmelden</button>
                         </div>
+<!--                        todo: das hier zentrieren-->
+                        <button type="submit">Anmelden</button>
                     </form>
                 </div>
 
@@ -100,7 +102,7 @@
     <!-- Mitmacher -->
     <section class="container_mitmacher" id="mitmacher">
         <h1 class="title"> Mitmacher </h1>
-
+<!--todo: diese tabelle zentrieren-->
         <div class="subcontainer_mitmacher">
             <!--        <h2>Wer ist schon dabei?</h2>-->
             <table>
