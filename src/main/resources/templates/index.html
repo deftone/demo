@@ -63,24 +63,24 @@
                 <p class="padding-top">Mach auch mit! Gebe deinen Namen (gerne auch nur Vornamen) ein und
                     wähle einen Ort aus, wo du Müll sammeln möchtest, damit wir uns nicht ins Gehege kommen :)</p>
 
-                <div class="mitmachen_form">
 
-                    <form method="POST" th:action="@{/addPerson}" enctype="multipart/form-data">
-                        <div class="mitmachen_form">
-                            Name: <input name="name"/>
-                            Ort:
-                            <select id="id" name="id">
-<!--                                todo: warum gehen nicht 2 worte mit leerzeichen in text?-->
-                                <option th:value="''" th:text="bitte_auswählen"></option>
-                                <option th:each="location : ${freeLocations}"
-                                        th:value="${location.id}"
-                                        th:text="${location.name}"></option>
-                            </select>
-                        </div>
-<!--                        todo: das hier zentrieren-->
-                        <button type="submit">Anmelden</button>
-                    </form>
-                </div>
+                <form class="mitmachen_form" method="POST" th:action="@{/addPerson}" enctype="multipart/form-data">
+
+                    <div class="mitmachen_select">
+                        Name: <input name="name"/>
+                        Ort:
+                        <select id="id" name="id">
+                            <!--                                todo: warum gehen nicht 2 worte mit leerzeichen in text?-->
+                            <option th:value="''" th:text="bitte_auswählen"></option>
+                            <option th:each="location : ${freeLocations}"
+                                    th:value="${location.id}"
+                                    th:text="${location.name}"></option>
+                        </select>
+                    </div>
+
+                    <!--                        todo: das hier zentrieren-->
+                    <button type="submit">Anmelden</button>
+                </form>
 
             </div>
             <div class="container_side_50" id="hidden_mobile">
@@ -102,9 +102,9 @@
     <!-- Mitmacher -->
     <section class="container_mitmacher" id="mitmacher">
         <h1 class="title"> Mitmacher </h1>
-<!--todo: diese tabelle zentrieren-->
         <div class="subcontainer_mitmacher">
-            <!--        <h2>Wer ist schon dabei?</h2>-->
+            <div class="mitmachen_text">
+                <h5 class="padding-bottom">Danke an alle, die sich für den <span th:text="${nextEvent}"></span> angemeldet haben!</h5>
             <table>
                 <thead>
                 <tr>

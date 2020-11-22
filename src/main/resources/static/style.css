@@ -247,6 +247,16 @@ tbody tr .tablerow{
   padding: 1rem;
   }
 
+.container_mitmachen .mitmachen_form{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  }
+
+.container_mitmachen .mitmachen_select{
+  display: flex-item;
+  }
+
 .container_mitmachen input{
     background-color: white;
     color: #ff8000 ; /* orange */
@@ -264,6 +274,7 @@ tbody tr .tablerow{
   }
 
 .container_mitmachen button{
+  display: flex-item;
   align: center;
   background-color: #ff8000 ; /* orange */
   color: white;
@@ -295,7 +306,15 @@ tbody tr .tablerow{
 
 /*** MITMACHER ***/
 
+.container_mitmacher .subcontainer_mitmacher {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2rem;
+ }
 
+.container_mitmacher .padding-bottom{
+  padding-bottom: 2rem;
+  }
 .container_mitmacher th {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
@@ -331,6 +350,5 @@ tbody tr .tablerow{
   padding-bottom: 1rem;
   }
 
-.container_mitmacher .subcontainer_mitmacher {
- }
+
 
