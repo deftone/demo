@@ -30,7 +30,7 @@
                 von ca. 11:00 bis 13:00 Müll auf. <br>
                 Wir sorgen für ein Transport der "Beute" zum Wertstoffhof.
                 Euch entstehen keine Kosten.<br></h5>
-            <a href="#mitmachen" role="button"> Mitmachen</a>
+            <a href="#mitmachen" role="button">Mitmachen</a>
         </div>
     </section>
 
@@ -40,7 +40,7 @@
         <div class="subcontainer_mitmachen">
 
             <div class="mitmachen_text">
-                <h2>Nächste Aktion ist am Sonntag den <span th:text="${nextEvent}"></span> um 11:00</h2>
+                <h2>Die nächste Aktion ist am Sonntag den <span th:text="${nextEvent}"></span> um 11:00</h2>
                 <p>Damit möglichst viele Stellen - und nichts doppelt - abgesammelt werden haben wir eine Liste
                     mit Orten erstellt, für welche ihr euch anmelden könnt.</p>
 
@@ -54,14 +54,13 @@
                     <tbody>
                     <tr th:each="location : ${locations}">
                         <td class="tablerow" th:text="${location.name}"></td>
-                        <!--                    todo: logik umdrehen!!!-->
-                        <td class="tablerow" th:text="${location.booked}"></td>
+                        <td class="tablerow" th:text="${location.getFrei()}"></td>
                     </tr>
                     </tbody>
                 </table>
 
                 <p class="padding-top">Mach auch mit! Gebe deinen Namen (gerne auch nur Vornamen) ein und
-                    wähle einen Ort aus, wo du Müll sammeln möchtest, damit wir uns nicht ins Gehege kommen :)</p>
+                    wähle einen freien Ort aus, wo du Müll sammeln möchtest, damit wir uns nicht ins Gehege kommen :)</p>
 
 
                 <form class="mitmachen_form" method="POST" th:action="@{/addPerson}" enctype="multipart/form-data">
@@ -104,23 +103,43 @@
         <h1 class="title"> Mitmacher </h1>
         <div class="subcontainer_mitmacher">
             <div class="mitmachen_text">
-                <h5 class="padding-bottom">Danke an alle, die sich für den <span th:text="${nextEvent}"></span> angemeldet haben!</h5>
-            <table>
-                <thead>
-                <tr>
-                    <th class="tablerow">Name</th>
-                    <th class="tablerow">angemeldet am</th>
-                    <th class="tablerow">Ort</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="participant : ${participants}">
-                    <td class="tablerow" th:text="${participant.name}"></td>
-                    <td class="tablerow" th:text="${participant.angemeldetAm}"></td>
-                    <td class="tablerow" th:text="${participant.locationName}"></td>
-                </tr>
-                </tbody>
-            </table>
+                <h5 class="padding">Danke an alle, die sich für den <span th:text="${nextEvent}"></span>
+                    angemeldet haben!</h5>
+
+
+                <table id="hidden_mobile">
+                    <thead>
+                    <tr>
+                        <th class="tablerow">Name</th>
+                        <th class="tablerow">angemeldet am</th>
+                        <th class="tablerow">Ort</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="participant : ${participants}">
+                        <td class="tablerow" th:text="${participant.name}"></td>
+                        <td class="tablerow" th:text="${participant.angemeldetAm}"></td>
+                        <td class="tablerow" th:text="${participant.locationName}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <table id="hidden_desktop">
+                    <thead>
+                    <tr>
+                        <th class="tablerow">Name</th>
+                        <th class="tablerow">Ort</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="participant : ${participants}">
+                        <td class="tablerow" th:text="${participant.name}"></td>
+                        <td class="tablerow" th:text="${participant.locationName}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
         </div>
     </section>
 </div>

@@ -23,4 +23,12 @@ public class Location {
     private String name;
 
     private Boolean booked;
+
+    // wird direkt im html template aufgerufen
+    public String getFrei(){
+        if (this.booked){
+            return "Nein";
+        }
+        else return "Ja";
+    }
 }
