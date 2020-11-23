@@ -10,6 +10,7 @@ html {
 #0080ff  = mittleres blau
 #0059b3  = dunkles blau
 #00305F  = ganz dunkels blau
+#08088A  = noch dunkleres blau
 */
 
 body .main{
@@ -399,4 +400,50 @@ tbody tr .tablerow{
 .container_mitmacher p{
   font-size: 1rem;
   padding-bottom: 1rem;
+  }
+
+/*CONTACT*/
+
+.container_contact  .title {
+  text-align: center;
+  text-shadow: 5px 5px black;  /**/
+  padding: 3.2rem 0;
+  }
+
+.container_contact h1{
+  font-size: 3rem;
+  }
+
+#contact .container_contact {
+  background-color: #08088A;
+  color: white;
+  padding-bottom: 2rem;
+  }
+#contact .contact_info {
+  width: 90%;
+  margin: auto;
+  background-color: #0059b3;
+  border-radius: 1rem;
+  }
+#contact .contact_info div {
+  padding: 1rem 0;
+  text-align: center;
+  }
+#contact .contact_info div i {
+  display: inline-block;
+  padding: 0;
+  color: white;
+  }
+#contact .contact_info div span {
+  padding: 1rem 0;
+  display: inline-block;
+  }
+#contact .contact_info div p {
+  text-align: center;
+  }
+#contact .contact_info div p:last-child {
+  padding: 0;
+  }
+#contact .contact_info div:last-child {
+  padding-bottom: 2rem;
   }

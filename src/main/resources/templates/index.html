@@ -7,11 +7,13 @@
     <title>CleanUp</title>
     <link rel="stylesheet" href="style.css" th:href="@{/style.css}"/>
     <link rel="stylesheet" href="reset.css" th:href="@{/reset.css}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!--    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli">-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- todo: logo von uns! -->
     <link rel="icon" href="images/ic-logo.ico"/>
+
 </head>
 <body>
 <div class="main">
@@ -60,7 +62,8 @@
                 </table>
 
                 <p class="padding-top">Mach auch mit! Gebe deinen Namen (gerne auch nur Vornamen) ein und
-                    wähle einen freien Ort aus, wo du Müll sammeln möchtest, damit wir uns nicht ins Gehege kommen :)</p>
+                    wähle einen freien Ort aus, wo du Müll sammeln möchtest, damit wir uns nicht ins Gehege kommen
+                    :)</p>
 
 
                 <form class="mitmachen_form" method="POST" th:action="@{/addPerson}" enctype="multipart/form-data">
@@ -142,6 +145,46 @@
             </div>
         </div>
     </section>
+
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="container_contact">
+            <h1 class="title"> Kontakt </h1>
+            <div class="contact_info">
+                <div>
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <span> Organisatoren: </span>
+                    <p> Sabrina Anna Hänsel, Katrin Rose, Kristina Wallmichrath und Rüdiger Dunker </p>
+                </div>
+
+                <div>
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                    <span> E-Mail: </span>
+                    <p> cleanuprossdorf@gmail.com </p>
+                </div>
+
+                <div>
+                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                    <span> facebook: </span>
+                    <p> todo: link </p>
+                </div>
+
+                <div>
+                    <i class="fa fa-linux" aria-hidden="true"></i>
+                    <span> Webmaster: </span>
+                    <p> Katrin Rose </p>
+                </div>
+
+                <div>
+                    <i class="fa fa-server" aria-hidden="true"></i>
+                    <span> Sponsor: </span>
+                    <p><a href="https://www.objectix.de/" target="_blank"> <img src="images/objectix-logo.png"></a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
 </div>
 
 </body>
