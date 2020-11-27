@@ -46,7 +46,7 @@
                 <p>Damit möglichst viele Stellen - und nichts doppelt - abgesammelt werden haben wir eine Liste
                     mit Orten erstellt, für welche ihr euch anmelden könnt.</p>
 
-                <table>
+                <table id="hidden_mobile">
                     <thead>
                     <tr>
                         <th class="tablerow">Ort</th>
@@ -57,6 +57,19 @@
                     <tr th:each="location : ${locations}">
                         <td class="tablerow" th:text="${location.name}"></td>
                         <td class="tablerow" th:text="${location.getFrei()}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <table id="hidden_desktop">
+                    <thead>
+                    <tr>
+                        <th class="tablerow">Ort</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="location : ${locations}">
+                        <td class="tablerow" th:text="${location.name}"></td>
                     </tr>
                     </tbody>
                 </table>

@@ -177,16 +177,13 @@ a {
     }
   }
 
-/*** MITMACHEN ***/
+/*** TABLE ***/
 
  table {
   border-style: solid;
   border-width: 1px;
   border-collapse: collapse;
-  margin:10px 10px 10px 10px
-  border-spacing: 1;
-  border-collapse: collapse;
-  background:white;
+  background: white;
   border-radius:6px;
   overflow:hidden;
   max-width:800px;
@@ -196,17 +193,19 @@ a {
   color: #0059b3;  /* dunkles blau */
   }
 
-td,th{
-  padding-left:8px
+@media only screen and (max-width: 700px) {
+   table {
+    width: 90%;
+    }
   }
 
-.container_mitmachen th {
+ th {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   text-align: left;
   font-size: 120%;
-  background-color: #ff8000; /* orange */
   color: white;
+  background-color: #ff8000; /* orange */
   }
 
 
@@ -218,7 +217,6 @@ th, td {
 
 thead tr .tablerow{
   height:2.5rem;
-  background:#ff8000; /* orange */
   font-size: 1.5 rem;
   padding: .5rem;
   padding-bottom: 0rem;
@@ -233,6 +231,8 @@ tbody tr .tablerow{
     border:0;
     }
   }
+
+/**** MITMACHEN ****/
 
 .container_mitmachen{
   background-color: #0080ff;   /* mittleres blau */
@@ -260,11 +260,19 @@ tbody tr .tablerow{
 .container_mitmachen .subcontainer_mitmachen {
   display: flex;
   align-items: flex-start;
+  justify-content: center;
   }
 
 .container_mitmachen .mitmachen_text {
   width: 50%;
   padding: 1rem
+  }
+
+@media only screen and (max-width: 700px) {
+  .container_mitmachen .mitmachen_text {
+    width: 100%;
+    padding: 1rem;
+    }
   }
 
 .mitmachen_form{
@@ -340,9 +348,6 @@ tbody tr .tablerow{
   }
 
 @media only screen and (max-width: 700px) {
-  .container_mitmachen .mitmachen_text {
-    width: 100%;
-    }
   .container_mitmachen .container_media_padding {
     padding: 0;
     }
@@ -365,15 +370,6 @@ tbody tr .tablerow{
 
 .container_mitmacher .padding{
   padding-bottom: 2rem;
-  }
-
-.container_mitmacher th {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  text-align: left;
-  font-size: 120%;
-  background-color: #0059b3;  /* dunkles blau */
-  color: white;
   }
 
 .container_mitmacher{
