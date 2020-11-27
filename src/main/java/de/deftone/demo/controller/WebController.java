@@ -27,7 +27,7 @@ public class WebController {
         this.participantService = participantService;
     }
 
-    @GetMapping("/index")
+    @GetMapping("/")
     public java.lang.String showTemplate(Model model) {
         model.addAttribute("nextEvent", eventService.getNextEvent().getFormattedDate());
         model.addAttribute("locations", locationService.getAllLocations());
