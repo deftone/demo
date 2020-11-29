@@ -57,6 +57,6 @@ public class WebController {
             model.addAttribute("locations", locationService.getAllLocations());
             model.addAttribute("freeLocations", locationService.getFreeLocations());
         }
-        return "redirect:/index#mitmacher";
+        return "redirect:/#mitmacher";
     }
 }

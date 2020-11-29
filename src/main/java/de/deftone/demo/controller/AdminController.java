@@ -25,6 +25,11 @@ public class AdminController {
         return locationService.addLocation(location);
     }
 
+    @PostMapping(path = "/admin/addLocationList", consumes = "application/json")
+    public List<Location> addLocationList(@RequestBody List<Location> locations) {
+        return locationService.addLocationList(locations);
+    }
+
     //zum kontrollieren
     @GetMapping("/admin/getLocations")
     public List<Location> getLocations() {
@@ -42,6 +47,12 @@ public class AdminController {
     public void deleteLocation(@RequestParam long id) {
         locationService.deleteLocation(id);
     }
+
+    @PostMapping(path = "/admin/deleteAllLocation")
+    public void deleteAllLocation() {
+        locationService.deleteAllLocation();
+    }
+
 
     // ****** Event *******
     //zum erstellen

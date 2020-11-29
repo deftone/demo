@@ -5,8 +5,7 @@ import de.deftone.demo.repo.LocationRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -16,13 +15,16 @@ public class LocationService {
     private final LocationRepo locationRepo;
 
     public List<Location> getAllLocations() {
-        return locationRepo.findAll();
+        List<Location> all = locationRepo.findAll();
+        Collections.sort(all);
+        return all;
     }
 
     public List<Location> getFreeLocations() {
         return locationRepo.findAll()
                 .stream()
-                .filter(l -> !l.getBooked())
+                .filter(Location::getFree)
+                .sorted()
                 .collect(Collectors.toList());
     }
 
@@ -40,9 +42,25 @@ public class LocationService {
         }
     }
 
+    // hier ohne exception, alle die gehen hinzufuegen
+    public List<Location> addLocationList(List<Location> locations) {
+        List<Location> savedLocations = new ArrayList<>();
+        for (Location location : locations) {
+            long count = locationRepo.findAll()
+                    .stream()
+                    .filter(l -> l.getName().equalsIgnoreCase(location.getName().trim()))
+                    .count();
+            if (count == 0L) {
+                location.setName(location.getName().trim());
+                savedLocations.add(locationRepo.save(location));
+            }
+        }
+        return savedLocations;
+    }
+
     public List<Location> resetAllLocation() {
         for (Location location : locationRepo.findAll()) {
-            location.setBooked(false);
+            location.setFree(true);
             locationRepo.save(location);
         }
         return locationRepo.findAll();
@@ -60,7 +78,7 @@ public class LocationService {
         Location location = locationRepo.findById(id)
                 //todo: bessere exception
                 .orElseThrow(() -> new RuntimeException("Keine Location mit id " + id));
-        location.setBooked(true);
+        location.setFree(false);
         locationRepo.save(location);
     }
 
@@ -69,5 +87,9 @@ public class LocationService {
                 //todo: bessere exception
                 .orElseThrow(() -> new RuntimeException("Keine Location mit id " + id));
         locationRepo.delete(location);
+    }
+
+    public void deleteAllLocation() {
+        locationRepo.deleteAll();
     }
 }

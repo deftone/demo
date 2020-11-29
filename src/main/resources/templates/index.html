@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="reset.css" th:href="@{/reset.css}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <!--    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli">-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- todo: logo von uns! -->
     <link rel="icon" href="images/ic-logo.ico"/>
@@ -39,6 +39,11 @@
     <!-- MITMACHEN -->
     <section class="container_mitmachen" id="mitmachen">
         <h1 class="title"> Mitmachen </h1>
+        <div class="prototyp">Liebe Mitstreiter, dies ist unser erster digitaler Orga-Versuch. Bitte gebt uns Bescheid,
+            ob ihr die von uns
+            vorgeschlagenen Orte/Rounten angemessen findet oder ob ihr Verbesserungswünsche habt. Gerne eine Mail an
+            Katrin.Rose@posteo.de schicken. Danke!
+        </div>
         <div class="subcontainer_mitmachen">
 
             <div class="mitmachen_text">
@@ -49,12 +54,14 @@
                 <table id="hidden_mobile">
                     <thead>
                     <tr>
+                        <th class="tablerow">Kürzel</th>
                         <th class="tablerow">Ort</th>
                         <th class="tablerow">frei</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="location : ${locations}">
+                        <td class="tablerow" th:text="${location.idString}"></td>
                         <td class="tablerow" th:text="${location.name}"></td>
                         <td class="tablerow" th:text="${location.getFrei()}"></td>
                     </tr>
@@ -74,43 +81,47 @@
                     </tbody>
                 </table>
 
-                <p class="padding-top">Mach auch mit! Gebe deinen Namen (gerne auch nur Vornamen) ein und
-                    wähle einen freien Ort aus, wo du Müll sammeln möchtest, damit wir uns nicht ins Gehege kommen
-                    :)</p>
-
-
-                <form class="mitmachen_form" method="POST" th:action="@{/addPerson}" enctype="multipart/form-data">
-
-                    <div class="mitmachen_select">
-                        Name: <input name="name"/>
-                        Ort:
-                        <select id="id" name="id">
-                            <!--                                todo: warum gehen nicht 2 worte mit leerzeichen in text?-->
-                            <option th:value="''" th:text="bitte_auswählen"></option>
-                            <option th:each="location : ${freeLocations}"
-                                    th:value="${location.id}"
-                                    th:text="${location.name}"></option>
-                        </select>
-                    </div>
-
-                    <!--                        todo: das hier zentrieren-->
-                    <button type="submit">Anmelden</button>
-                </form>
 
             </div>
             <div class="container_side_50" id="hidden_mobile">
                 <a href="" class="container_mitmachen_box">
                     <div class="container_media_100">
-                        <img src="images/rossdorf.png" alt="">
+                        <img src="images/Gundernhausen.png" alt="">
                     </div>
                 </a>
 
                 <a href="" class="container_mitmachen_box">
                     <div class="container_media_100">
-                        <img src="images/gundernhausen.png" alt="">
+                        <img src="images/Rossdorf.png" alt="">
                     </div>
                 </a>
             </div>
+        </div>
+
+
+        <div class="mitmachen-panel">
+            <p class="padding-top">Mach auch mit! Gebe deinen Namen (gerne auch nur Vornamen) ein und
+                wähle einen freien Ort aus, wo du Müll sammeln möchtest, damit wir uns nicht ins Gehege kommen
+                :) TODO: Abholorte und Zeiten von Rüdiger hinzufuegen!!!</p>
+
+
+            <form class="mitmachen_form" method="POST" th:action="@{/addPerson}" enctype="multipart/form-data">
+
+                <div class="mitmachen_select">
+                    Name: <input name="name"/>
+                    Ort:
+                    <select id="id" name="id">
+                        <!--                                todo: warum gehen nicht 2 worte mit leerzeichen in text?-->
+                        <option th:value="''" th:text="bitte_auswählen"></option>
+                        <option th:each="location : ${freeLocations}"
+                                th:value="${location.id}"
+                                th:text="${location.getCompactIdAndName()}"></option>
+                    </select>
+                </div>
+
+                <!--                        todo: das hier zentrieren-->
+                <button type="submit">Anmelden</button>
+            </form>
         </div>
     </section>
 
