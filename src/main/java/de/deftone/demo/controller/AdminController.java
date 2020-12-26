@@ -2,11 +2,9 @@ package de.deftone.demo.controller;
 
 import de.deftone.demo.model.Event;
 import de.deftone.demo.model.Location;
-import de.deftone.demo.model.Wort;
 import de.deftone.demo.service.EventService;
 import de.deftone.demo.service.LocationService;
 import de.deftone.demo.service.ParticipantService;
-import de.deftone.demo.service.WortService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,24 +17,6 @@ public class AdminController {
     private final LocationService locationService;
     private final EventService eventService;
     private final ParticipantService participantService;
-    private final WortService wortService;
-
-    //todo: wort zeug wieder raus!!!
-    @PostMapping("/addWord")
-    public void addWort(@RequestParam String word) {
-        wortService.addWort(word);
-    }
-
-    @GetMapping("/getAllWords")
-    public List<Wort> getAllWords() {
-        return wortService.getAllWords();
-    }
-
-    @GetMapping("/getRandomWord")
-    public String getRandomWord(){
-        return wortService.getWort();
-    }
-
 
     // ****** Location ******
     //zum erstellen
