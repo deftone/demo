@@ -452,6 +452,9 @@ tbody tr .tablerow{
 #contact .contact_info div p {
   text-align: center;
   }
+#contact .contact_info div p a {
+  color: white;
+  }
 #contact .contact_info div p:last-child {
   padding: 0;
   }
