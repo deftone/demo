@@ -67,11 +67,13 @@
                 <table id="hidden_desktop">
                     <thead>
                     <tr>
+                        <th class="tablerow">Kürzel</th>
                         <th class="tablerow">Ort</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="location : ${locations}">
+                        <td class="tablerow" th:text="${location.idString}"></td>
                         <td class="tablerow" th:text="${location.name}"></td>
                     </tr>
                     </tbody>
