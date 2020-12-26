@@ -4,6 +4,7 @@ import de.deftone.demo.model.Participant;
 import de.deftone.demo.service.EventService;
 import de.deftone.demo.service.LocationService;
 import de.deftone.demo.service.ParticipantService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,19 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.time.LocalDate;
 
 @Controller
+@AllArgsConstructor
 public class WebController {
 
     private final LocationService locationService;
     private final EventService eventService;
     private final ParticipantService participantService;
-
-    public WebController(LocationService locationService,
-                         EventService eventService,
-                         ParticipantService participantService) {
-        this.locationService = locationService;
-        this.eventService = eventService;
-        this.participantService = participantService;
-    }
 
     @GetMapping("/")
     public java.lang.String showTemplate(Model model) {

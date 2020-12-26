@@ -420,10 +420,15 @@ tbody tr .tablerow{
   font-size: 3rem;
   }
 
+.container_contact .padding-top{
+  padding-top: 2rem;
+  }
+
 #contact .container_contact {
   background-color: #08088A;
   color: white;
   padding-bottom: 2rem;
+  text-align: center;
   }
 #contact .contact_info {
   width: 90%;

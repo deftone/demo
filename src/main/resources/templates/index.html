@@ -30,8 +30,8 @@
             <h2> Wir machen Roßdorf und Gundernhausen sauber!</h2>
             <h5> Wir treffen uns jeden ersten Sonntag im Monat und sammeln
                 von ca. 11:00 bis 13:00 Müll auf. <br>
-                Wir sorgen für ein Transport der "Beute" zum Wertstoffhof.
-                Euch entstehen keine Kosten.<br></h5>
+                Dabei sorgen wir für den Transport der „Beute" zum Wertstoffhof.
+                Euch entstehen keine Kosten!<br></h5>
             <a href="#mitmachen" role="button">Mitmachen</a>
         </div>
     </section>
@@ -39,17 +39,13 @@
     <!-- MITMACHEN -->
     <section class="container_mitmachen" id="mitmachen">
         <h1 class="title"> Mitmachen </h1>
-        <div class="prototyp">Liebe Mitstreiter, dies ist unser erster digitaler Orga-Versuch. Bitte gebt uns Bescheid,
-            ob ihr die von uns
-            vorgeschlagenen Orte/Rounten angemessen findet oder ob ihr Verbesserungswünsche habt. Gerne eine Mail an
-            Katrin.Rose@posteo.de schicken. Danke!
-        </div>
         <div class="subcontainer_mitmachen">
 
             <div class="mitmachen_text">
-                <h2>Die nächste Aktion ist am Sonntag den <span th:text="${nextEvent}"></span> um 11:00</h2>
-                <p>Damit möglichst viele Stellen - und nichts doppelt - abgesammelt werden haben wir eine Liste
-                    mit Orten erstellt, für welche ihr euch anmelden könnt.</p>
+                <h2>Die nächste Aktion ist am Sonntag, den <span th:text="${nextEvent}"></span> um 11:00.</h2>
+                <p>Damit möglichst viele - und keine doppelten - Stellen abgesammelt werden haben wir eine Liste
+                    mit Orten erstellt, für welche ihr euch anmelden könnt. Wenn ihr Feedback zu den Routen habt,
+                    gerne eine Mail an katrin@cleanup-rossdorf.de schicken, danke!</p>
 
                 <table id="hidden_mobile">
                     <thead>
@@ -100,9 +96,20 @@
 
 
         <div class="mitmachen-panel">
-            <p class="padding-top">Mach auch mit! Gebe deinen Namen (gerne auch nur Vornamen) ein und
-                wähle einen freien Ort aus, wo du Müll sammeln möchtest, damit wir uns nicht ins Gehege kommen
-                :) TODO: Abholorte und Zeiten von Rüdiger hinzufuegen!!!</p>
+            <p class="padding-top">
+
+                Sammelpunkt zum Abgeben des Mülls ist gegen 13:00 am Freibad in Roßdorf
+                und ca 10-15 min später am XXX in Gundernhausen.
+
+                Rüdiger kommt mit seinem Hänger zu diesen Orten gefahren. Für Fragen oder besondere
+                Abholdwünsche bei schweren Fundstücken dürft ihr ihn anrufen: 0172 7418178.
+                <br><br>
+
+                Mach auch mit! Gib deinen Namen (gerne auch nur Vornamen) ein und
+                wähle einen freien Ort aus, wo du Müll sammeln möchtest.
+
+
+            </p>
 
 
             <form class="mitmachen_form" method="POST" th:action="@{/addPerson}" enctype="multipart/form-data">
@@ -119,7 +126,6 @@
                     </select>
                 </div>
 
-                <!--                        todo: das hier zentrieren-->
                 <button type="submit">Anmelden</button>
             </form>
         </div>
@@ -174,7 +180,10 @@
     <!-- CONTACT -->
     <section id="contact">
         <div class="container_contact">
+
+
             <h1 class="title"> Kontakt </h1>
+
             <div class="contact_info">
                 <div>
                     <i class="fa fa-user" aria-hidden="true"></i>
@@ -185,7 +194,7 @@
                 <div>
                     <i class="fa fa-envelope" aria-hidden="true"></i>
                     <span> E-Mail: </span>
-                    <p> cleanuprossdorf@gmail.com </p>
+                    <p> katrin@cleanup-rossdorf.de </p>
                 </div>
 
                 <div>
@@ -206,6 +215,7 @@
                     <p><a href="https://www.objectix.de/" target="_blank"> <img src="images/objectix-logo.png"></a></p>
                 </div>
             </div>
+            <h3 class="padding-top">Dies ist eine private Initiative. Diese Webseite wird nicht für kommerzielle Zwecke genutzt.</h3>
         </div>
     </section>
 
