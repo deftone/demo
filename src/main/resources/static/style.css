@@ -361,6 +361,16 @@ tbody tr .tablerow{
   .container_mitmachen .container_media_padding {
     padding: 0;
     }
+
+  .container_mitmachen table {
+     font-size: 1rem;
+    }
+
+   .container_mitmachen p {
+      font-size: 1rem;
+      color: white;
+      text-align: center;
+    }
   }
 
 
@@ -375,6 +385,11 @@ tbody tr .tablerow{
 @media only screen and (max-width: 700px) {
   .container_mitmacher .subcontainer_mitmacher {
     padding: 1rem;
+    }
+  }
+
+.container_mitmacher .subcontainer_mitmacher table {
+    font-size: 1rem;
     }
   }
 
