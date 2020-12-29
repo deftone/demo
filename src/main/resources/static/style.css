@@ -386,12 +386,12 @@ tbody tr .tablerow{
   .container_mitmacher .subcontainer_mitmacher {
     padding: 1rem;
     }
-  }
 
-.container_mitmacher .subcontainer_mitmacher table {
+  .container_mitmacher .subcontainer_mitmacher table {
     font-size: 1rem;
     }
   }
+
 
 .container_mitmacher .padding{
   padding-bottom: 2rem;
