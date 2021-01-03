@@ -151,12 +151,20 @@ a {
   }
 
 @media only screen and (max-width: 700px) {
+  .container_banner h1,
+  .container_banner h2,
+  .container_banner h5,
+  .container_banner a{
+    margin: 1rem 1.6rem;
+    }
+
   .container_banner {
     flex-direction: column;
     }
 
   .container_side_40 {
     align-items: center;
+    margin-bottom: 1.5rem;
     }
 
   .container_main_60 {
@@ -274,14 +282,33 @@ tbody tr .tablerow{
   }
 
 @media only screen and (max-width: 700px) {
-  .container_mitmachen .mitmachen_text {
-    width: 100%;
-    padding: 1rem;
+  .title {
+    padding: 1rem 0;
     }
+
+  .container_mitmachen .mitmachen_text {
+    padding-top: 0rem;
+    width: 100%;
+    }
+
+  .container_mitmachen  h2{
+     font-size: 1.5rem;
+     padding-bottom: 1rem;
+     padding-top: 0rem;
+     }
+
+  .container_mitmachen .padding-top {
+     padding-top: 0rem;
+   }
+
+   .container_mitmachen .mitmachen-panel{
+      padding: 0rem;
+   }
+
   }
+
 .mitmachen-panel{
   padding: 2rem;
-
   }
 
 .mitmachen_form{
@@ -367,7 +394,7 @@ tbody tr .tablerow{
     }
 
    .container_mitmachen p {
-      font-size: 1rem;
+      font-size: 1.2rem;
       color: white;
       text-align: center;
     }
@@ -390,6 +417,16 @@ tbody tr .tablerow{
   .container_mitmacher .subcontainer_mitmacher table {
     font-size: 1rem;
     }
+
+  #mitmacher .title {
+    padding-top: 1rem;
+    padding-bottom: 0rem;
+    }
+
+  #mitmacher h5{
+    font-size: 1.2rem;
+    }
+
   }
 
 
@@ -476,3 +513,18 @@ tbody tr .tablerow{
 #contact .contact_info div:last-child {
   padding-bottom: 2rem;
   }
+
+
+@media only screen and (max-width: 700px) {
+  #contact .title {
+    padding: 1rem 0;
+    }
+
+  #contact {
+    font-size: 1.2rem;
+    }
+
+  #contact h3{
+    font-size: 1rem;
+    }
+ }
