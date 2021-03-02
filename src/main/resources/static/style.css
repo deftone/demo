@@ -266,10 +266,6 @@ tbody tr .tablerow{
   padding-bottom: 1rem;
   }
 
-.container_mitmachen .padding-top{
-  padding-top: 2rem;
-  }
-
 .container_mitmachen .subcontainer_mitmachen {
   display: flex;
   align-items: flex-start;
@@ -350,6 +346,11 @@ tbody tr .tablerow{
   text-align: center;
   border-radius: 1rem;
   }
+
+.bold{
+   font-size: 1.7rem;
+   font-weight: bold;
+}
 
 @media only screen and (max-width: 700px) {
 

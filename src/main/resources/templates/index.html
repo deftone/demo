@@ -41,10 +41,13 @@
         <div class="subcontainer_mitmachen">
 
             <div class="mitmachen_text">
-                <h2>Die nächste Aktion ist am Sonntag, den <span th:text="${nextEvent}"></span> um 11:00.</h2>
+                <h2>Die nächste Aktion ist am Sonntag, den <span th:text="${nextEvent}"></span>.</h2>
                 <p>Damit möglichst viele - und keine doppelten - Stellen abgesammelt werden haben wir eine Liste
-                    mit Orten erstellt, für welche ihr euch anmelden könnt. Wenn ihr Feedback zu den Routen habt,
-                    gerne eine Mail an katrin@cleanup-rossdorf.de schicken, danke!</p>
+                    mit Orten erstellt, für welche ihr euch anmelden könnt. Ihr könnt aber auch einen eigenen Ort
+                    zum Sammeln angeben. Siehe weiter unten.
+                    <br/><br/>
+                    Wenn ihr Feedback zu den Routen habt,
+                    gerne eine Mail an info@cleanup-rossdorf.de schicken, danke!</p>
 
                 <table id="hidden_mobile">
                     <thead>
@@ -115,15 +118,22 @@
         <div class="mitmachen-panel">
             <p class="padding-top">
 
+            <div class="bold">
                 Sammelpunkt zum Abgeben des Mülls ist gegen 13:00 am Freibad in Roßdorf
-                und ca 10-15 min später am Kerbplatz in Gundernhausen.
-                <br><br>
-                Rüdiger kommt mit seinem Hänger zu diesen Orten gefahren. Für Fragen oder besondere
-                Abholwünsche bei schweren Fundstücken dürft ihr ihn anrufen: 0172 7418178.
-                <br><br>
+                und ca. 15 min später am Kerbplatz in Gundernhausen.
+            </div>
 
-                Mach auch mit! Gib deinen Namen (gerne auch nur Vornamen) ein und
-                wähle einen freien Ort aus, wo du Müll sammeln möchtest.
+            <br>
+            Ihr müsst nicht um 11:00 starten, d.h. ihr könnt also auch kürzer oder länger, oder auch schon am Samstag sammeln.
+            Hauptsache ihr seid am jeweiligen Sonntag rechtzeitig am Sammelpunkt zum Abliefern :)
+
+            <br><br>
+            Rüdiger kommt mit seinem Hänger zu diesen Orten gefahren. Für Fragen oder besondere
+            Abholwünsche bei schweren Fundstücken dürft ihr ihn anrufen: 0172 7418178.
+            <br><br>
+
+            Mach auch mit! Gib deinen Namen (gerne auch nur Vornamen) ein und
+            wähle einen freien Ort aus, wo du Müll sammeln möchtest.
 
 
             </p>
@@ -141,6 +151,20 @@
                                 th:value="${location.id}"
                                 th:text="${location.getCompactIdAndName()}"></option>
                     </select>
+                </div>
+
+                <button type="submit">Anmelden</button>
+            </form>
+
+            Alle Routen schon vergeben? Oder du möchtest gerne woanders Müll sammeln?
+            Dann trage hier deinen Namen und einen selbstgewählten Ort ein:
+
+            <!--            <form th:action="@{/mycontroller/{path}(path=${type})}">-->
+            <form class="mitmachen_form" method="POST" th:action="@{/addPersonNewRoute}" th:object="${freeLocation}">
+
+                <div class="mitmachen_select">
+                    Name: <input th:field="*{name}"/>
+                    Ort: <input th:field="*{location}"/>
                 </div>
 
                 <button type="submit">Anmelden</button>
@@ -211,7 +235,7 @@
                 <div>
                     <i class="fa fa-envelope" aria-hidden="true"></i>
                     <span> E-Mail: </span>
-                    <p> katrin@cleanup-rossdorf.de </p>
+                    <p> info@cleanup-rossdorf.de </p>
                 </div>
 
                 <div>

@@ -1,5 +1,6 @@
 package de.deftone.demo.controller;
 
+import de.deftone.demo.model.FreeLocation;
 import de.deftone.demo.model.Participant;
 import de.deftone.demo.service.EventService;
 import de.deftone.demo.service.LocationService;
@@ -7,9 +8,7 @@ import de.deftone.demo.service.ParticipantService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
@@ -22,18 +21,19 @@ public class WebController {
     private final ParticipantService participantService;
 
     @GetMapping("/")
-    public java.lang.String showTemplate(Model model) {
+    public String showTemplate(Model model) {
         model.addAttribute("nextEvent", eventService.getNextEvent().getFormattedDate());
         model.addAttribute("locations", locationService.getAllLocations());
         model.addAttribute("freeLocations", locationService.getFreeLocations());
         model.addAttribute("participants", participantService.getAllParticipantsForNextEvent());
+        model.addAttribute("freeLocation", new FreeLocation());
         return "index";
     }
 
     @PostMapping("/addPerson")
-    public java.lang.String addPerson(@RequestParam String name,
-                                      @RequestParam Integer id,
-                                      Model model) {
+    public String addPerson(@RequestParam String name,
+                            @RequestParam Integer id,
+                            Model model) {
         // was ist die id bei auswaehlen?? null?
         if (name != null && !name.isEmpty() && id != null) {
             Participant participant = new Participant();
@@ -50,6 +50,26 @@ public class WebController {
             model.addAttribute("participants", participantService.getAllParticipantsForNextEvent());
             model.addAttribute("locations", locationService.getAllLocations());
             model.addAttribute("freeLocations", locationService.getFreeLocations());
+        }
+        return "redirect:/#mitmacher";
+    }
+
+    @PostMapping("/addPersonNewRoute")
+    public String addPersonNewRoute(@ModelAttribute FreeLocation freeLocation,
+                                    Model model) {
+        if (freeLocation != null
+                && !freeLocation.getName().isEmpty()
+                && !freeLocation.getLocation().isEmpty()) {
+            Participant participant = new Participant();
+            participant.setName(freeLocation.getName());
+            participant.setAngemeldetAm(LocalDate.now());
+            participant.setEvent(eventService.getNextEvent());
+            participant.setLocationName(freeLocation.getLocation());
+            participantService.addParticipant(participant);
+
+            // alle geaenderten Attribute neu holen
+            model.addAttribute("participants", participantService.getAllParticipantsForNextEvent());
+
         }
         return "redirect:/#mitmacher";
     }
