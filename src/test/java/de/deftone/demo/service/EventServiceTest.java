@@ -2,40 +2,43 @@ package de.deftone.demo.service;
 
 import de.deftone.demo.model.Event;
 import de.deftone.demo.repo.EventRepo;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 // ohne diese Annotation @RunWith ist der eventRepoMock null
 // diese Zeile macht den Test NICHT langsam
 // es wird nicht die Application gestartet!
-@RunWith(SpringRunner.class)
-public class EventServiceTest {
+//@RunWith(SpringRunner.class)
+//das war fuer junit4, aber jetzt in junit5, daher brauchen wir jetzt das hier
+@ExtendWith(SpringExtension.class)
+//aber auch das startet spring nur mit leerem application context, daher schnell!
+class EventServiceTest {
 
     @Mock
     private EventRepo eventRepoMock;
 
     private EventService service;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         service = new EventService(eventRepoMock);
     }
 
     @Test
-    public void addEventSuccess() {
+    void addEventSuccess() {
         when(eventRepoMock.save(any()))
                 .thenReturn(new Event(1L, LocalDate.of(2020, 12, 1)));
         Event event = service.addEvent("2020-12-01");
@@ -43,7 +46,7 @@ public class EventServiceTest {
     }
 
     @Test
-    public void addEventWrongDatePattern() {
+    void addEventWrongDatePattern() {
         when(eventRepoMock.save(any()))
                 .thenReturn(new Event(1L, LocalDate.of(2020, 12, 1)));
         try {
@@ -56,7 +59,7 @@ public class EventServiceTest {
     }
 
     @Test
-    public void addEventDatumExistiertSchon() {
+    void addEventDatumExistiertSchon() {
         when(eventRepoMock.findAll())
                 .thenReturn(Collections.singletonList(
                         new Event(1L, LocalDate.of(2020, 12, 1))));
@@ -69,14 +72,14 @@ public class EventServiceTest {
     }
 
     @Test
-    public void testNextEventOhneHeute() {
+    void testNextEventOhneHeute() {
         when(eventRepoMock.findAll()).thenReturn(createEventsOhneHeute());
         Event nextEvent = service.getNextEvent();
         assertEquals(LocalDate.now().plusDays(5), nextEvent.getDate());
     }
 
     @Test
-    public void testNextEventMitHeute() {
+    void testNextEventMitHeute() {
         when(eventRepoMock.findAll()).thenReturn(createEventsMitHeute());
         Event nextEvent = service.getNextEvent();
         assertEquals(LocalDate.now(), nextEvent.getDate());

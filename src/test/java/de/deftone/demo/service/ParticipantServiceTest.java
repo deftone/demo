@@ -3,21 +3,21 @@ package de.deftone.demo.service;
 import de.deftone.demo.model.Event;
 import de.deftone.demo.model.Participant;
 import de.deftone.demo.repo.ParticipantRepo;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-@RunWith(SpringRunner.class)
-public class ParticipantServiceTest {
+@ExtendWith(SpringExtension.class)
+class ParticipantServiceTest {
 
     @Mock
     private ParticipantRepo participantRepoMock;
@@ -27,13 +27,13 @@ public class ParticipantServiceTest {
 
     private ParticipantService service;
 
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         service = new ParticipantService(participantRepoMock, eventServiceMock);
     }
 
     @Test
-    public void getParticipantsForNextEvent() {
+    void getParticipantsForNextEvent() {
         Event nextEvent = new Event();
         nextEvent.setDate(LocalDate.now().plusDays(5));
         when(eventServiceMock.getNextEvent()).thenReturn(nextEvent);

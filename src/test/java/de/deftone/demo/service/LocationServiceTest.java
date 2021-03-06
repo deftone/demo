@@ -2,34 +2,34 @@ package de.deftone.demo.service;
 
 import de.deftone.demo.model.Location;
 import de.deftone.demo.repo.LocationRepo;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.when;
 
-@RunWith(SpringRunner.class)
-// Klasse muss public sein, sonst wird kein Test erkannt!
-public class LocationServiceTest {
+@ExtendWith(SpringExtension.class)
+class LocationServiceTest {
 
     @Mock
     private LocationRepo locationRepoMock;
 
     private LocationService service;
 
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         service = new LocationService(locationRepoMock);
     }
 
     @Test
-    public void locationGibtEsSchonMitAndererSchreibweise() {
+    void locationGibtEsSchonMitAndererSchreibweise() {
         when(locationRepoMock.findAll()).thenReturn(createLocations());
         try {
             //testet auch indirekt den trimm!
@@ -41,7 +41,7 @@ public class LocationServiceTest {
     }
 
     @Test
-    public void locationGibtEsNochNicht() {
+    void locationGibtEsNochNicht() {
         when(locationRepoMock.findAll()).thenReturn(createLocations());
 
         Location newLocation = new Location(4L, "R2", "Spielplatz", false);
@@ -55,7 +55,7 @@ public class LocationServiceTest {
     }
 
     @Test
-    public void locationListHinzufuegen() {
+    void locationListHinzufuegen() {
         Location locationOK = new Location(4L, "R4", "B38", true);
         Location locationOK2 = new Location(6L, "R6", "xyz", true);
         when(locationRepoMock.findAll()).thenReturn(createLocations());
