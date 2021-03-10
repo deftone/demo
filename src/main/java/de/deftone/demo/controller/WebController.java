@@ -8,8 +8,10 @@ import de.deftone.demo.service.ParticipantService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 
 @Controller
@@ -55,8 +57,16 @@ public class WebController {
     }
 
     @PostMapping("/addPersonNewRoute")
-    public String addPersonNewRoute(@ModelAttribute FreeLocation freeLocation,
+    public String addPersonNewRoute(@Valid @ModelAttribute FreeLocation freeLocation,
+                                    BindingResult bindingResult,
                                     Model model) {
+        // das hier klappt, aber der fehlerrahmen erscheint nicht :(
+        if (bindingResult.hasErrors()) {
+            //todo: ein pop up? dass beides angegeben werden muss?
+            // oder etwas ins html hinzufuegen?
+            return "redirect:/#anmelden";
+        }
+
         if (freeLocation != null
                 && !freeLocation.getName().isEmpty()
                 && !freeLocation.getLocation().isEmpty()) {

@@ -136,12 +136,9 @@
             wähle einen freien Ort aus, wo du Müll sammeln möchtest.
 
 
-            </p>
-
-
             <form class="mitmachen_form" method="POST" th:action="@{/addPerson}" enctype="multipart/form-data">
 
-                <div class="mitmachen_select">
+                <div class="mitmachen_select" id="anmelden">
                     Name: <input name="name"/>
                     Ort:
                     <select id="id" name="id">
@@ -159,7 +156,6 @@
             Alle Routen schon vergeben? Oder du möchtest gerne woanders Müll sammeln?
             Dann trage hier deinen Namen und einen selbstgewählten Ort ein:
 
-            <!--            <form th:action="@{/mycontroller/{path}(path=${type})}">-->
             <form class="mitmachen_form" method="POST" th:action="@{/addPersonNewRoute}" th:object="${freeLocation}">
 
                 <div class="mitmachen_select">
@@ -245,6 +241,15 @@
                         CleanUp Gruppe - Roßdorf Gundernhausen
                     </a></p>
                 </div>
+
+                <div>
+                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                    <span> instagram: </span>
+                    <p><a href="https://www.instagram.com/cleanup_rossdorf/ " target="_blank">
+                        cleanup_rossdorf
+                    </a></p>
+                </div>
+
 
                 <div>
                     <i class="fa fa-linux" aria-hidden="true"></i>
