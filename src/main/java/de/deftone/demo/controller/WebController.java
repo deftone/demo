@@ -1,5 +1,6 @@
 package de.deftone.demo.controller;
 
+import de.deftone.demo.model.GivenLocation;
 import de.deftone.demo.model.FreeLocation;
 import de.deftone.demo.model.Participant;
 import de.deftone.demo.service.EventService;
@@ -29,30 +30,37 @@ public class WebController {
         model.addAttribute("freeLocations", locationService.getFreeLocations());
         model.addAttribute("participants", participantService.getAllParticipantsForNextEvent());
         model.addAttribute("freeLocation", new FreeLocation());
+        model.addAttribute("givenLocation", new GivenLocation());
         return "index";
     }
 
     @PostMapping("/addPerson")
-    public String addPerson(@RequestParam String name,
-                            @RequestParam Integer id,
+    public String addPerson(@Valid @ModelAttribute GivenLocation givenLocation,
+                            BindingResult bindingResult,
                             Model model) {
-        // was ist die id bei auswaehlen?? null?
-        if (name != null && !name.isEmpty() && id != null) {
-            Participant participant = new Participant();
-            participant.setName(name);
-            participant.setAngemeldetAm(LocalDate.now());
-            participant.setEvent(eventService.getNextEvent());
-            participant.setLocationName(locationService.getLocationNameById(id));
-            participantService.addParticipant(participant);
 
-            //und anschliessend als gebucht setzen, damit aus auswahlbox verschwindet
-            locationService.setLocationToBooked(id);
-
-            // alle geaenderten Attribute neu holen
-            model.addAttribute("participants", participantService.getAllParticipantsForNextEvent());
-            model.addAttribute("locations", locationService.getAllLocations());
-            model.addAttribute("freeLocations", locationService.getFreeLocations());
+        // das hier klappt, aber der fehlerrahmen erscheint nicht :(
+        if (bindingResult.hasErrors()) {
+            //todo: ein pop up? dass beides angegeben werden muss?
+            // oder etwas ins html hinzufuegen?
+            return "redirect:/#anmelden";
         }
+
+        Participant participant = new Participant();
+        participant.setName(givenLocation.getName());
+        participant.setAngemeldetAm(LocalDate.now());
+        participant.setEvent(eventService.getNextEvent());
+        participant.setLocationName(locationService.getLocationNameById(givenLocation.getIdFromString()));
+        participantService.addParticipant(participant);
+
+        //und anschliessend als gebucht setzen, damit aus auswahlbox verschwindet
+        locationService.setLocationToBooked(givenLocation.getIdFromString());
+
+        // alle geaenderten Attribute neu holen
+        model.addAttribute("participants", participantService.getAllParticipantsForNextEvent());
+        model.addAttribute("locations", locationService.getAllLocations());
+        model.addAttribute("freeLocations", locationService.getFreeLocations());
+
         return "redirect:/#mitmacher";
     }
 
