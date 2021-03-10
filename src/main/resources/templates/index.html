@@ -31,7 +31,7 @@
                 von ca. 11:00 bis 13:00 Müll auf. <br>
                 Dabei sorgen wir für den Transport der „Beute" zum Wertstoffhof.
                 Euch entstehen keine Kosten!<br></h5>
-            <a href="#mitmachen" role="button">Mitmachen</a>
+            <a href="#anmelden" role="button">Mitmachen</a>
         </div>
     </section>
 
@@ -130,19 +130,19 @@
             <br><br>
             Rüdiger kommt mit seinem Hänger zu diesen Orten gefahren. Für Fragen oder besondere
             Abholwünsche bei schweren Fundstücken dürft ihr ihn anrufen: 0172 7418178.
-            <br><br>
+            <br><br id="anmelden">
 
-            Mach auch mit! Gib deinen Namen (gerne auch nur Vornamen) ein und
+            <span class="bold">Mach auch mit!</span>
+            Gib deinen Namen (gerne auch nur Vornamen) ein und
             wähle einen freien Ort aus, wo du Müll sammeln möchtest.
 
 
-            <form class="mitmachen_form" method="POST" th:action="@{/addPerson}" enctype="multipart/form-data">
+            <form class="mitmachen_form" method="POST" th:action="@{/addPerson}" th:object="${givenLocation}">
 
-                <div class="mitmachen_select" id="anmelden">
+                <div class="mitmachen_select">
                     Name: <input name="name"/>
                     Ort:
                     <select id="id" name="id">
-                        <!--                                todo: warum gehen nicht 2 worte mit leerzeichen in text?-->
                         <option th:value="''" th:text="bitte_auswählen"></option>
                         <option th:each="location : ${freeLocations}"
                                 th:value="${location.id}"
