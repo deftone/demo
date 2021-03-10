@@ -2,6 +2,7 @@ package de.deftone.demo.controller;
 
 import de.deftone.demo.model.Event;
 import de.deftone.demo.model.Location;
+import de.deftone.demo.model.Participant;
 import de.deftone.demo.service.EventService;
 import de.deftone.demo.service.LocationService;
 import de.deftone.demo.service.ParticipantService;
@@ -68,6 +69,12 @@ public class AdminController {
     }
 
     // ***** Participant *******
+
+    @GetMapping("/admin/getAllParticipantsForNextEvent")
+    public List<Participant> getAllParticipantsForNextEvent(){
+        return participantService.getAllParticipantsForNextEvent();
+    }
+
     //Teilnehmer loeschen
     @PostMapping(path = "/admin/deleteParticipant")
     public boolean deleteParticipant(@RequestParam long id) {
