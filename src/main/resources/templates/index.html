@@ -38,16 +38,26 @@
     <!-- MITMACHEN -->
     <section class="container_mitmachen" id="mitmachen">
         <h1 class="title"> Mitmachen </h1>
+
+        <div class="mitmachen-panel">
+
+            <h2>Die nächste Aktion ist am Sonntag, den <span th:text="${nextEvent}"></span>.</h2>
+            <p>Damit möglichst viele - und keine doppelten - Stellen abgesammelt werden haben wir eine Liste
+                mit Orten erstellt, für welche ihr euch anmelden könnt. Ihr könnt aber auch einen eigenen Ort
+                zum Sammeln angeben. Siehe weiter unten.
+                <br/><br/>
+                Achtet beim Sammeln an der Hauptstraße in Roßdorf darauf, dass ihr nur jeweils auf einer Straßenseite
+                sammeln müsst,
+                da wir die Straße verschiedenen Routen (3, 4a, 4b und 5) zugeordnet haben.
+                <br/><br/>
+                Wenn ihr Feedback zu den Routen habt,
+                gerne eine Mail an info@cleanup-rossdorf.de schicken, danke!</p>
+        </div>
+
         <div class="subcontainer_mitmachen">
 
             <div class="mitmachen_text">
-                <h2>Die nächste Aktion ist am Sonntag, den <span th:text="${nextEvent}"></span>.</h2>
-                <p>Damit möglichst viele - und keine doppelten - Stellen abgesammelt werden haben wir eine Liste
-                    mit Orten erstellt, für welche ihr euch anmelden könnt. Ihr könnt aber auch einen eigenen Ort
-                    zum Sammeln angeben. Siehe weiter unten.
-                    <br/><br/>
-                    Wenn ihr Feedback zu den Routen habt,
-                    gerne eine Mail an info@cleanup-rossdorf.de schicken, danke!</p>
+
 
                 <table id="hidden_mobile">
                     <thead>
@@ -124,7 +134,8 @@
             </div>
 
             <br>
-            Ihr müsst nicht um 11:00 starten, d.h. ihr könnt also auch kürzer oder länger, oder auch schon am Samstag sammeln.
+            Ihr müsst nicht um 11:00 starten, d.h. ihr könnt also auch kürzer oder länger, oder auch schon am Samstag
+            sammeln.
             Hauptsache ihr seid am jeweiligen Sonntag rechtzeitig am Sammelpunkt zum Abliefern :)
 
             <br><br>
