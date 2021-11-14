@@ -56,11 +56,6 @@ public class WebController {
         //und anschliessend als gebucht setzen, damit aus auswahlbox verschwindet
         locationService.setLocationToBooked(givenLocation.getIdFromString());
 
-        // alle geaenderten Attribute neu holen
-        model.addAttribute("participants", participantService.getAllParticipantsForNextEvent());
-        model.addAttribute("locations", locationService.getAllLocations());
-        model.addAttribute("freeLocations", locationService.getFreeLocations());
-
         return "redirect:/#mitmacher";
     }
 
@@ -84,10 +79,6 @@ public class WebController {
             participant.setEvent(eventService.getNextEvent());
             participant.setLocationName(freeLocation.getLocation());
             participantService.addParticipant(participant);
-
-            // alle geaenderten Attribute neu holen
-            model.addAttribute("participants", participantService.getAllParticipantsForNextEvent());
-
         }
         return "redirect:/#mitmacher";
     }
