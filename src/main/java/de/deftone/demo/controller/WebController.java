@@ -82,4 +82,9 @@ public class WebController {
         }
         return "redirect:/#mitmacher";
     }
+
+    @GetMapping({"/presse"})
+    public String presse() {
+        return "presse";
+    }
 }

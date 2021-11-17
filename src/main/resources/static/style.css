@@ -461,6 +461,134 @@ tbody tr .tablerow{
   padding-bottom: 1rem;
   }
 
+
+/*** PRESSE ***/
+.container_presse {
+  display: flex;
+  justify-content: center;
+  background-color: #ff8000;   /* orange */
+  color: white;
+  }
+
+.container_presse .title {
+  text-align: center;
+  text-shadow: 5px 5px #0059b3;  /* dunkles blau */
+  padding: 1rem 0;
+  }
+
+
+
+.container_presse  .container_main_60 p{
+    margin: 0 2rem;
+    text-align: justify;
+    }
+
+.container_presse .container_side_40 a {
+  background-color: #0080ff ; /* mittleres blau */
+   color: white;
+   font-size: 2rem;
+   text-align: center;
+   border-radius: 1rem;
+   display: flex-item;
+   align: center;
+   padding: 0.8rem 5rem;
+   margin: 2rem 1.6rem;
+  }
+
+
+.container_presse .container_side_40 a:hover {
+  background-color: white;
+  color: #0080ff;  /* mittleres blau */
+  }
+
+.container_presse .container_side_40 a:active {
+  color: white;
+  background-color: #b35900;   /* dunkles orange */
+  }
+
+.container_presse a {
+  transition-property: background-color;
+  transition-duration: 0.5s;
+  transition-delay: 0ms;
+  transition-timing-function: ease-in;
+  }
+
+.blauer_hintergrund {
+  background-color: #0080ff;   /* mittleres blau */
+  }
+
+.dunkelblauer_hintergrund {
+  background-color: #0059b3;   /* dunkles blau */
+  }
+
+
+.container_presse h1,
+.container_presse h2,
+.container_presse h5,
+.container_presse a{
+  display: inline-flex;
+  margin: 2rem 1.6rem;
+  color: white;
+  }
+
+.container_presse h1 {
+  text-shadow: 3px 3px #b35900;  /* dunkles orange */
+  font-size: 3rem;
+  }
+
+.container_presse h2 {
+  font-size: 2rem;
+  }
+
+.container_presse h5 {
+  font-size: 1.5rem;
+  }
+
+.container_presse p {
+  font-size: 1.2rem;
+  }
+
+
+
+
+
+@media only screen and (max-width: 700px) {
+  .container_presse h1,
+  .container_presse h2,
+  .container_presse h5,
+  .container_presse a{
+    margin: 1rem 1.6rem;
+    }
+
+  .container_presse {
+    flex-direction: column;
+    }
+
+  .container_side_40 {
+    align-items: center;
+    margin-bottom: 1.5rem;
+    }
+
+  .container_main_60 {
+    width: 100%;
+    }
+
+  .container_main_60
+  .container_media_padding {
+
+      }
+
+  .container_side_40 {
+    width: 100%;
+    }
+
+  .container_presse a{
+    font-size: 1.5rem;
+    padding: 0.8rem 5rem;
+    }
+  }
+
+
 /*CONTACT*/
 
 .container_contact  .title {
