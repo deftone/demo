@@ -476,6 +476,12 @@ tbody tr .tablerow{
   padding: 1rem 0;
   }
 
+.container_presse .title_dunkel {
+  text-align: center;
+  text-shadow: 5px 5px #08088A;  /* noch dunkleres blau */
+  padding: 1rem 0;
+  }
+
 .container_presse .container_main_60 .container_media_padding {
       padding: 3.2rem 2.4rem 0rem 2.4rem;
       }
