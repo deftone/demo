@@ -74,7 +74,7 @@ a {
 .title {
   text-align: center;
   text-shadow: 5px 5px #0059b3;  /* dunkles blau */
-  padding: 3.2rem 0;
+  padding: 3.2rem 0 0 0;
  /* font-weight: bold; */
   }
 
@@ -262,8 +262,8 @@ tbody tr .tablerow{
   }
 
 .container_mitmachen p{
-  font-size: 1.5rem;
-  padding-bottom: 1rem;
+  font-size: 1.3rem;
+  padding-bottom: 0rem;
   }
 
 .container_mitmachen .subcontainer_mitmachen {
@@ -293,6 +293,12 @@ tbody tr .tablerow{
      padding-top: 0rem;
      }
 
+  .container_mitmachen  p{
+     font-size: 1.2rem;
+     padding-bottom: 0rem;
+     padding-top: 0rem;
+     }
+
   .container_mitmachen .padding-top {
      padding-top: 0rem;
    }
@@ -304,7 +310,7 @@ tbody tr .tablerow{
   }
 
 .mitmachen-panel{
-  padding: 2rem;
+  padding: 0 1rem 0 1rem;
   }
 
 .mitmachen_form{
@@ -371,9 +377,9 @@ tbody tr .tablerow{
     }
   }
 
-.subcontainer_mitmachen .container_side_50 .container_mitmachen_box .container_media_100 img{
+.container_mitmachen_box .container_media_100 img{
   margin: 1rem;
-  width: 90%;
+  width: 93%;
   }
 
 .container_mitmachen  h1 {
@@ -424,10 +430,6 @@ tbody tr .tablerow{
     padding-bottom: 0rem;
     }
 
-  #mitmacher h5{
-    font-size: 1.2rem;
-    }
-
   }
 
 
@@ -445,10 +447,14 @@ tbody tr .tablerow{
   font-size: 3rem;
   }
 
+.container_mitmacher p{
+  font-size: 1.3rem;
+  }
+
 .container_mitmacher   .title {
   text-align: center;
   text-shadow: 5px 5px #00305F;  /*ganz dunkles blau*/
-  padding: 3.2rem 0;
+  padding: 3rem 0;
   }
 
 .container_mitmacher h2{

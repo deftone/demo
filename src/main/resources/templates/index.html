@@ -41,7 +41,8 @@
 
         <div class="mitmachen-panel">
 
-            <h2>Die nächste Aktion ist am Sonntag, den <span th:text="${nextEvent}"></span>.</h2>
+            <p class="bold">Die nächste Aktion ist am Sonntag, den <span th:text="${nextEvent}"></span>.</p>
+           <br>
             <p>Damit möglichst viele - und keine doppelten - Stellen abgesammelt werden haben wir eine Liste
                 mit Orten erstellt, für welche ihr euch anmelden könnt. Ihr könnt aber auch einen eigenen Ort
                 zum Sammeln angeben. Siehe weiter unten.
@@ -52,6 +53,7 @@
                 <br/><br/>
                 Wenn ihr Feedback zu den Routen habt,
                 gerne eine Mail an info@cleanup-rossdorf.de schicken, danke!</p>
+            <br>
         </div>
 
         <div class="subcontainer_mitmachen">
@@ -121,6 +123,7 @@
                 <div class="container_media_100">
                     <img src="images/RossdorfNeu.png" alt="">
                     <p>Routen in Roßdorf Rx</p>
+                    <br>
                 </div>
             </a>
         </div>
@@ -128,24 +131,28 @@
         <div class="mitmachen-panel">
             <p class="padding-top">
 
-            <div class="bold">
+            <p class="bold">
                 Sammelpunkt zum Abgeben des Mülls ist gegen 13:00 am Freibad in Roßdorf
                 und ca. 15 min später am Kerbplatz in Gundernhausen.
-            </div>
+            </p>
+            <p>
+                <br>
+                Ihr müsst nicht um 11:00 starten, d.h. ihr könnt also auch kürzer oder länger, oder auch schon am
+                Samstag
+                sammeln.
+                Hauptsache ihr seid am jeweiligen Sonntag rechtzeitig am Sammelpunkt zum Abliefern :)
 
-            <br>
-            Ihr müsst nicht um 11:00 starten, d.h. ihr könnt also auch kürzer oder länger, oder auch schon am Samstag
-            sammeln.
-            Hauptsache ihr seid am jeweiligen Sonntag rechtzeitig am Sammelpunkt zum Abliefern :)
+                <br><br>
+                Rüdiger kommt mit seinem Hänger zu diesen Orten gefahren. Für Fragen oder besondere
+                Abholwünsche bei schweren Fundstücken dürft ihr ihn anrufen: 0172 7418178.
+                <br><br id="anmelden">
+            </p>
+            <p class="bold">Mach auch mit!</p>
+            <p>
 
-            <br><br>
-            Rüdiger kommt mit seinem Hänger zu diesen Orten gefahren. Für Fragen oder besondere
-            Abholwünsche bei schweren Fundstücken dürft ihr ihn anrufen: 0172 7418178.
-            <br><br id="anmelden">
-
-            <span class="bold">Mach auch mit!</span>
-            Gib deinen Namen (gerne auch nur Vornamen) ein und
-            wähle einen freien Ort aus, wo du Müll sammeln möchtest.
+                Gib deinen Namen (gerne auch nur Vornamen) ein und
+                wähle einen freien Ort aus, wo du Müll sammeln möchtest.
+            </p>
 
 
             <form class="mitmachen_form" method="POST" th:action="@{/addPerson}" th:object="${givenLocation}">
@@ -164,8 +171,11 @@
                 <button type="submit">Anmelden</button>
             </form>
 
-            Alle Routen schon vergeben? Oder du möchtest gerne woanders Müll sammeln?
-            Dann trage hier deinen Namen und einen selbstgewählten Ort ein:
+            <p>
+                Alle Routen schon vergeben? Oder du möchtest gerne woanders Müll sammeln?
+                Dann trage hier deinen Namen und einen selbstgewählten Ort ein:
+            </p>
+
 
             <form class="mitmachen_form" method="POST" th:action="@{/addPersonNewRoute}" th:object="${freeLocation}">
 
@@ -184,8 +194,11 @@
         <h1 class="title"> Mitmacher </h1>
         <div class="subcontainer_mitmacher">
             <div class="mitmachen_text">
-                <h5 class="padding">Danke an alle, die sich für den <span th:text="${nextEvent}"></span>
-                    angemeldet haben!</h5>
+                <p >Danke an alle, die sich für den <span th:text="${nextEvent}"></span>
+                    angemeldet haben!
+                <br>
+                <br>
+                </p>
 
 
                 <table id="hidden_mobile">
