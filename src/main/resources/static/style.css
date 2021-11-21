@@ -201,12 +201,6 @@ a {
   color: #0059b3;  /* dunkles blau */
   }
 
-@media only screen and (max-width: 700px) {
-   table {
-    width: 90%;
-    }
-  }
-
  th {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -375,7 +369,7 @@ tbody tr .tablerow{
     display: flex-item;
     margin: 2px;
     }
-  }
+}
 
 .container_mitmachen_box .container_media_100 img{
   margin: 1rem;
