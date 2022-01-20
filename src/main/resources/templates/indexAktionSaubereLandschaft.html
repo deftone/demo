@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:Name="http://www.w3.org/1999/xhtml"
+      th:lang="${#locale.language}">
+<head>
+    <meta charset="utf-8"/>
+    <title>CleanUp</title>
+    <link rel="stylesheet" href="style.css" th:href="@{/style.css}"/>
+    <link rel="stylesheet" href="reset.css" th:href="@{/reset.css}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/favicon.ico"/>
+
+</head>
+<body>
+<div class="main">
+    <!-- BANNER -->
+    <section class="container_banner blue" role="banner">
+        <h1> CleanUp Spezial im April 2022
+            <br>
+            <br>
+            Aktion Saubere Landschaft</h1>
+    </section>
+    <section class="container_banner" role="banner">
+
+        <div class="container_main_60">
+            <div class="container_media_padding">
+                <img src="images/CleanUpBanner2.jpg">
+            </div>
+        </div>
+
+        <div class="container_side_40">
+            <h1> CleanUp Roßdorf - Gundernhausen</h1>
+            <h2> Wir machen Roßdorf und Gundernhausen sauber!</h2>
+            <h5> Normalerweise treffen wir uns jeden ersten Sonntag im Monat und sammeln
+                von ca. 11:00 bis 13:00 Müll auf. <br>
+                In diesem April ist es anders. Gemeinsam mit der Gemeinde und der ZAW
+                sammeln wir am SAMSTAG, den 2.4.2022 von 10:00 bis 13:00 Müll
+                mit einem gemeinsamen Ausklang am Bauhof in Roßdorf.<br></h5>
+            <a href="#anmelden" role="button">Mitmachen</a>
+        </div>
+    </section>
+
+    <!-- MITMACHEN -->
+    <section class="container_mitmachen" id="mitmachen">
+        <h1 class="title"> Mitmachen </h1>
+
+        <div class="mitmachen-panel">
+
+            <p class="bold">Dieses besondere Clean Up findet am Samstag, den 02.04.2022 von 10:00 bis 13:00 statt.</p>
+            <br>
+            <p> Es ist eine gemeinsame Aktion der Gemeinde Roßdorf, der ZAW und dem CleanUp.
+                <br>
+                <br>
+                Ablauf:
+                <br>
+                <br>
+                Wir treffen uns um 10:00 an verschiedenen Treffpunkten in Roßdorf bzw. Gundernhausen.
+                Dein Treffpunkt richtet sich daran aus, wo du Müll sammeln möchtest. Siehe weiter unten.
+                <br>
+                <br>
+                An jedem Treffpunkt wird jemand des Orgateams sein um Materialien (Greifer, Weste, Müllsäcke,
+                Handschuhe) zu verteilen und Fragen zu beantworten.
+                <br>
+                <br>
+                Dann zieht jedes Grüppchen los und sammelt Müll in der vorher ausgewählten Route, s.u.
+                <br>
+                <br>
+                Um 13:00 treffen wir uns dann ALLE in Roßdorf am Bauhof für einen gemütlichen Ausklang. Für Essen und
+                Getränke ist gesorgt!
+                <br>
+                <br>
+                Die vorgeschlagenen Routen findet ihr in der Tabelle und könnte auch in den Karten sehen, wo in Roßdorf
+                bzw. Gundernhausen diese sind.
+                Fall ihr woanders sammeln möchtet, dann tragt einen Ort ein.
+                <br>
+                <br>
+                Wichtig: Ihr müsst bevor ihr euch anmeldet die Corona Richtlinien durchlesen und dieses mal auch
+                Adressdaten angeben (keine Angst, die werden nicht auf der Seite veröffentlicht). Sonst könnt ihr nicht
+                mitmachen.
+                <br>
+                <br>
+                Achtung: die Veranstaltung ist auf 50 Personen beschränkt!
+        </div>
+
+        <div class="subcontainer_mitmachen">
+
+            <div class="mitmachen_text">
+
+
+                <table id="hidden_mobile">
+                    <thead>
+                    <tr>
+                        <th class="tablerow">Kürzel</th>
+                        <th class="tablerow">Ort</th>
+                        <th class="tablerow">frei</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="location : ${locations}">
+                        <td class="tablerow" th:text="${location.idString}"></td>
+                        <td class="tablerow" th:text="${location.name}"></td>
+                        <td class="tablerow" th:text="${location.getFrei()}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <table id="hidden_desktop">
+                    <thead>
+                    <tr>
+                        <th class="tablerow">Kürzel</th>
+                        <th class="tablerow">Ort</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="location : ${locations}">
+                        <td class="tablerow" th:text="${location.idString}"></td>
+                        <td class="tablerow" th:text="${location.name}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+            <div class="container_side_50" id="hidden_mobile">
+                <a href="" class="container_mitmachen_box">
+                    <div class="container_media_100">
+                        <img src="images/Gundernhausen.png" alt="">
+                    </div>
+                </a>
+
+                <a href="" class="container_mitmachen_box">
+                    <div class="container_media_100">
+                        <img src="images/RossdorfNeu.png" alt="">
+                    </div>
+                </a>
+            </div>
+        </div>
+
+
+        <div id="hidden_desktop">
+            <a href="" class="container_mitmachen_box">
+                <div class="container_media_100">
+                    <img src="images/Gundernhausen.png" alt="">
+                </div>
+                <p>Routen in Gundernhausen Gx</p>
+            </a>
+
+            <a href="" class="container_mitmachen_box">
+                <div class="container_media_100">
+                    <img src="images/RossdorfNeu.png" alt="">
+                    <p>Routen in Roßdorf Rx</p>
+                    <br>
+                </div>
+            </a>
+        </div>
+
+        <div class="mitmachen-panel">
+            <p class="padding-top">
+
+            <p class="bold">
+                Bitte beachten Sie folgende Hinweise:
+            </p>
+            <ul>
+                <li>Für die Teilnahme an der Aktion Saubere Landschaft bringen Sie bitte eine Mund-
+                    Nasen-Abdeckung mit.
+                </li>
+                <li>Sollten Sie Anzeichen von Erkältungskrankheiten vorweisen, ist eine Teilnahme
+                    nicht möglich.
+                </li>
+                <li>Sollten Sie sich in den 2 Wochen vor der Veranstaltung in einem ausgewiesenen
+                    Corona-Risiko-Gebiet aufgehalten haben, ist die Teilnahme nicht möglich.
+                </li>
+                <li>Für die Teilnahme an der Aktion Saubere Landschaft ist die Erfassung von
+                    Teilnehmerdaten zwingend erforderlich. Bitte füllen Sie dieses Datenblatt vollständig
+                    aus und bestätigen Sie die Richtigkeit mit Ihrer Unterschrift. Um die Nachverfolgung
+                    von Infektionen zu ermöglichen, müssen wir als Veranstalter nach § 1 der Corona-
+                    Kontakt- und Betriebsbeschränkungsverordnung des Landes Hessen Daten unserer
+                    Teilnehmenden erfassen. Selbstverständlich achten wir hierbei auf den Schutz Ihrer
+                    Daten*. Wir danken Ihnen für Ihre Mithilfe.
+                </li>
+            </ul>
+            <p>
+
+                <br><br id="anmelden">
+            </p>
+            <p class="bold">Mach auch mit!</p>
+            <br>
+            <p>
+                Gib deinen Kontaktdaten ein und
+                wähle einen freien Ort aus, wo du Müll sammeln möchtest.
+            </p>
+            <p class="bold">
+                <br>
+                <br>
+                Anmeldeschluss: Mittwoch, der 30.März 2022
+                <br>
+                <br>
+            </p>
+
+
+            <form method="POST"
+                  th:action="@{/aktionSaubereLandschaftAddPerson}"
+                  th:object="${givenLocationASL}">
+                <div th:replace="fragments/input :: input('text','Vor- und Nachname', 'vorUndNachName')"/>
+                <div th:replace="fragments/input :: input('text','Straße mit HausNr', 'strasseHausNr')"/>
+                <div th:replace="fragments/input :: input('text','PLZ Ort', 'plzOrt')"/>
+                <div th:replace="fragments/input :: input('text','Email-Adresse', 'emailAdresse')"/>
+                <div th:replace="fragments/input :: input('text','weitere Teilnehmer', 'weitereTeilnehmer')"/>
+                Ort:
+                <select id="id" name="id">-->
+                    <option th:value="''" th:text="bitte_auswählen"></option>
+                    <option th:each="location : ${freeLocationsASL}"
+                            th:value="${location.id}"
+                            th:text="${location.getCompactIdAndName()}"></option>
+                </select>
+                <div th:replace="fragments/input :: input('text','freier Ort', 'freeLocation')"/>
+                <br/>
+                <div class="form-row">
+                    <button type="submit">Anmelden</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Mitmacher -->
+    <section class="container_mitmacher" id="mitmacher">
+        <h1 class="title"> Mitmacher </h1>
+        <div class="subcontainer_mitmacher">
+            <div class="mitmachen_text">
+                <p>Danke an alle, die sich für den 02.04.2022 angemeldet haben!
+                    <br>
+                    <br>
+                </p>
+
+
+                <table id="hidden_mobile">
+                    <thead>
+                    <tr>
+                        <th class="tablerow">Name</th>
+                        <th class="tablerow">weitere Teilnehmer</th>
+                        <th class="tablerow">Ort</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="participant : ${participantsASL}">
+                        <td class="tablerow" th:text="${participant.vorUndNachName}"></td>
+                        <td class="tablerow" th:text="${participant.weitereTeilnehmer}"></td>
+                        <td class="tablerow" th:text="${participant.locationName}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <table id="hidden_desktop">
+                    <thead>
+                    <tr>
+                        <th class="tablerow">Name</th>
+                        <th class="tablerow">Ort</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="participant : ${participantsASL}">
+                        <td class="tablerow" th:text="${participant.vorUndNachName}"></td>
+                        <td class="tablerow" th:text="${participant.locationName}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="container_contact">
+
+
+            <h1 class="title"> Kontakt </h1>
+
+            <div class="contact_info">
+                <div>
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <span> Idee und Organisation: </span>
+                    <p> Sabrina Anna Hänsel, Katrin Rose, Kristina Wallmichrath und Rüdiger Dunker </p>
+                </div>
+
+                <div>
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                    <span> E-Mail: </span>
+                    <p> info@cleanup-rossdorf.de </p>
+                </div>
+
+                <div>
+                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                    <span> facebook: </span>
+                    <p><a href="https://www.facebook.com/groups/cleanuprossdorfgundernhausen/ " target="_blank">
+                        CleanUp Gruppe - Roßdorf Gundernhausen
+                    </a></p>
+                </div>
+
+                <div>
+                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                    <span> instagram: </span>
+                    <p><a href="https://www.instagram.com/cleanup_rossdorf/ " target="_blank">
+                        cleanup_rossdorf
+                    </a></p>
+                </div>
+
+
+                <div>
+                    <i class="fa fa-linux" aria-hidden="true"></i>
+                    <span> Webmaster: </span>
+                    <p> Katrin Rose </p>
+                </div>
+
+                <div>
+                    <i class="fa fa-server" aria-hidden="true"></i>
+                    <span> Sponsor: </span>
+                    <p><a href="https://www.objectix.de/" target="_blank"> <img src="images/objectix-logo.png"></a></p>
+                </div>
+            </div>
+            <h3 class="padding-top">Dies ist eine private Initiative. Diese Webseite wird nicht für kommerzielle Zwecke
+                genutzt. <br> Bild: iStock-Illustration-ID:1001374964, Bildnachweis:Lisitsa</h3>
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>

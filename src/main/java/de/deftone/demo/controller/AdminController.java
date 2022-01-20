@@ -2,6 +2,7 @@ package de.deftone.demo.controller;
 
 import de.deftone.demo.model.Event;
 import de.deftone.demo.model.Location;
+import de.deftone.demo.model.LocationASL;
 import de.deftone.demo.model.Participant;
 import de.deftone.demo.service.EventService;
 import de.deftone.demo.service.LocationService;
@@ -29,6 +30,11 @@ public class AdminController {
     @PostMapping(path = "/admin/addLocationList", consumes = "application/json")
     public List<Location> addLocationList(@RequestBody List<Location> locations) {
         return locationService.addLocationList(locations);
+    }
+
+    @PostMapping(path = "/admin/addASLLocationList", consumes = "application/json")
+    public List<LocationASL> addASLLocationList(@RequestBody List<LocationASL> locations) {
+        return locationService.addASLLocationList(locations);
     }
 
     //zum kontrollieren

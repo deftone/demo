@@ -1,8 +1,6 @@
 package de.deftone.demo.controller;
 
-import de.deftone.demo.model.GivenLocation;
-import de.deftone.demo.model.FreeLocation;
-import de.deftone.demo.model.Participant;
+import de.deftone.demo.model.*;
 import de.deftone.demo.service.EventService;
 import de.deftone.demo.service.LocationService;
 import de.deftone.demo.service.ParticipantService;
@@ -87,4 +85,54 @@ public class WebController {
     public String presse() {
         return "presse";
     }
+
+    @GetMapping("/aktionSaubereLandschaft")
+    public String showTemplateAktionSaubereLandschaft(Model model) {
+        model.addAttribute("nextEvent", eventService.getNextEvent().getFormattedDate());
+        model.addAttribute("locations", locationService.getAllASLLocations());
+        model.addAttribute("freeLocationsASL", locationService.getFreeASLLocations());
+        model.addAttribute("participantsASL", participantService.getAllASLParticipantsForNextEvent());
+        model.addAttribute("freeLocationASL", new FreeLocation());
+        model.addAttribute("givenLocationASL", new GivenLocationASL());
+        return "indexAktionSaubereLandschaft";
+    }
+
+    @PostMapping("/aktionSaubereLandschaftAddPerson")
+    public String addPersonAktionSaubereLandschaft(@Valid @ModelAttribute GivenLocationASL givenLocationASL,
+                                                   BindingResult bindingResult,
+                                                   Model model) {
+
+        // das hier klappt, aber der fehlerrahmen erscheint nicht :(
+        if (bindingResult.hasErrors()) {
+            //todo: ein pop up? dass beides angegeben werden muss?
+            // oder etwas ins html hinzufuegen?
+            return "redirect:/aktionSaubereLandschaft#anmelden";
+        }
+
+        ParticipantASL participant = new ParticipantASL();
+        participant.setVorUndNachName(givenLocationASL.getVorUndNachName());
+        participant.setStrasseHausNr(givenLocationASL.getStrasseHausNr());
+        participant.setPlzOrt(givenLocationASL.getPlzOrt());
+        participant.setEmailAdresse(givenLocationASL.getEmailAdresse());
+        participant.setWeitereTeilnehmer(givenLocationASL.getWeitereTeilnehmer());
+        participant.setAngemeldetAm(LocalDate.now());
+        participant.setEvent(eventService.getNextEvent());
+        // check was gefuellt ist
+
+        if (givenLocationASL.getIdFromString() != -1L) {
+            String locationNameById = locationService.getASLLocationNameById(givenLocationASL.getIdFromString());
+            participant.setLocationName(locationNameById);
+            //und anschliessend als gebucht setzen, damit aus auswahlbox verschwindet
+            locationService.setASLLocationToBooked(givenLocationASL.getIdFromString());
+        } else {
+            participant.setLocationName(givenLocationASL.getFreeLocation());
+        }
+
+        participantService.addParticipantASL(participant);
+
+
+
+        return "redirect:/aktionSaubereLandschaft#mitmacher";
+    }
+
 }

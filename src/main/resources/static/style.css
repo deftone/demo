@@ -99,6 +99,10 @@ a {
   background-color: #ff8000;   /* orange */
   }
 
+ .blue {
+    background-color: #0080ff;   /* blau */
+    }
+
 .container_banner h1,
 .container_banner h2,
 .container_banner h5,
