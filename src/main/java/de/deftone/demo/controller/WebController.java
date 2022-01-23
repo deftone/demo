@@ -86,6 +86,9 @@ public class WebController {
         return "presse";
     }
 
+
+    // AKTION SAUBERE LANDSCHAFT
+
     @GetMapping("/aktionSaubereLandschaft")
     public String showTemplateAktionSaubereLandschaft(Model model) {
         model.addAttribute("nextEvent", eventService.getNextEvent().getFormattedDate());
@@ -95,6 +98,17 @@ public class WebController {
         model.addAttribute("freeLocationASL", new FreeLocation());
         model.addAttribute("givenLocationASL", new GivenLocationASL());
         return "indexAktionSaubereLandschaft";
+    }
+
+    @GetMapping("/aktionSaubereLandschaftAnmelden")
+    public String anmeldenAktionSaubereLandschaft(Model model) {
+        model.addAttribute("nextEvent", eventService.getNextEvent().getFormattedDate());
+        model.addAttribute("locations", locationService.getAllASLLocations());
+        model.addAttribute("freeLocationsASL", locationService.getFreeASLLocations());
+        model.addAttribute("participantsASL", participantService.getAllASLParticipantsForNextEvent());
+        model.addAttribute("freeLocationASL", new FreeLocation());
+        model.addAttribute("givenLocationASL", new GivenLocationASL());
+        return "anmeldenAktionSaubereLandschaft";
     }
 
     @PostMapping("/aktionSaubereLandschaftAddPerson")
@@ -107,7 +121,7 @@ public class WebController {
             // allerdings ist man dann ganz oben, daher evtl eine eigene neue seite, wo man sich anmelden kann
             // oder ich finde heraus, wie man an die stelle #anmelden kommt, hier mit href arbeiten klappt aber nicht
             // macht aber evtl eh sinn, die ganze anmelde formalitaet auf einer eigenen seite zu machen
-            return "indexAktionSaubereLandschaft";
+            return "anmeldenAktionSaubereLandschaft";
         }
 
         ParticipantASL participant = new ParticipantASL();

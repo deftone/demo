@@ -105,10 +105,11 @@ a {
 
 .container_banner h1,
 .container_banner h2,
+.container_banner h3,
 .container_banner h5,
 .container_banner a{
   display: inline-flex;
-  margin: 2rem 1.6rem;
+  margin: 1rem 1.6rem;
   color: white;
   }
 
@@ -119,6 +120,10 @@ a {
 
 .container_banner h2 {
   font-size: 2rem;
+  }
+
+.container_banner h3 {
+  font-weight: bold
   }
 
 .container_banner h5 {
@@ -325,7 +330,7 @@ tbody tr .tablerow{
 
 .container_mitmachen input{
   background-color: white;
-  color: #ff8000 ; /* orange */
+  color: #B35900 ; /* dunkles orange */
   font-size: 1.5rem;
   border-radius: .6rem;
   width: 15rem;
@@ -334,12 +339,24 @@ tbody tr .tablerow{
 .container_mitmachen select{
   width: 17rem;
   background-color: white;
-  color: #ff8000 ; /* orange */
+  color: #B35900 ; /* dunkles orange */
   font-size: 1.5rem;
   border-radius: .6rem;
   }
 
 .container_mitmachen button{
+  display: flex-item;
+  align: center;
+  background-color: #ff8000 ; /* orange */
+  color: white;
+  font-size: 1.5rem;
+  padding: 0.8rem 5rem;
+  margin: 2rem 1.6rem;
+  text-align: center;
+  border-radius: 1rem;
+  }
+
+a.button{
   display: flex-item;
   align: center;
   background-color: #ff8000 ; /* orange */
@@ -698,18 +715,17 @@ tbody tr .tablerow{
 li {
   grid-gap: 2em;
   align-items: start;
+  font-size: 1.2rem;
   line-height: 1.5;
 }
 
 .box{
-    background-color: #258203; /*dunkles oliviges gruen*/
+    background-color: #0059b3; /*dunkles blau*/
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 1rem;
-    padding: 2rem;
-    margin: 1rem;
     border: 1px solid white;
     }
 
@@ -724,7 +740,6 @@ li {
   padding: 0.8rem 0rem;
   margin: 2rem 1.6rem;
   border: 1px solid white;
-
 }
 
 .form-input-field-error{
