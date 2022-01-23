@@ -109,7 +109,7 @@ public class WebController {
     public String addPersonAktionSaubereLandschaft(@Valid @ModelAttribute GivenLocationASL givenLocationASL,
                                                    BindingResult bindingResult,
                                                    Model model) {
-
+        model.addAttribute("freeLocationsASL", locationService.getFreeASLLocations());
         // alle Pflichtfelder muessen gefuellt sein:
         if (bindingResult.hasErrors() || keinOrtEingetragen(givenLocationASL)
         ) {
@@ -122,7 +122,6 @@ public class WebController {
             // allerdings ist man dann ganz oben, daher evtl eine eigene neue seite, wo man sich anmelden kann
             // oder ich finde heraus, wie man an die stelle #anmelden kommt, hier mit href arbeiten klappt aber nicht
             // macht aber evtl eh sinn, die ganze anmelde formalitaet auf einer eigenen seite zu machen
-            // das Problem ist aber jetzt, dass die Liste mit den freeLocationsASL leer ist :((((
             return "anmeldenAktionSaubereLandschaft";
         }
 
