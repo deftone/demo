@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -93,20 +94,13 @@ public class WebController {
     public String showTemplateAktionSaubereLandschaft(Model model) {
         model.addAttribute("nextEvent", eventService.getNextEvent().getFormattedDate());
         model.addAttribute("locations", locationService.getAllASLLocations());
-        model.addAttribute("freeLocationsASL", locationService.getFreeASLLocations());
         model.addAttribute("participantsASL", participantService.getAllASLParticipantsForNextEvent());
-        model.addAttribute("freeLocationASL", new FreeLocation());
-        model.addAttribute("givenLocationASL", new GivenLocationASL());
         return "indexAktionSaubereLandschaft";
     }
 
     @GetMapping("/aktionSaubereLandschaftAnmelden")
     public String anmeldenAktionSaubereLandschaft(Model model) {
-        model.addAttribute("nextEvent", eventService.getNextEvent().getFormattedDate());
-        model.addAttribute("locations", locationService.getAllASLLocations());
         model.addAttribute("freeLocationsASL", locationService.getFreeASLLocations());
-        model.addAttribute("participantsASL", participantService.getAllASLParticipantsForNextEvent());
-        model.addAttribute("freeLocationASL", new FreeLocation());
         model.addAttribute("givenLocationASL", new GivenLocationASL());
         return "anmeldenAktionSaubereLandschaft";
     }
@@ -116,11 +110,19 @@ public class WebController {
                                                    BindingResult bindingResult,
                                                    Model model) {
 
-        if (bindingResult.hasErrors()) {
+        // alle Pflichtfelder muessen gefuellt sein:
+        if (bindingResult.hasErrors() || keinOrtEingetragen(givenLocationASL)
+        ) {
+            if (keinOrtEingetragen(givenLocationASL)) {
+                bindingResult.addError(new FieldError("givenLocationASL",
+                        "freeLocation",
+                        "Bitte eine Route aus der Liste auswählen oder hier einen Ort eintragen"));
+            }
             // damit die fehlermeldungen an den input boxen angezeigt werden, KEIN redirekt sonder das template zurueck geben!!
             // allerdings ist man dann ganz oben, daher evtl eine eigene neue seite, wo man sich anmelden kann
             // oder ich finde heraus, wie man an die stelle #anmelden kommt, hier mit href arbeiten klappt aber nicht
             // macht aber evtl eh sinn, die ganze anmelde formalitaet auf einer eigenen seite zu machen
+            // das Problem ist aber jetzt, dass die Liste mit den freeLocationsASL leer ist :((((
             return "anmeldenAktionSaubereLandschaft";
         }
 
@@ -133,7 +135,6 @@ public class WebController {
         participant.setAngemeldetAm(LocalDate.now());
         participant.setEvent(eventService.getNextEvent());
         // check was gefuellt ist
-
         if (givenLocationASL.getIdFromString() != -1L) {
             String locationNameById = locationService.getASLLocationNameById(givenLocationASL.getIdFromString());
             participant.setLocationName(locationNameById);
@@ -146,8 +147,11 @@ public class WebController {
         participantService.addParticipantASL(participant);
 
 
-
         return "redirect:/aktionSaubereLandschaft#mitmacher";
     }
 
+    private boolean keinOrtEingetragen(GivenLocationASL givenLocationASL) {
+        return givenLocationASL.getIdFromString() == -1L &&
+                (givenLocationASL.getFreeLocation().isBlank() || givenLocationASL.getFreeLocation().isEmpty());
+    }
 }
