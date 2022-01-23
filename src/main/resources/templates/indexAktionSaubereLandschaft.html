@@ -163,7 +163,7 @@
             <p class="bold">
                 Bitte beachten Sie folgende Hinweise:
             </p>
-            <ul>
+            <ul class="with-dots">
                 <li>Für die Teilnahme an der Aktion Saubere Landschaft bringen Sie bitte eine Mund-
                     Nasen-Abdeckung mit.
                 </li>
@@ -200,28 +200,35 @@
                 <br>
             </p>
 
+            <section class="box">
+                <form method="POST"
+                      th:action="@{/aktionSaubereLandschaftAddPerson}"
+                      th:object="${givenLocationASL}">
+                    <fieldset>
+                        <div th:replace="fragments/input :: input('text','Vor- und Nachname', 'vorUndNachName')"/>
+                        <div th:replace="fragments/input :: input('text','Straße mit HausNr', 'strasseHausNr')"/>
+                        <div th:replace="fragments/input :: input('text','PLZ Ort', 'plzOrt')"/>
+                        <div th:replace="fragments/input :: input('text','Email-Adresse', 'emailAdresse')"/>
+                        <div th:replace="fragments/input :: input('text','weitere Teilnehmer', 'weitereTeilnehmer')"/>
+                        <div class="nebeneinander">
 
-            <form method="POST"
-                  th:action="@{/aktionSaubereLandschaftAddPerson}"
-                  th:object="${givenLocationASL}">
-                <div th:replace="fragments/input :: input('text','Vor- und Nachname', 'vorUndNachName')"/>
-                <div th:replace="fragments/input :: input('text','Straße mit HausNr', 'strasseHausNr')"/>
-                <div th:replace="fragments/input :: input('text','PLZ Ort', 'plzOrt')"/>
-                <div th:replace="fragments/input :: input('text','Email-Adresse', 'emailAdresse')"/>
-                <div th:replace="fragments/input :: input('text','weitere Teilnehmer', 'weitereTeilnehmer')"/>
-                Ort:
-                <select id="id" name="id">-->
-                    <option th:value="''" th:text="bitte_auswählen"></option>
-                    <option th:each="location : ${freeLocationsASL}"
-                            th:value="${location.id}"
-                            th:text="${location.getCompactIdAndName()}"></option>
-                </select>
-                <div th:replace="fragments/input :: input('text','freier Ort', 'freeLocation')"/>
-                <br/>
-                <div class="form-row">
-                    <button type="submit">Anmelden</button>
-                </div>
-            </form>
+                            Ort:
+                            <select id="id" name="id">-->
+                                <option th:value="''" th:text="bitte_auswählen"></option>
+                                <option th:each="location : ${freeLocationsASL}"
+                                        th:value="${location.id}"
+                                        th:text="${location.getCompactIdAndName()}"></option>
+                            </select>
+                            <div th:replace="fragments/input :: input('text','freier Ort', 'freeLocation')"/>
+
+                        </div>
+                        <br/>
+                        <div class="form-row">
+                            <button type="submit">Anmelden</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </section>
         </div>
     </section>
 

@@ -102,11 +102,12 @@ public class WebController {
                                                    BindingResult bindingResult,
                                                    Model model) {
 
-        // das hier klappt, aber der fehlerrahmen erscheint nicht :(
         if (bindingResult.hasErrors()) {
-            //todo: ein pop up? dass beides angegeben werden muss?
-            // oder etwas ins html hinzufuegen?
-            return "redirect:/aktionSaubereLandschaft#anmelden";
+            // damit die fehlermeldungen an den input boxen angezeigt werden, KEIN redirekt sonder das template zurueck geben!!
+            // allerdings ist man dann ganz oben, daher evtl eine eigene neue seite, wo man sich anmelden kann
+            // oder ich finde heraus, wie man an die stelle #anmelden kommt, hier mit href arbeiten klappt aber nicht
+            // macht aber evtl eh sinn, die ganze anmelde formalitaet auf einer eigenen seite zu machen
+            return "indexAktionSaubereLandschaft";
         }
 
         ParticipantASL participant = new ParticipantASL();

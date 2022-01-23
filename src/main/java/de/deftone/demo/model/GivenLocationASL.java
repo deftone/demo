@@ -15,7 +15,6 @@ public class GivenLocationASL {
     private String plzOrt;
     @NotBlank
     private String emailAdresse;
-    @NotBlank
     private String weitereTeilnehmer;
     private String id;
     private String freeLocation;
