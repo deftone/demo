@@ -73,6 +73,23 @@
                             </select>
                             <div th:replace="fragments/input :: input('text','freier Ort', 'freeLocation')"/>
 
+                            <div class="checkbox">
+                                <input class="checkbox-icon" type="checkbox" name="personenDaten" value="ok">
+                                <p>
+                                    Hiermit erkläre ich ausdrücklich meine freiwillige Zustimmung zur elektronischen
+                                    Erfassung und Weiterverarbeitung meiner personenbezogenen Daten.
+                                    <br>
+                                    Die Übertragung Ihrer Daten an uns erfolgt verschlüsselt. Sie sind zu keinem
+                                    Zeitpunkt
+                                    verpflichtet Daten an uns zu übermitteln, sollten Sie jedoch eine Anfrage bzw.
+                                    Anmeldung
+                                    tätigen wollen, benötigen wir die entsprechenden Informationen.
+                                </p>
+                            </div>
+                            <!-- wird nur angezeigt wenn es fehler gibt -->
+                            <div th:if="${#fields.hasErrors('${givenLocationASL.personenDaten}')}">
+                                <p class="red"><br>Bitte zustimmen</p>
+                            </div>
                         </div>
                         <br/>
                         <div class="form-row">

@@ -111,12 +111,19 @@ public class WebController {
                                                    Model model) {
         model.addAttribute("freeLocationsASL", locationService.getFreeASLLocations());
         // alle Pflichtfelder muessen gefuellt sein:
-        if (bindingResult.hasErrors() || keinOrtEingetragen(givenLocationASL)
+        if (bindingResult.hasErrors()
+                || keinOrtEingetragen(givenLocationASL)
+                || datenCheckboxFehlt(givenLocationASL)
         ) {
             if (keinOrtEingetragen(givenLocationASL)) {
                 bindingResult.addError(new FieldError("givenLocationASL",
                         "freeLocation",
                         "Bitte eine Route aus der Liste auswählen oder hier einen Ort eintragen"));
+            }
+            if (datenCheckboxFehlt(givenLocationASL)) {
+                bindingResult.addError(new FieldError("givenLocationASL",
+                        "personenDaten",
+                        "Bitte zustimmen"));
             }
             // damit die fehlermeldungen an den input boxen angezeigt werden, KEIN redirekt sonder das template zurueck geben!!
             // allerdings ist man dann ganz oben, daher evtl eine eigene neue seite, wo man sich anmelden kann
@@ -152,5 +159,9 @@ public class WebController {
     private boolean keinOrtEingetragen(GivenLocationASL givenLocationASL) {
         return givenLocationASL.getIdFromString() == -1L &&
                 (givenLocationASL.getFreeLocation().isBlank() || givenLocationASL.getFreeLocation().isEmpty());
+    }
+
+    private boolean datenCheckboxFehlt(GivenLocationASL givenLocationASL) {
+        return givenLocationASL.getPersonenDaten() == null;
     }
 }

@@ -18,6 +18,7 @@ public class GivenLocationASL {
     private String weitereTeilnehmer;
     private String id;
     private String freeLocation;
+    private String personenDaten;
 
     public Long getIdFromString() {
         // im model ist es ein String, wir brauchen aber das Long
