@@ -766,6 +766,16 @@ li {
     padding: 1.5rem;
     }
 
+.ueber-checkbox{
+    width: 50rem;
+    background-color: #0059b3; /*dunkles blau*/
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: start;
+    border-radius: 1rem;
+    }
+
 .checkbox-icon{
       height: 2rem;
       width: 2rem;

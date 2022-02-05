@@ -19,6 +19,7 @@ public class GivenLocationASL {
     private String id;
     private String freeLocation;
     private String personenDaten;
+    private String fotosMachen;
 
     public Long getIdFromString() {
         // im model ist es ein String, wir brauchen aber das Long

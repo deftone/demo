@@ -43,12 +43,12 @@
                     Corona-Risiko-Gebiet aufgehalten haben, ist die Teilnahme nicht möglich.
                 </li>
                 <li>Für die Teilnahme an der Aktion Saubere Landschaft ist die Erfassung von
-                    Teilnehmerdaten zwingend erforderlich. Bitte füllen Sie dieses Datenblatt vollständig
-                    aus und bestätigen Sie die Richtigkeit mit Ihrer Unterschrift. Um die Nachverfolgung
+                    Teilnehmerdaten zwingend erforderlich. Bitte füllen Sie dieses Formular vollständig
+                    aus und stimmen Sie der elektronischen Erfassung zu. Um die Nachverfolgung
                     von Infektionen zu ermöglichen, müssen wir als Veranstalter nach § 1 der Corona-
                     Kontakt- und Betriebsbeschränkungsverordnung des Landes Hessen Daten unserer
                     Teilnehmenden erfassen. Selbstverständlich achten wir hierbei auf den Schutz Ihrer
-                    Daten*. Wir danken Ihnen für Ihre Mithilfe.
+                    Daten. Wir danken Ihnen für Ihre Mithilfe.
                 </li>
             </ul>
 
@@ -73,23 +73,57 @@
                             </select>
                             <div th:replace="fragments/input :: input('text','freier Ort', 'freeLocation')"/>
 
+                            <div class="ueber-checkbox">
+                                <p>
+                                    <br>
+                                    Die Übertragung Ihrer Daten an uns erfolgt verschlüsselt. Sie sind zu keinem
+                                    Zeitpunkt
+                                    verpflichtet Daten an uns zu übermitteln, sollten Sie jedoch eine
+                                    Anmeldung
+                                    tätigen wollen, benötigen wir die entsprechenden Informationen.
+                                    <br>
+                                    <br>
+                                </p>
+                            </div>
                             <div class="checkbox">
                                 <input class="checkbox-icon" type="checkbox" name="personenDaten" value="ok">
                                 <p>
                                     Hiermit erkläre ich ausdrücklich meine freiwillige Zustimmung zur elektronischen
                                     Erfassung und Weiterverarbeitung meiner personenbezogenen Daten.
                                     <br>
-                                    Die Übertragung Ihrer Daten an uns erfolgt verschlüsselt. Sie sind zu keinem
-                                    Zeitpunkt
-                                    verpflichtet Daten an uns zu übermitteln, sollten Sie jedoch eine Anfrage bzw.
-                                    Anmeldung
-                                    tätigen wollen, benötigen wir die entsprechenden Informationen.
                                 </p>
                             </div>
                             <!-- wird nur angezeigt wenn es fehler gibt -->
                             <div th:if="${#fields.hasErrors('${givenLocationASL.personenDaten}')}">
                                 <p class="red"><br>Bitte zustimmen</p>
                             </div>
+
+
+                            <div class="ueber-checkbox">
+                                <p>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    Die Gemeinde beabsichtigt Fotos aufzunehmen, auf denen die
+                                    Betroffenen abgelichtet sein können.
+                                    Die Fotoaufnahmen werden zukünftig für Zwecke der PR- und Öffentlichkeitsarbeit der
+                                    Gemeinde eingesetzt.
+                                    <br>
+                                    Die Einwilligungszustimmung ist freiweillig.
+                                    <br>
+                                    <br>
+                                </p>
+                            </div>
+                            <div class="checkbox">
+                                <input class="checkbox-icon" type="checkbox" name="fotosMachen" value="ok">
+                                <p> Hiermit erkläre ich meine Einwilligung zur Nutzung der Fotoaufnahmen meiner
+                                    Person für die oben beschriebenen Zwecke und Verwendungen. Mir ist bekannt, dass ich
+                                    für die Veröffentlichung kein Entgelt erhalte. Die Einwilligung erfolgt ausdrücklich
+                                    freiwillig.
+                                </p>
+                            </div>
+
+
                         </div>
                         <br/>
                         <div class="form-row">
