@@ -48,6 +48,14 @@ public class ParticipantService {
         }
         return false;
     }
+    public boolean deleteASLParticipant(long id) {
+        Optional<ParticipantASL> byId = participantASLRepo.findById(id);
+        if (byId.isPresent()) {
+            participantASLRepo.delete(byId.get());
+            return true;
+        }
+        return false;
+    }
 
     public ParticipantASL addParticipantASL(ParticipantASL participant) {
         return participantASLRepo.save(participant);

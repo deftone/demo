@@ -1,9 +1,6 @@
 package de.deftone.demo.controller;
 
-import de.deftone.demo.model.Event;
-import de.deftone.demo.model.Location;
-import de.deftone.demo.model.LocationASL;
-import de.deftone.demo.model.Participant;
+import de.deftone.demo.model.*;
 import de.deftone.demo.service.EventService;
 import de.deftone.demo.service.LocationService;
 import de.deftone.demo.service.ParticipantService;
@@ -46,8 +43,14 @@ public class AdminController {
     //zum zuruecksetzen
     @GetMapping(path = "/admin/resetAllLocations")
     public List<Location> resetAllLocations() {
-        return locationService.resetAllLocation();
+        return locationService.resetAllLocations();
     }
+
+    @GetMapping(path = "/admin/resetAllASLLocations")
+    public List<LocationASL> resetAllASLLocations() {
+        return locationService.resetAllASLLocations();
+    }
+
 
     //zum loeschen
     @PostMapping(path = "/admin/deleteLocation")
@@ -57,7 +60,12 @@ public class AdminController {
 
     @PostMapping(path = "/admin/deleteAllLocation")
     public void deleteAllLocation() {
-        locationService.deleteAllLocation();
+        locationService.deleteAllLocations();
+    }
+
+    @PostMapping(path = "/admin/deleteAllASLLocation")
+    public void deleteAllASLLocation() {
+        locationService.deleteAllASLLocations();
     }
 
 
@@ -77,13 +85,23 @@ public class AdminController {
     // ***** Participant *******
 
     @GetMapping("/admin/getAllParticipantsForNextEvent")
-    public List<Participant> getAllParticipantsForNextEvent(){
+    public List<Participant> getAllParticipantsForNextEvent() {
         return participantService.getAllParticipantsForNextEvent();
+    }
+
+    @GetMapping("/admin/getAllASLParticipantsForNextEvent")
+    public List<ParticipantASL> getAllASLParticipantsForNextEvent() {
+        return participantService.getAllASLParticipantsForNextEvent();
     }
 
     //Teilnehmer loeschen
     @PostMapping(path = "/admin/deleteParticipant")
     public boolean deleteParticipant(@RequestParam long id) {
         return participantService.deleteParticipant(id);
+    }
+
+    @PostMapping(path = "/admin/deleteASLParticipant")
+    public boolean deleteASLParticipant(@RequestParam long id) {
+        return participantService.deleteASLParticipant(id);
     }
 }

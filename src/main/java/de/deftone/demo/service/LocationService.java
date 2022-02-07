@@ -90,7 +90,7 @@ public class LocationService {
         return savedLocations;
     }
 
-    public List<Location> resetAllLocation() {
+    public List<Location> resetAllLocations() {
         for (Location location : locationRepo.findAll()) {
             location.setFree(true);
             locationRepo.save(location);
@@ -145,7 +145,11 @@ public class LocationService {
         locationRepo.delete(location);
     }
 
-    public void deleteAllLocation() {
+    public void deleteAllLocations() {
         locationRepo.deleteAll();
+    }
+
+    public void deleteAllASLLocations() {
+        locationASLRepo.deleteAll();
     }
 }
