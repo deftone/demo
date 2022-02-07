@@ -1,6 +1,7 @@
 package de.deftone.demo.service;
 
 import de.deftone.demo.model.Location;
+import de.deftone.demo.repo.LocationASLRepo;
 import de.deftone.demo.repo.LocationRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,11 +22,14 @@ class LocationServiceTest {
     @Mock
     private LocationRepo locationRepoMock;
 
+    @Mock
+    private LocationASLRepo locationASLRepoMock;
+
     private LocationService service;
 
     @BeforeEach
     void setUp() {
-        service = new LocationService(locationRepoMock);
+        service = new LocationService(locationRepoMock, locationASLRepoMock);
     }
 
     @Test

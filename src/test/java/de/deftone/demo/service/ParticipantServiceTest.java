@@ -2,6 +2,7 @@ package de.deftone.demo.service;
 
 import de.deftone.demo.model.Event;
 import de.deftone.demo.model.Participant;
+import de.deftone.demo.repo.ParticipantASLRepo;
 import de.deftone.demo.repo.ParticipantRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,13 +24,16 @@ class ParticipantServiceTest {
     private ParticipantRepo participantRepoMock;
 
     @Mock
+    private ParticipantASLRepo participantASLRepoMock;
+
+    @Mock
     private EventService eventServiceMock;
 
     private ParticipantService service;
 
     @BeforeEach
     void setUp() {
-        service = new ParticipantService(participantRepoMock, eventServiceMock);
+        service = new ParticipantService(participantRepoMock, participantASLRepoMock, eventServiceMock);
     }
 
     @Test
