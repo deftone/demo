@@ -4,6 +4,7 @@ import de.deftone.demo.model.*;
 import de.deftone.demo.service.EventService;
 import de.deftone.demo.service.LocationService;
 import de.deftone.demo.service.ParticipantService;
+import de.deftone.demo.service.SecretService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,7 @@ public class AdminController {
     private final LocationService locationService;
     private final EventService eventService;
     private final ParticipantService participantService;
+    private final SecretService secretService;
 
     // ****** Location ******
     //zum erstellen
@@ -89,9 +91,28 @@ public class AdminController {
         return participantService.getAllParticipantsForNextEvent();
     }
 
-    @GetMapping("/admin/getAllASLParticipantsForNextEvent")
-    public List<ParticipantASL> getAllASLParticipantsForNextEvent() {
-        return participantService.getAllASLParticipantsForNextEvent();
+    @GetMapping("/admin/getSecrets")
+    public List<Secret> getSecrets() {
+        return secretService.getAllSecrets();
+    }
+
+    @PostMapping("/admin/addSecret")
+    public Secret setSecret(@RequestBody Secret secret) {
+        return secretService.addSecret(secret);
+    }
+
+    @PostMapping("/admin/deleteSecret")
+    public void setSecret(@RequestParam long id) {
+        secretService.deleteSecret(id);
+    }
+
+    @PostMapping("/admin/getAllASLParticipantsForNextEvent")
+    public List<ParticipantASL> getAllASLParticipantsForNextEvent(@RequestBody Secret secret) {
+        if (secretService.checkSecret(secret)) {
+            return participantService.getAllASLParticipantsForNextEvent();
+        } else {
+            return null;
+        }
     }
 
     //Teilnehmer loeschen
