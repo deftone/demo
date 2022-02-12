@@ -1,6 +1,7 @@
 package de.deftone.demo.controller;
 
-import de.deftone.demo.model.*;
+import de.deftone.demo.model.Event;
+import de.deftone.demo.model.LocationASL;
 import de.deftone.demo.service.EventService;
 import de.deftone.demo.service.LocationService;
 import de.deftone.demo.service.ParticipantService;
@@ -70,7 +71,43 @@ class WebControllerASLTest {
         mockMvc.perform(get("/aktionSaubereLandschaft"))
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("locations", hasItems(ALL_LOCATIONS.toArray())))
-                .andExpect(model().attribute("freeLocations", hasItems(FREE_LOCATIONS.toArray())))
                 .andExpect(content().string(containsString("In diesem April ist es anders. Gemeinsam mit der Gemeinde")));
     }
+
+    @DisplayName("teste anzeige der anmeldeseite fuer ASL")
+    @Test
+    void testAnmeldeSeite() throws Exception {
+        mockMvc.perform(get("/aktionSaubereLandschaftAnmelden"))
+                .andExpect(status().isOk())
+                .andExpect(model().attribute("freeLocationsASL", hasItems(FREE_LOCATIONS.toArray())))
+                .andExpect(content().string(containsString("Aktion Saubere Landschaft - Anmelden")));
+    }
+
+    @DisplayName("teste anmelden der locations auf home fuer ASL")
+    @Test
+    void testAnmelden() throws Exception {
+        mockMvc.perform(get("/aktionSaubereLandschaft"))
+                .andExpect(status().isOk())
+                .andExpect(model().attribute("locations", hasItems(ALL_LOCATIONS.toArray())))
+                .andExpect(content().string(containsString("In diesem April ist es anders. Gemeinsam mit der Gemeinde")));
+    }
+
+    @DisplayName("teste anmelden mit route aus checkbox fuer ASL - OK")
+    @Test
+    void testAddPerson() throws Exception {
+        when(locationServiceMock.getLocationNameById(2)).thenReturn(LOC2.getName());
+
+        mockMvc.perform(post("/aktionSaubereLandschaftAddPerson")
+                        .param("vorUndNachName", "Jonny")
+                        .param("strasseHausNr", "strasse")
+                        .param("plzOrt", "12345 O")
+                        .param("emailAdresse", "a@b.de")
+                        .param("weitereTeilnehmer", "eins, zwei, drei")
+                        .param("id", "2") // oder freeLocation
+                        .param("personenDaten", "true")
+                //optional: fotosMachen
+        ).andExpect(redirectedUrl("/aktionSaubereLandschaft#mitmacher"));
+    }
+
+    //todo: noch mehr tests, mit freeLocation und mit allen moeglichen fehleingaben
 }

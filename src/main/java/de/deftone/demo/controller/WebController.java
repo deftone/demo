@@ -94,7 +94,6 @@ public class WebController {
     public String showTemplateAktionSaubereLandschaft(Model model) {
         model.addAttribute("nextEvent", eventService.getNextEvent().getFormattedDate());
         model.addAttribute("locations", locationService.getAllASLLocations());
-        model.addAttribute("participantsASL", participantService.getAllASLParticipantsForNextEvent());
         return "indexAktionSaubereLandschaft";
     }
 
