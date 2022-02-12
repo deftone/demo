@@ -7,6 +7,7 @@ import de.deftone.demo.service.EventService;
 import de.deftone.demo.service.LocationService;
 import de.deftone.demo.service.ParticipantService;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -72,6 +73,7 @@ class WebControllerTest {
     }
 
 
+    @DisplayName("teste anzeige der locations auf home")
     @Test
     void testHome() throws Exception {
         mockMvc.perform(get("/"))
@@ -82,6 +84,7 @@ class WebControllerTest {
                 .andExpect(content().string(containsString("Die nächste Aktion ist am Sonntag, den <span>" + EVENT.getFormattedDate() + "</span>.")));
     }
 
+    @DisplayName("teste anmelden mit route aus checkbox - OK")
     @Test
     void testAddPerson() throws Exception {
         when(locationServiceMock.getLocationNameById(2)).thenReturn(LOC2.getName());
@@ -90,5 +93,56 @@ class WebControllerTest {
                 .param("name", "Jonny")
                 .param("id", "2"))
                 .andExpect(redirectedUrl("/#mitmacher"));
+    }
+
+    @DisplayName("teste anmelden mit route aus checkbox: keine route ausgewaehlt")
+    @Test
+    void testAddPerson2() throws Exception {
+
+        mockMvc.perform(post("/addPerson")
+                .param("name", "Jonny")
+                .param("id", ""))
+                .andExpect(redirectedUrl("/#anmelden"));
+    }
+
+    @DisplayName("teste anmelden mit route aus checkbox: kein name angegeben")
+    @Test
+    void testAddPerson3() throws Exception {
+        when(locationServiceMock.getLocationNameById(2)).thenReturn(LOC2.getName());
+
+        mockMvc.perform(post("/addPerson")
+                .param("name", "")
+                .param("id", "2"))
+                .andExpect(redirectedUrl("/#anmelden"));
+    }
+
+    @DisplayName("teste anmelden mit frei text location - OK")
+    @Test
+    void testAddPerson4() throws Exception {
+
+        mockMvc.perform(post("/addPersonNewRoute")
+                .param("name", "Jonny")
+                .param("location", "B38"))
+                .andExpect(redirectedUrl("/#mitmacher"));
+    }
+
+    @DisplayName("teste anmelden mit frei text location - kein name")
+    @Test
+    void testAddPerson5() throws Exception {
+
+        mockMvc.perform(post("/addPersonNewRoute")
+                .param("name", "")
+                .param("location", "B38"))
+                .andExpect(redirectedUrl("/#anmelden"));
+    }
+
+    @DisplayName("teste anmelden mit frei text location - keine location")
+    @Test
+    void testAddPerson6() throws Exception {
+
+        mockMvc.perform(post("/addPersonNewRoute")
+                .param("name", "Jonny")
+                .param("location", ""))
+                .andExpect(redirectedUrl("/#anmelden"));
     }
 }

@@ -40,4 +40,14 @@ public class SecretService {
         Secret secretFromDB = byId.get();
         return passwordEncoder.matches(secret.getName(), secretFromDB.getName());
     }
+
+    public String getPassphrase() {
+        // die passphrase wurde unter id = 1 gespeichert
+        Optional<Secret> byId = secretRepo.findById(1L);
+        if (byId.isPresent()){
+            return byId.get().getName();
+        }
+        //todo: bessere exception! sollte aber nie auftreten wenn einmal konfiguriert
+        throw new RuntimeException("kein secret fuer die passphrase gefunden");
+    }
 }
