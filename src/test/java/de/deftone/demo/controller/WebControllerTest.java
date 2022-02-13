@@ -100,8 +100,7 @@ class WebControllerTest {
     void testAddPerson2() throws Exception {
 
         mockMvc.perform(post("/addPerson")
-                .param("name", "Jonny")
-                .param("id", ""))
+                .param("name", "Jonny"))
                 .andExpect(redirectedUrl("/#anmelden"));
     }
 
@@ -111,7 +110,6 @@ class WebControllerTest {
         when(locationServiceMock.getLocationNameById(2)).thenReturn(LOC2.getName());
 
         mockMvc.perform(post("/addPerson")
-                .param("name", "")
                 .param("id", "2"))
                 .andExpect(redirectedUrl("/#anmelden"));
     }
@@ -131,7 +129,6 @@ class WebControllerTest {
     void testAddPerson5() throws Exception {
 
         mockMvc.perform(post("/addPersonNewRoute")
-                .param("name", "")
                 .param("location", "B38"))
                 .andExpect(redirectedUrl("/#anmelden"));
     }
@@ -141,8 +138,7 @@ class WebControllerTest {
     void testAddPerson6() throws Exception {
 
         mockMvc.perform(post("/addPersonNewRoute")
-                .param("name", "Jonny")
-                .param("location", ""))
+                .param("name", "Jonny"))
                 .andExpect(redirectedUrl("/#anmelden"));
     }
 }

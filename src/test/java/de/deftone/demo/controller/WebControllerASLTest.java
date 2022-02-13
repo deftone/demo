@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -61,8 +62,6 @@ class WebControllerASLTest {
         when(eventServiceMock.getNextEvent()).thenReturn(EVENT);
         when(locationServiceMock.getAllASLLocations()).thenReturn(ALL_LOCATIONS);
         when(locationServiceMock.getFreeASLLocations()).thenReturn(FREE_LOCATIONS);
-
-        //todo: liste mit allen vergebenen Orten
     }
 
     @DisplayName("teste anzeige der locations auf home fuer ASL")
@@ -92,22 +91,173 @@ class WebControllerASLTest {
                 .andExpect(content().string(containsString("In diesem April ist es anders. Gemeinsam mit der Gemeinde")));
     }
 
-    @DisplayName("teste anmelden mit route aus checkbox fuer ASL - OK")
+    @DisplayName("teste anmelden nur Pflichtfelder (mit route aus liste) fuer ASL - OK")
     @Test
     void testAddPerson() throws Exception {
         when(locationServiceMock.getLocationNameById(2)).thenReturn(LOC2.getName());
 
         mockMvc.perform(post("/aktionSaubereLandschaftAddPerson")
+                .param("vorUndNachName", "Jonny")
+                .param("strasseHausNr", "strasse")
+                .param("plzOrt", "12345 O")
+                .param("emailAdresse", "a@b.de")
+                .param("id", "2") // oder freeLocation
+                .param("personenDaten", "true")
+        ).andExpect(redirectedUrl("/aktionSaubereLandschaft#mitmacher"));
+        // da hier alle services gemocked sind, kann man leider nicht testen,
+        // ob der Teilnehmer wirklich auf der DB gespeichert wurde
+        // hier kann man nur testen, ob sich die Weboberflaeche richtig verhaelt
+    }
+
+    @DisplayName("teste anmelden nur Pflichtfelder (mit selbstgewahltem Ort) fuer ASL - OK")
+    @Test
+    void testAddPerson2() throws Exception {
+
+        mockMvc.perform(post("/aktionSaubereLandschaftAddPerson")
+                .param("vorUndNachName", "Jonny")
+                .param("strasseHausNr", "strasse")
+                .param("plzOrt", "12345 O")
+                .param("emailAdresse", "a@b.de")
+                .param("freeLocation", "Eiserne Hand")
+                .param("personenDaten", "true")
+        ).andExpect(redirectedUrl("/aktionSaubereLandschaft#mitmacher"));
+        // da hier alle services gemocked sind, kann man leider nicht testen,
+        // ob der Teilnehmer wirklich auf der DB gespeichert wurde
+        // hier kann man nur testen, ob sich die Weboberflaeche richtig verhaelt
+    }
+
+    @DisplayName("teste anmelden alle Felder fuer ASL - OK")
+    @Test
+    void testAddPerson3() throws Exception {
+        mockMvc.perform(post("/aktionSaubereLandschaftAddPerson")
+                .param("vorUndNachName", "Jonny")
+                .param("strasseHausNr", "strasse")
+                .param("plzOrt", "12345 O")
+                .param("emailAdresse", "a@b.de")
+                .param("weitereTeilnehmer", "eins, zwei, drei") //freiwillig
+                .param("freeLocation", "Eiserne Hand")
+                .param("personenDaten", "true")
+                .param("fotosMachen", "true") //freiwillig
+        ).andExpect(redirectedUrl("/aktionSaubereLandschaft#mitmacher"));
+        // da hier alle services gemocked sind, kann man leider nicht testen,
+        // ob der Teilnehmer wirklich auf der DB gespeichert wurde
+        // hier kann man nur testen, ob sich die Weboberflaeche richtig verhaelt
+    }
+
+    @DisplayName("teste anmelden, name fehlt - NOK")
+    @Test
+    void testAddPerson4() throws Exception {
+        ResultActions perform = mockMvc.perform(post("/aktionSaubereLandschaftAddPerson")
+//                .param("vorUndNachName", "Jonny")
+                        .param("strasseHausNr", "strasse")
+                        .param("plzOrt", "12345 O")
+                        .param("emailAdresse", "a@b.de")
+                        .param("freeLocation", "Eiserne Hand")
+                        .param("personenDaten", "true")
+        );
+        // hier ja eben kein redirect, wegen model und field errors, diese pruefen
+        perform.andExpect(content()
+                .string(containsString("Bitte Vor- und Nachname eingeben, z.B. Max Mustermann")));
+        //die schon eingegebenen Pflichtfelder sind im model und html noch enthalten:
+        perform.andExpect(content().string(containsString("12345 O")));
+        perform.andReturn().getModelAndView().getModel().containsValue("12345 O");
+        perform.andExpect(content().string(containsString("a@b.de")));
+        perform.andReturn().getModelAndView().getModel().containsValue("a@b.de");
+        perform.andExpect(content().string(containsString("Eiserne Hand")));
+        perform.andReturn().getModelAndView().getModel().containsValue("Eiserne Hand");
+    }
+
+    @DisplayName("teste anmelden, strasse fehlt - NOK")
+    @Test
+    void testAddPerson5() throws Exception {
+        ResultActions perform = mockMvc.perform(post("/aktionSaubereLandschaftAddPerson")
+                        .param("vorUndNachName", "Jonny")
+//                        .param("strasseHausNr", "strasse")
+                        .param("plzOrt", "12345 O")
+                        .param("emailAdresse", "a@b.de")
+                        .param("freeLocation", "Eiserne Hand")
+                        .param("personenDaten", "true")
+        );
+        // hier ja eben kein redirect, wegen model und field errors, diese pruefen
+        perform.andExpect(content()
+                .string(containsString("Bitte Straße und Hausnr eingeben, z.B. Darmstädter Str. 1")));
+        //die schon eingegebenen Pflichtfelder sind im model und html noch enthalten:
+        perform.andExpect(content().string(containsString("Jonny")));
+        perform.andReturn().getModelAndView().getModel().containsValue("Jonny");
+        perform.andExpect(content().string(containsString("a@b.de")));
+        perform.andReturn().getModelAndView().getModel().containsValue("a@b.de");
+        perform.andExpect(content().string(containsString("Eiserne Hand")));
+        perform.andReturn().getModelAndView().getModel().containsValue("Eiserne Hand");
+    }
+
+    @DisplayName("teste anmelden, email fehlt - NOK")
+    @Test
+    void testAddPerson6() throws Exception {
+        ResultActions perform = mockMvc.perform(post("/aktionSaubereLandschaftAddPerson")
+                        .param("vorUndNachName", "Jonny")
+                        .param("strasseHausNr", "strasse")
+                        .param("plzOrt", "12345 O")
+//                        .param("emailAdresse", "a@b.de")
+                        .param("freeLocation", "Eiserne Hand")
+                        .param("personenDaten", "true")
+        );
+        // hier ja eben kein redirect, wegen model und field errors, diese pruefen
+        perform.andExpect(content()
+                .string(containsString("Bitte eine gültige Email-Adresse eingeben, z.B. Max@Mustermann.de")));
+        //die schon eingegebenen Pflichtfelder sind im model und html noch enthalten:
+        perform.andExpect(content().string(containsString("Jonny")));
+        perform.andReturn().getModelAndView().getModel().containsValue("Jonny");
+        perform.andExpect(content().string(containsString("12345 O")));
+        perform.andReturn().getModelAndView().getModel().containsValue("12345 O");
+        perform.andExpect(content().string(containsString("Eiserne Hand")));
+        perform.andReturn().getModelAndView().getModel().containsValue("Eiserne Hand");
+    }
+
+    @DisplayName("teste anmelden, location fehlt - NOK")
+    @Test
+    void testAddPerson7() throws Exception {
+        ResultActions perform = mockMvc.perform(post("/aktionSaubereLandschaftAddPerson")
                         .param("vorUndNachName", "Jonny")
                         .param("strasseHausNr", "strasse")
                         .param("plzOrt", "12345 O")
                         .param("emailAdresse", "a@b.de")
-                        .param("weitereTeilnehmer", "eins, zwei, drei")
-                        .param("id", "2") // oder freeLocation
+//                        .param("freeLocation", "Eiserne Hand")
                         .param("personenDaten", "true")
-                //optional: fotosMachen
-        ).andExpect(redirectedUrl("/aktionSaubereLandschaft#mitmacher"));
+        );
+        // hier ja eben kein redirect, wegen model und field errors, diese pruefen
+        perform.andExpect(content()
+                .string(containsString("Bitte eine Route aus der Liste auswählen oder einen selbstgewählten Ort eintragen")));
+        //die schon eingegebenen Pflichtfelder sind im model und html noch enthalten:
+        perform.andExpect(content().string(containsString("Jonny")));
+        perform.andReturn().getModelAndView().getModel().containsValue("Jonny");
+        perform.andExpect(content().string(containsString("12345 O")));
+        perform.andReturn().getModelAndView().getModel().containsValue("12345 O");
+        perform.andExpect(content().string(containsString("a@b.de")));
+        perform.andReturn().getModelAndView().getModel().containsValue("a@b.de");
     }
 
-    //todo: noch mehr tests, mit freeLocation und mit allen moeglichen fehleingaben
+    @DisplayName("teste anmelden, zustimmung fehlt - NOK")
+    @Test
+    void testAddPerson8() throws Exception {
+        ResultActions perform = mockMvc.perform(post("/aktionSaubereLandschaftAddPerson")
+                        .param("vorUndNachName", "Jonny")
+                        .param("strasseHausNr", "strasse")
+                        .param("plzOrt", "12345 O")
+                        .param("emailAdresse", "a@b.de")
+                        .param("freeLocation", "Eiserne Hand")
+//                        .param("personenDaten", "true")
+        );
+        // hier ja eben kein redirect, wegen model und field errors, diese pruefen
+        perform.andExpect(content()
+                .string(containsString("Bitte zustimmen")));
+        //die schon eingegebenen Pflichtfelder sind im model und html noch enthalten:
+        perform.andExpect(content().string(containsString("Jonny")));
+        perform.andReturn().getModelAndView().getModel().containsValue("Jonny");
+        perform.andExpect(content().string(containsString("12345 O")));
+        perform.andReturn().getModelAndView().getModel().containsValue("12345 O");
+        perform.andExpect(content().string(containsString("a@b.de")));
+        perform.andReturn().getModelAndView().getModel().containsValue("a@b.de");
+        perform.andExpect(content().string(containsString("Eiserne Hand")));
+        perform.andReturn().getModelAndView().getModel().containsValue("Eiserne Hand");
+    }
 }

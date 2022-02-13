@@ -24,7 +24,7 @@ public class GivenLocationASL {
     public Long getIdFromString() {
         // im model ist es ein String, wir brauchen aber das Long
         // da im html die id als Long uebergeben wird sollte es hier nie knallen!
-        if (this.id.isEmpty() || this.id.isBlank()){
+        if (this.id == null || this.id.isEmpty() || this.id.isBlank()){
             return -1L;
         }
 

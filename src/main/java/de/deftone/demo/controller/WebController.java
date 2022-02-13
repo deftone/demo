@@ -161,7 +161,9 @@ public class WebController {
 
     private boolean keinOrtEingetragen(GivenLocationASL givenLocationASL) {
         return givenLocationASL.getIdFromString() == -1L &&
-                (givenLocationASL.getFreeLocation().isBlank() || givenLocationASL.getFreeLocation().isEmpty());
+                (givenLocationASL.getFreeLocation() == null
+                        || givenLocationASL.getFreeLocation().isBlank()
+                        || givenLocationASL.getFreeLocation().isEmpty());
     }
 
     private boolean datenCheckboxFehlt(GivenLocationASL givenLocationASL) {
