@@ -38,7 +38,7 @@
                 von ca. 11:00 bis 13:00 Müll auf.
                 <br>
                 <br>
-                In diesem April ist es anders. Gemeinsam mit der Gemeinde und der ZAW
+                In diesem April ist es anders. Gemeinsam mit der Gemeinde
                 sammeln wir diesmal am ersten </h5>
             <h3>SAMSTAG, den 2.4.2022 von 10:00 bis 13:00,</h3>
             <h5> mit einem gemeinsamen Ausklang am Bauhof in Roßdorf.</h5>
@@ -182,36 +182,16 @@
                 <p>Danke an alle, die sich für den 02.04.2022 angemeldet haben!
                     <br>
                     <br>
+                    Folgende Routen bzw. Orte sind schon vergeben:
                 </p>
-
-
-                <table id="hidden_mobile">
+                <table >
                     <thead>
                     <tr>
-                        <th class="tablerow">Name</th>
-                        <th class="tablerow">weitere Teilnehmer</th>
                         <th class="tablerow">Ort</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="participant : ${participantsASL}">
-                        <td class="tablerow" th:text="${participant.vorUndNachName}"></td>
-                        <td class="tablerow" th:text="${participant.weitereTeilnehmer}"></td>
-                        <td class="tablerow" th:text="${participant.locationName}"></td>
-                    </tr>
-                    </tbody>
-                </table>
-
-                <table id="hidden_desktop">
-                    <thead>
-                    <tr>
-                        <th class="tablerow">Name</th>
-                        <th class="tablerow">Ort</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="participant : ${participantsASL}">
-                        <td class="tablerow" th:text="${participant.vorUndNachName}"></td>
                         <td class="tablerow" th:text="${participant.locationName}"></td>
                     </tr>
                     </tbody>
