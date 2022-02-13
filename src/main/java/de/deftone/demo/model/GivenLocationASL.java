@@ -7,13 +7,13 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class GivenLocationASL {
 
-    @NotBlank
+    @NotBlank(message = "Bitte Vor- und Nachname eingeben, z.B. Max Mustermann")
     private String vorUndNachName;
-    @NotBlank
+    @NotBlank(message = "Bitte Straße und Hausnr eingeben, z.B. Darmstädter Str. 1")
     private String strasseHausNr;
-    @NotBlank
+    @NotBlank(message = "Bitte PLZ und Ort eingeben, z.B. 64380 Rodorf")
     private String plzOrt;
-    @NotBlank
+    @NotBlank(message = "Bitte eine gültige Email-Adresse eingeben, z.B. Max@Mustermann.de")
     private String emailAdresse;
     private String weitereTeilnehmer;
     private String id;
