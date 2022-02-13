@@ -20,7 +20,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 class ParticipantServiceTest {
@@ -112,6 +112,30 @@ class ParticipantServiceTest {
         checkParticipant(createEndcodedASLParticipant(), savedParticipantASL);
     }
 
+    @DisplayName("teste, dass die passphrase geholt wird und beim 2. mal bekannt ist")
+    @Test
+    void encodeParticipantASLDoppelt() {
+        ParticipantASL participantASL = createASLParticipant();
+        ParticipantASL savedParticipantASL = service.encodeParticipantASL(participantASL);
+        checkParticipant(createEndcodedASLParticipant(), savedParticipantASL);
+        // zweites mal, jetzt ist die Passphrase bekannt
+        ParticipantASL savedParticipantASL2 = service.encodeParticipantASL(participantASL);
+        checkParticipant(createEndcodedASLParticipant(), savedParticipantASL2);
+        // deshalb wird dieser mock nur einmal (beim erstenmal) aufgerufen
+        verify(secretServiceMock, times(1)).getPassphrase();
+    }
+
+    @DisplayName("teste das verschluesseln nur der Pflicht-Felder mit Personendaten eines ASL Teilnehmers")
+    @Test
+    void encodeParticipantASL2() {
+        ParticipantASL participantASL = createASLParticipant();
+        participantASL.setWeitereTeilnehmer(null);
+        ParticipantASL savedParticipantASL = service.encodeParticipantASL(participantASL);
+        ParticipantASL endcodedASLParticipant = createEndcodedASLParticipant();
+        endcodedASLParticipant.setWeitereTeilnehmer(null);
+        checkParticipant(endcodedASLParticipant, savedParticipantASL);
+    }
+
     @DisplayName("unzureichender test des hinzufuegens inkl encoden eines neuen Teilnehmers")
     @Test
     void addASLPartisipant() {
@@ -127,18 +151,6 @@ class ParticipantServiceTest {
         ParticipantASL savedParticipant = service.addParticipantASL(participantASL);
         checkParticipant(expectedParticipant, savedParticipant);
     }
-
-    @DisplayName("teste das verschluesseln nur der Pflicht-Felder mit Personendaten eines ASL Teilnehmers")
-    @Test
-    void encodeParticipantASL2() {
-        ParticipantASL participantASL = createASLParticipant();
-        participantASL.setWeitereTeilnehmer(null);
-        ParticipantASL savedParticipantASL = service.encodeParticipantASL(participantASL);
-        ParticipantASL endcodedASLParticipant = createEndcodedASLParticipant();
-        endcodedASLParticipant.setWeitereTeilnehmer(null);
-        checkParticipant(endcodedASLParticipant, savedParticipantASL);
-    }
-
 
     @DisplayName("teste das entschluesseln eines ASL Teilnehmers")
     @Test
