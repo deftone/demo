@@ -18,8 +18,9 @@ public class ParticipantService {
     private final ParticipantRepo participantRepo;
     private final ParticipantASLRepo participantASLRepo;
     private final EventService eventService;
+    private final SecretService secretService;
     private final AESCrypto aesCrypto;
-    private final String passphrase;
+    private String passphrase;
 
     public ParticipantService(ParticipantRepo participantRepo,
                               ParticipantASLRepo participantASLRepo,
@@ -29,9 +30,18 @@ public class ParticipantService {
         this.participantRepo = participantRepo;
         this.participantASLRepo = participantASLRepo;
         this.eventService = eventService;
+        this.secretService = secretService;
         this.aesCrypto = aesCrypto;
-        this.passphrase = secretService.getPassphrase();
     }
+
+    private String getPassphrase() {
+        if (passphrase == null) {
+            this.passphrase = secretService.getPassphrase();
+            return passphrase;
+        }
+        return passphrase;
+    }
+
 
     public Participant addParticipant(Participant participant) {
         return participantRepo.save(participant);
@@ -47,6 +57,7 @@ public class ParticipantService {
 
     public List<ParticipantASL> getAllASLParticipantsForNextEvent() {
         Event nextEvent = eventService.getNextEvent();
+        String passphrase = getPassphrase();
         List<ParticipantASL> encodedParticipants = participantASLRepo.findAll()
                 .stream()
                 .filter(p -> p.getEvent().getDate().compareTo(nextEvent.getDate()) == 0)
@@ -85,6 +96,7 @@ public class ParticipantService {
     }
 
     ParticipantASL encodeParticipantASL(ParticipantASL participant) {
+        String passphrase = getPassphrase();
         ParticipantASL verschluesselterParticipant = new ParticipantASL();
         verschluesselterParticipant.setVorUndNachName(aesCrypto.encrypt(participant.getVorUndNachName(), passphrase));
         verschluesselterParticipant.setStrasseHausNr(aesCrypto.encrypt(participant.getStrasseHausNr(), passphrase));
@@ -100,6 +112,5 @@ public class ParticipantService {
         verschluesselterParticipant.setFotosMachen(participant.isFotosMachen());
         return verschluesselterParticipant;
     }
-
 
 }
