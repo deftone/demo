@@ -27,7 +27,8 @@ public class ParticipantASL {
     private String emailAdresse;
     private String weitereTeilnehmer;
     private String locationName;
+    private boolean fotosMachen;
 
-    @OneToOne(targetEntity=Event.class)
+    @OneToOne(targetEntity = Event.class)
     private Event event;
 }

@@ -97,6 +97,7 @@ public class ParticipantService {
         verschluesselterParticipant.setAngemeldetAm(participant.getAngemeldetAm());
         verschluesselterParticipant.setEvent(participant.getEvent());
         verschluesselterParticipant.setLocationName(participant.getLocationName());
+        verschluesselterParticipant.setFotosMachen(participant.isFotosMachen());
         return verschluesselterParticipant;
     }
 

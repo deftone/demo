@@ -189,6 +189,7 @@ class ParticipantServiceTest {
         participantASL.setEvent(nextEvent);
         participantASL.setLocationName("Enterprise NCC 1701-D");
         participantASL.setAngemeldetAm(LocalDate.now());
+        participantASL.setFotosMachen(true);
         return participantASL;
     }
 
@@ -203,6 +204,7 @@ class ParticipantServiceTest {
         participantASL.setEvent(nextEvent);
         participantASL.setLocationName("Enterprise NCC 1701-D");
         participantASL.setAngemeldetAm(LocalDate.now());
+        participantASL.setFotosMachen(true);
         return participantASL;
     }
 
@@ -214,6 +216,7 @@ class ParticipantServiceTest {
         assertEquals(sollParticipant.getWeitereTeilnehmer(), istParticipant.getWeitereTeilnehmer());
         assertEquals(sollParticipant.getLocationName(), istParticipant.getLocationName());
         assertEquals(sollParticipant.getAngemeldetAm(), istParticipant.getAngemeldetAm());
+        assertEquals(sollParticipant.isFotosMachen(), istParticipant.isFotosMachen());
         checkEvent(sollParticipant.getEvent(), istParticipant.getEvent());
     }
 

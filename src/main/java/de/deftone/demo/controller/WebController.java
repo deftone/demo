@@ -149,6 +149,9 @@ public class WebController {
         } else {
             participant.setLocationName(givenLocationASL.getFreeLocation());
         }
+        if (givenLocationASL.getFotosMachen() != null) {
+            participant.setFotosMachen(true);
+        }
 
         participantService.addParticipantASL(participant);
 
