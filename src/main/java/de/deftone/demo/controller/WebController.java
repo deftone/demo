@@ -118,7 +118,7 @@ public class WebController {
             if (keinOrtEingetragen(givenLocationASL)) {
                 bindingResult.addError(new FieldError("givenLocationASL",
                         "freeLocation",
-                        "Bitte eine Route aus der Liste auswählen oder hier einen Ort eintragen"));
+                        "Bitte eine Route aus der Liste auswählen oder einen selbstgewählten Ort eintragen"));
             }
             if (datenCheckboxFehlt(givenLocationASL)) {
                 bindingResult.addError(new FieldError("givenLocationASL",

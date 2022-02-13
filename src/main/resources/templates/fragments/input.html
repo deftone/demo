@@ -2,11 +2,12 @@
 <head>
 </head>
 <body>
-<div th:fragment="input(type, label, field)">
+<div th:fragment="input(type, label, field, label2)">
     <label th:text="${label}">Firstname: </label>
     <input th:attr="type=${type}"
            th:value="*{__${field}__}" th:field="*{__${field}__}"
-           th:class="${'form-input-field' + (#fields.hasErrors(field) ?' is-invalid':'')}"/>
+    th:class="${'form-input-field' + (#fields.hasErrors(field) ?' is-invalid':'')}"/>
+    <label th:text="${label2}">Firstname: </label>
     <!-- wenn es fehler gibt, dann kommt ein ramen und unten steht der fehler dran, voll cool! -->
     <div class="form-input-field-error"
          th:if="${#fields.hasErrors(field)}"
