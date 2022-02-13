@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
@@ -38,6 +39,12 @@ class ParticipantServiceTest {
 
     private ParticipantService service;
 
+    private final Event veryOldEvent = new Event(0L, LocalDate.now().minusDays(50));
+    private final Event oldEvent = new Event(1L, LocalDate.now().minusDays(25));
+    private final Event nextEvent = new Event(2L, LocalDate.now().plusDays(5));
+    private final Event futureEvent = new Event(3L, LocalDate.now().plusMonths(1));
+
+
     @BeforeEach
     void setUp() {
         AESCrypto aesCrypto = new AESCrypto();
@@ -55,8 +62,6 @@ class ParticipantServiceTest {
     @DisplayName("hole von mehreren Teilnehmern nur die, die fuers naechste Event angemeldet sind")
     @Test
     void getParticipantsForNextEvent() {
-        Event nextEvent = new Event();
-        nextEvent.setDate(LocalDate.now().plusDays(5));
         when(eventServiceMock.getNextEvent()).thenReturn(nextEvent);
         when(participantRepoMock.findAll()).thenReturn(createParticipantsForSeveralEvents());
         List<Participant> allParticipantsForNextEvent = service.getAllParticipantsForNextEvent();
@@ -67,15 +72,15 @@ class ParticipantServiceTest {
 
     private List<Participant> createParticipantsForSeveralEvents() {
         List<Participant> list = new ArrayList<>();
-        Event veryOldEvent = new Event(1L, LocalDate.now().minusDays(25));
+
         list.add(new Participant(1L, LocalDate.now().minusMonths(1), "Heinz", "egal", veryOldEvent));
         list.add(new Participant(2L, LocalDate.now().minusMonths(1), "Hans", "egal", veryOldEvent));
-        Event oldEvent = new Event(1L, LocalDate.now().minusDays(25));
+
         list.add(new Participant(3L, LocalDate.now().minusMonths(1), "Hugo", "egal", oldEvent));
-        Event nextEvent = new Event(2L, LocalDate.now().plusDays(5));
+
         list.add(new Participant(4L, LocalDate.now().minusDays(2), "Donald", "egal", nextEvent));
         list.add(new Participant(5L, LocalDate.now().minusDays(1), "Daisy", "egal", nextEvent));
-        Event futureEvent = new Event(3L, LocalDate.now().plusMonths(1));
+
         list.add(new Participant(6L, LocalDate.now().minusDays(1), "Jonny", "egal", futureEvent));
         return list;
     }
@@ -107,16 +112,21 @@ class ParticipantServiceTest {
         checkParticipant(createEndcodedASLParticipant(), savedParticipantASL);
     }
 
-//    @DisplayName("todo: der mock funktioniert nicht und savedParti ist null :(")
-//    @Test
-//    void addASLPartisipant() {
-//        ParticipantASL participantASL = createASLParticipant();
-//        ParticipantASL expectedParticipant = createEndcodedASLParticipant();
-//        when(participantASLRepoMock.save(expectedParticipant)).thenReturn(expectedParticipant);
-//
-//        ParticipantASL savedParticipant = service.addParticipantASL(participantASL);
-//        checkParticipant(expectedParticipant, savedParticipant);
-//    }
+    @DisplayName("unzureichender test des hinzufuegens inkl encoden eines neuen Teilnehmers")
+    @Test
+    void addASLPartisipant() {
+        ParticipantASL participantASL = createASLParticipant();
+
+        ParticipantASL expectedParticipant = createEndcodedASLParticipant();
+        //leider kann man es hier nicht genauer testen
+        when(participantASLRepoMock.save(any(ParticipantASL.class))).thenReturn(expectedParticipant);
+        //gut waere:
+        //when(participantASLRepoMock.save(expectedParticipant)).thenReturn(expectedParticipant);
+        // aber das geht nicht, weil es nicht wirklich die gleichen objekte sind
+        // in der methode wird ein neues erzeugt, auch wenn es die selben felder hat
+        ParticipantASL savedParticipant = service.addParticipantASL(participantASL);
+        checkParticipant(expectedParticipant, savedParticipant);
+    }
 
     @DisplayName("teste das verschluesseln nur der Pflicht-Felder mit Personendaten eines ASL Teilnehmers")
     @Test
@@ -133,9 +143,6 @@ class ParticipantServiceTest {
     @DisplayName("teste das entschluesseln eines ASL Teilnehmers")
     @Test
     void getAllASLParticipantsForNextEvent() {
-        Event nextEvent = new Event();
-        nextEvent.setDate(LocalDate.now().plusDays(5));
-
         when(eventServiceMock.getNextEvent()).thenReturn(nextEvent);
         when(participantASLRepoMock.findAll()).thenReturn(createEncodedASLParticipants());
 
@@ -149,9 +156,6 @@ class ParticipantServiceTest {
     @DisplayName("teste das entschluesseln eines ASL Teilnehmers - nur Pflichtfelder")
     @Test
     void getAllASLParticipantsForNextEvent2() {
-        Event nextEvent = new Event();
-        nextEvent.setDate(LocalDate.now().plusDays(5));
-
         when(eventServiceMock.getNextEvent()).thenReturn(nextEvent);
         List<ParticipantASL> encodedASLParticipants = createEncodedASLParticipants();
         encodedASLParticipants.get(0).setWeitereTeilnehmer(null);
@@ -170,7 +174,6 @@ class ParticipantServiceTest {
     private List<ParticipantASL> createEncodedASLParticipants() {
         List<ParticipantASL> encodedParticipants = new ArrayList<>();
         ParticipantASL encodedParticipantASL = createEndcodedASLParticipant();
-        Event nextEvent = new Event(2L, LocalDate.now().plusDays(5));
         encodedParticipantASL.setEvent(nextEvent);
         encodedParticipants.add(encodedParticipantASL);
         return encodedParticipants;
@@ -178,29 +181,28 @@ class ParticipantServiceTest {
 
     private ParticipantASL createASLParticipant() {
         ParticipantASL participantASL = new ParticipantASL();
-        participantASL.setId(1L);
         participantASL.setVorUndNachName("Jean-Luc Picard");
         participantASL.setEmailAdresse("jean-luc@picard.de");
         participantASL.setStrasseHausNr("Darmstädter Str. 33");
         participantASL.setPlzOrt("64380 Roßdorf");
         participantASL.setWeitereTeilnehmer("Will Riker, Deanna Troi, Mister Data");
-        participantASL.setEvent(null);
-        participantASL.setLocationName(null);
-        participantASL.setAngemeldetAm(null);
+        participantASL.setEvent(nextEvent);
+        participantASL.setLocationName("Enterprise NCC 1701-D");
+        participantASL.setAngemeldetAm(LocalDate.now());
         return participantASL;
     }
 
     private ParticipantASL createEndcodedASLParticipant() {
         ParticipantASL participantASL = new ParticipantASL();
-        participantASL.setId(0L);
+        participantASL.setId(1L);
         participantASL.setVorUndNachName("sefTiRlc/nynGJZbiU5S6Q==");
         participantASL.setEmailAdresse("9LnEQLWxawne8L6MjlTkW5BOEfxNdG4iuld+C6wtkRc=");
         participantASL.setStrasseHausNr("qejxctf3LKYJ+pGlnExfI3laW6fvleUDxj7EFcfszCA=");
         participantASL.setPlzOrt("ibYskQ/8BQd446+IuELmVw==");
         participantASL.setWeitereTeilnehmer("6dY9EKFZ1MgKNEPWThV5P5lU+6C+yea8YfW5ZxJXTR+s09qB/MhrLlLC3gVnEjtV");
-        participantASL.setEvent(null);
-        participantASL.setLocationName(null);
-        participantASL.setAngemeldetAm(null);
+        participantASL.setEvent(nextEvent);
+        participantASL.setLocationName("Enterprise NCC 1701-D");
+        participantASL.setAngemeldetAm(LocalDate.now());
         return participantASL;
     }
 
@@ -210,6 +212,14 @@ class ParticipantServiceTest {
         assertEquals(sollParticipant.getPlzOrt(), istParticipant.getPlzOrt());
         assertEquals(sollParticipant.getEmailAdresse(), istParticipant.getEmailAdresse());
         assertEquals(sollParticipant.getWeitereTeilnehmer(), istParticipant.getWeitereTeilnehmer());
+        assertEquals(sollParticipant.getLocationName(), istParticipant.getLocationName());
+        assertEquals(sollParticipant.getAngemeldetAm(), istParticipant.getAngemeldetAm());
+        checkEvent(sollParticipant.getEvent(), istParticipant.getEvent());
+    }
+
+    private void checkEvent(Event soll, Event ist) {
+        assertEquals(soll.getId(), ist.getId());
+        assertEquals(soll.getFormattedDate(), ist.getFormattedDate());
     }
 
 }

@@ -93,6 +93,10 @@ public class ParticipantService {
         if (participant.getWeitereTeilnehmer() != null && !participant.getWeitereTeilnehmer().isEmpty()) {
             verschluesselterParticipant.setWeitereTeilnehmer(aesCrypto.encrypt(participant.getWeitereTeilnehmer(), passphrase));
         }
+        //der Rest ist nicht verschluesselt:
+        verschluesselterParticipant.setAngemeldetAm(participant.getAngemeldetAm());
+        verschluesselterParticipant.setEvent(participant.getEvent());
+        verschluesselterParticipant.setLocationName(participant.getLocationName());
         return verschluesselterParticipant;
     }
 
