@@ -24,6 +24,7 @@ public class ParticipantASL {
     private String vorUndNachName;
     private String strasseHausNr;
     private String plzOrt;
+    private String telefonNr;
     private String emailAdresse;
     private String weitereTeilnehmer;
     private String locationName;

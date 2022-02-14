@@ -101,6 +101,7 @@ class WebControllerASLTest {
                 .param("strasseHausNr", "strasse")
                 .param("plzOrt", "12345 O")
                 .param("emailAdresse", "a@b.de")
+                .param("telefonNr", "12345")
                 .param("id", "2") // oder freeLocation
                 .param("personenDaten", "true")
         ).andExpect(redirectedUrl("/aktionSaubereLandschaft#mitmacher"));
@@ -118,6 +119,7 @@ class WebControllerASLTest {
                 .param("strasseHausNr", "strasse")
                 .param("plzOrt", "12345 O")
                 .param("emailAdresse", "a@b.de")
+                .param("telefonNr", "12345")
                 .param("freeLocation", "Eiserne Hand")
                 .param("personenDaten", "true")
         ).andExpect(redirectedUrl("/aktionSaubereLandschaft#mitmacher"));
@@ -134,6 +136,7 @@ class WebControllerASLTest {
                 .param("strasseHausNr", "strasse")
                 .param("plzOrt", "12345 O")
                 .param("emailAdresse", "a@b.de")
+                .param("telefonNr", "12345")
                 .param("weitereTeilnehmer", "eins, zwei, drei") //freiwillig
                 .param("freeLocation", "Eiserne Hand")
                 .param("personenDaten", "true")
@@ -152,6 +155,7 @@ class WebControllerASLTest {
                         .param("strasseHausNr", "strasse")
                         .param("plzOrt", "12345 O")
                         .param("emailAdresse", "a@b.de")
+                        .param("telefonNr", "12345")
                         .param("freeLocation", "Eiserne Hand")
                         .param("personenDaten", "true")
         );
@@ -163,6 +167,8 @@ class WebControllerASLTest {
         perform.andReturn().getModelAndView().getModel().containsValue("12345 O");
         perform.andExpect(content().string(containsString("a@b.de")));
         perform.andReturn().getModelAndView().getModel().containsValue("a@b.de");
+        perform.andExpect(content().string(containsString("12345")));
+        perform.andReturn().getModelAndView().getModel().containsValue("12345");
         perform.andExpect(content().string(containsString("Eiserne Hand")));
         perform.andReturn().getModelAndView().getModel().containsValue("Eiserne Hand");
     }
@@ -175,6 +181,7 @@ class WebControllerASLTest {
 //                        .param("strasseHausNr", "strasse")
                         .param("plzOrt", "12345 O")
                         .param("emailAdresse", "a@b.de")
+                        .param("telefonNr", "12345")
                         .param("freeLocation", "Eiserne Hand")
                         .param("personenDaten", "true")
         );
@@ -186,6 +193,8 @@ class WebControllerASLTest {
         perform.andReturn().getModelAndView().getModel().containsValue("Jonny");
         perform.andExpect(content().string(containsString("a@b.de")));
         perform.andReturn().getModelAndView().getModel().containsValue("a@b.de");
+        perform.andExpect(content().string(containsString("12345")));
+        perform.andReturn().getModelAndView().getModel().containsValue("12345");
         perform.andExpect(content().string(containsString("Eiserne Hand")));
         perform.andReturn().getModelAndView().getModel().containsValue("Eiserne Hand");
     }
@@ -198,6 +207,7 @@ class WebControllerASLTest {
                         .param("strasseHausNr", "strasse")
                         .param("plzOrt", "12345 O")
 //                        .param("emailAdresse", "a@b.de")
+                        .param("telefonNr", "12345")
                         .param("freeLocation", "Eiserne Hand")
                         .param("personenDaten", "true")
         );
@@ -209,8 +219,36 @@ class WebControllerASLTest {
         perform.andReturn().getModelAndView().getModel().containsValue("Jonny");
         perform.andExpect(content().string(containsString("12345 O")));
         perform.andReturn().getModelAndView().getModel().containsValue("12345 O");
+        perform.andExpect(content().string(containsString("12345")));
+        perform.andReturn().getModelAndView().getModel().containsValue("12345");
         perform.andExpect(content().string(containsString("Eiserne Hand")));
         perform.andReturn().getModelAndView().getModel().containsValue("Eiserne Hand");
+    }
+
+    @DisplayName("teste anmelden, telefonNr fehlt - NOK")
+    @Test
+    void testAddPerson6b() throws Exception {
+        ResultActions perform = mockMvc.perform(post("/aktionSaubereLandschaftAddPerson")
+                        .param("vorUndNachName", "Jonny")
+                        .param("strasseHausNr", "strasse")
+                        .param("plzOrt", "12345 O")
+                        .param("emailAdresse", "a@b.de")
+//                        .param("telefonNr", "12345")
+                        .param("freeLocation", "Eiserne Hand")
+                        .param("personenDaten", "true")
+        );
+        // hier ja eben kein redirect, wegen model und field errors, diese pruefen
+        perform.andExpect(content()
+                .string(containsString("Bitte eine Telefonnummer eingeben, z.B. 06154-123456")));
+        //die schon eingegebenen Pflichtfelder sind im model und html noch enthalten:
+        perform.andExpect(content().string(containsString("Jonny")));
+        perform.andReturn().getModelAndView().getModel().containsValue("Jonny");
+        perform.andExpect(content().string(containsString("12345 O")));
+        perform.andReturn().getModelAndView().getModel().containsValue("12345 O");
+        perform.andExpect(content().string(containsString("a@b.de")));
+        perform.andReturn().getModelAndView().getModel().containsValue("a@b.de");
+        perform.andExpect(content().string(containsString("12345")));
+        perform.andReturn().getModelAndView().getModel().containsValue("12345");
     }
 
     @DisplayName("teste anmelden, location fehlt - NOK")
@@ -221,6 +259,7 @@ class WebControllerASLTest {
                         .param("strasseHausNr", "strasse")
                         .param("plzOrt", "12345 O")
                         .param("emailAdresse", "a@b.de")
+                        .param("telefonNr", "12345")
 //                        .param("freeLocation", "Eiserne Hand")
                         .param("personenDaten", "true")
         );
@@ -234,6 +273,8 @@ class WebControllerASLTest {
         perform.andReturn().getModelAndView().getModel().containsValue("12345 O");
         perform.andExpect(content().string(containsString("a@b.de")));
         perform.andReturn().getModelAndView().getModel().containsValue("a@b.de");
+        perform.andExpect(content().string(containsString("12345")));
+        perform.andReturn().getModelAndView().getModel().containsValue("12345");
     }
 
     @DisplayName("teste anmelden, zustimmung fehlt - NOK")
@@ -244,6 +285,7 @@ class WebControllerASLTest {
                         .param("strasseHausNr", "strasse")
                         .param("plzOrt", "12345 O")
                         .param("emailAdresse", "a@b.de")
+                        .param("telefonNr", "12345")
                         .param("freeLocation", "Eiserne Hand")
 //                        .param("personenDaten", "true")
         );
@@ -257,6 +299,8 @@ class WebControllerASLTest {
         perform.andReturn().getModelAndView().getModel().containsValue("12345 O");
         perform.andExpect(content().string(containsString("a@b.de")));
         perform.andReturn().getModelAndView().getModel().containsValue("a@b.de");
+        perform.andExpect(content().string(containsString("12345")));
+        perform.andReturn().getModelAndView().getModel().containsValue("12345");
         perform.andExpect(content().string(containsString("Eiserne Hand")));
         perform.andReturn().getModelAndView().getModel().containsValue("Eiserne Hand");
     }

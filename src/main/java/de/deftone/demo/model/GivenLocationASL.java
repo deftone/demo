@@ -15,6 +15,8 @@ public class GivenLocationASL {
     private String plzOrt;
     @NotBlank(message = "Bitte eine gültige Email-Adresse eingeben, z.B. Max@Mustermann.de")
     private String emailAdresse;
+    @NotBlank(message = "Bitte eine Telefonnummer eingeben, z.B. 06154-123456")
+    private String telefonNr;
     private String weitereTeilnehmer;
     private String id;
     private String freeLocation;

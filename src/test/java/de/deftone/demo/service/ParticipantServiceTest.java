@@ -197,6 +197,7 @@ class ParticipantServiceTest {
         participantASL.setEmailAdresse("jean-luc@picard.de");
         participantASL.setStrasseHausNr("Darmstädter Str. 33");
         participantASL.setPlzOrt("64380 Roßdorf");
+        participantASL.setTelefonNr("06154-12345");
         participantASL.setWeitereTeilnehmer("Will Riker, Deanna Troi, Mister Data");
         participantASL.setEvent(nextEvent);
         participantASL.setLocationName("Enterprise NCC 1701-D");
@@ -212,6 +213,7 @@ class ParticipantServiceTest {
         participantASL.setEmailAdresse("9LnEQLWxawne8L6MjlTkW5BOEfxNdG4iuld+C6wtkRc=");
         participantASL.setStrasseHausNr("qejxctf3LKYJ+pGlnExfI3laW6fvleUDxj7EFcfszCA=");
         participantASL.setPlzOrt("ibYskQ/8BQd446+IuELmVw==");
+        participantASL.setTelefonNr("wJ2aB+/k4kS9CGSRc87xYA==");
         participantASL.setWeitereTeilnehmer("6dY9EKFZ1MgKNEPWThV5P5lU+6C+yea8YfW5ZxJXTR+s09qB/MhrLlLC3gVnEjtV");
         participantASL.setEvent(nextEvent);
         participantASL.setLocationName("Enterprise NCC 1701-D");
@@ -225,6 +227,7 @@ class ParticipantServiceTest {
         assertEquals(sollParticipant.getStrasseHausNr(), istParticipant.getStrasseHausNr());
         assertEquals(sollParticipant.getPlzOrt(), istParticipant.getPlzOrt());
         assertEquals(sollParticipant.getEmailAdresse(), istParticipant.getEmailAdresse());
+        assertEquals(sollParticipant.getTelefonNr(), istParticipant.getTelefonNr());
         assertEquals(sollParticipant.getWeitereTeilnehmer(), istParticipant.getWeitereTeilnehmer());
         assertEquals(sollParticipant.getLocationName(), istParticipant.getLocationName());
         assertEquals(sollParticipant.getAngemeldetAm(), istParticipant.getAngemeldetAm());

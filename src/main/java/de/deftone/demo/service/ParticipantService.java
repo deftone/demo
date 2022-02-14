@@ -67,6 +67,7 @@ public class ParticipantService {
             participantASL.setStrasseHausNr(aesCrypto.decrypt(participantASL.getStrasseHausNr(), passphrase));
             participantASL.setPlzOrt(aesCrypto.decrypt(participantASL.getPlzOrt(), passphrase));
             participantASL.setEmailAdresse(aesCrypto.decrypt(participantASL.getEmailAdresse(), passphrase));
+            participantASL.setTelefonNr(aesCrypto.decrypt(participantASL.getTelefonNr(), passphrase));
             participantASL.setWeitereTeilnehmer(aesCrypto.decrypt(participantASL.getWeitereTeilnehmer(), passphrase));
         }
         return encodedParticipants;
@@ -102,6 +103,7 @@ public class ParticipantService {
         verschluesselterParticipant.setStrasseHausNr(aesCrypto.encrypt(participant.getStrasseHausNr(), passphrase));
         verschluesselterParticipant.setPlzOrt(aesCrypto.encrypt(participant.getPlzOrt(), passphrase));
         verschluesselterParticipant.setEmailAdresse(aesCrypto.encrypt(participant.getEmailAdresse(), passphrase));
+        verschluesselterParticipant.setTelefonNr(aesCrypto.encrypt(participant.getTelefonNr(), passphrase));
         if (participant.getWeitereTeilnehmer() != null && !participant.getWeitereTeilnehmer().isEmpty()) {
             verschluesselterParticipant.setWeitereTeilnehmer(aesCrypto.encrypt(participant.getWeitereTeilnehmer(), passphrase));
         }

@@ -39,7 +39,7 @@
                 <li>Sollten Sie Anzeichen von Erkältungskrankheiten vorweisen, ist eine Teilnahme
                     nicht möglich.
                 </li>
-                <li>Sollten Sie sich in den 2 Wochen vor der Veranstaltung in einem ausgewiesenen
+                <li>Urlaubsrückkehrer: Sollten Sie sich in den 2 Wochen vor der Veranstaltung in einem ausgewiesenen
                     Corona-Risiko-Gebiet aufgehalten haben, ist die Teilnahme nicht möglich.
                 </li>
                 <li>Für die Teilnahme an der Aktion Saubere Landschaft ist die Erfassung von
@@ -51,6 +51,12 @@
                     Daten. Wir danken Ihnen für Ihre Mithilfe.
                 </li>
             </ul>
+
+            <p><a class="button" href="/aktionSaubereLandschaft"> Zurück </a>
+                <br>
+                <br>
+                <br>
+            </p>
 
             <section class="box">
                 <form method="POST"
@@ -64,6 +70,19 @@
                             <div th:replace="fragments/input :: input('text','Straße HausNr:', 'strasseHausNr', 'z.B. Darmstädter Str. 1')"/>
                             <div th:replace="fragments/input :: input('text','PLZ Ort:', 'plzOrt', 'z.B. 64380 Roßdorf')"/>
                             <div th:replace="fragments/input :: input('text','Email-Adresse:', 'emailAdresse', 'z.B. Max@Mustermann.de')"/>
+                            <div th:replace="fragments/input :: input('text','Telefonnummer:', 'telefonNr', 'z.B. 05154-12345')"/>
+
+                            <div class="ueber-rahmen">
+                                <p>
+                                    <br>
+                                    Bitte geben Sie weitere Teilnehmer hier ein. Das können z.B. Familienmitglieder oder
+                                    Freunde sein. Um Doppelungen zu vermeiden, dürfen diese sich nicht selbst
+                                    registrieren.
+                                    <br>
+                                    <br>
+                                </p>
+                            </div>
+
                             <div th:replace="fragments/input :: input('text','weitere Teilnehmer:', 'weitereTeilnehmer', 'z.B. Moritz Mustermann, Heinz Anders')"/>
                         </div>
                         <br>
@@ -71,13 +90,12 @@
                         <div class="ueber-rahmen">
                             <p>
                                 <br>
-                                Bitte wählen Sie bei Ort vorzugsweise eine der vorgegebenen Routen aus der Liste.
+                                Bitte wählen Sie bei Ort vorzugsweise eine der vorgegebenen Routen aus der Liste aus.
+                                Die Orte sind <a class="bunt" href="#routen"> unten </a> nochmal gezeigt.
                                 Sie können aber auch einen selbstgewählten Ort eingeben. Wenn möglich aber nur dann,
-                                wenn
-                                alle Routen in der Liste schon vergeben sind
-                                oder Sie einen verdreckten Ort in Roßdorf/Gundernhausen oder nahem Umland kennen, der
-                                nicht in der
-                                Liste der vorgegebenen Routen enthalten ist.
+                                wenn alle Routen aus der Liste schon vergeben sind
+                                oder Sie einen verdreckten Ort in Roßdorf/Gundernhausen kennen, der
+                                nicht in der Liste enthalten ist.
                                 <br>
                                 <br>
                             </p>
@@ -158,6 +176,82 @@
         </div>
     </section>
 
+    <section class="container_mitmachen" id="routen">
+        <h1 class="title"> Die Routen </h1>
+        <div class="subcontainer_mitmachen">
+            <div class="mitmachen_text">
+
+
+                <table id="hidden_mobile">
+                    <thead>
+                    <tr>
+                        <th class="tablerow">Kürzel</th>
+                        <th class="tablerow">Ort</th>
+                        <th class="tablerow">frei</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="location : ${locations}">
+                        <td class="tablerow" th:text="${location.idString}"></td>
+                        <td class="tablerow" th:text="${location.name}"></td>
+                        <td class="tablerow" th:text="${location.getFrei()}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <table id="hidden_desktop">
+                    <thead>
+                    <tr>
+                        <th class="tablerow">Kürzel</th>
+                        <th class="tablerow">Ort</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="location : ${locations}">
+                        <td class="tablerow" th:text="${location.idString}"></td>
+                        <td class="tablerow" th:text="${location.name}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+            <div class="container_side_50" id="hidden_mobile">
+                <a href="" class="container_mitmachen_box">
+                    <div class="container_media_100">
+                        <img src="images/Gundernhausen.png" alt="">
+                    </div>
+                </a>
+
+                <a href="" class="container_mitmachen_box">
+                    <div class="container_media_100">
+                        <img src="images/RossdorfNeu.png" alt="">
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div id="hidden_desktop">
+            <a href="" class="container_mitmachen_box">
+                <div class="container_media_100">
+                    <img src="images/Gundernhausen.png" alt="">
+                </div>
+                <p>Routen in Gundernhausen Gx</p>
+            </a>
+
+            <a href="" class="container_mitmachen_box">
+                <div class="container_media_100">
+                    <img src="images/RossdorfNeu.png" alt="">
+                    <p>Routen in Roßdorf Rx</p>
+                    <br>
+                </div>
+            </a>
+        </div>
+
+    </section>
+
 </div>
+
+
 </body>
 </html>

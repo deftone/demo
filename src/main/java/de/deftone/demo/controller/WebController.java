@@ -101,6 +101,7 @@ public class WebController {
     @GetMapping("/aktionSaubereLandschaftAnmelden")
     public String anmeldenAktionSaubereLandschaft(Model model) {
         model.addAttribute("freeLocationsASL", locationService.getFreeASLLocations());
+        model.addAttribute("locations", locationService.getAllASLLocations());
         model.addAttribute("givenLocationASL", new GivenLocationASL());
         return "anmeldenAktionSaubereLandschaft";
     }
@@ -144,8 +145,9 @@ public class WebController {
         if (givenLocationASL.getIdFromString() != -1L) {
             String locationNameById = locationService.getASLLocationNameById(givenLocationASL.getIdFromString());
             participant.setLocationName(locationNameById);
-            //und anschliessend als gebucht setzen, damit aus auswahlbox verschwindet
-            locationService.setASLLocationToBooked(givenLocationASL.getIdFromString());
+            // und anschliessend als gebucht setzen, damit aus auswahlbox verschwindet
+            // nein, nicht machen, ich setze die routen auf "gebucht"
+            // locationService.setASLLocationToBooked(givenLocationASL.getIdFromString());
         } else {
             participant.setLocationName(givenLocationASL.getFreeLocation());
         }
