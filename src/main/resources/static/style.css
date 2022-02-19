@@ -811,14 +811,13 @@ p.margin-left{
     flex-direction: column;
     }
 
- .form-row{
-     display: flex;
-        justify-content: center;
- }
-
 }
 
-
+/* button fuer amelden soll in der mitte sein */
+ .form-row{
+     display: flex;
+     justify-content: center;
+ }
 
 a.bunt{
     color: #ff8000;
