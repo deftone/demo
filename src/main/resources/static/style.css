@@ -763,7 +763,6 @@ li {
     flex-direction: column;
     justify-content: start;
     align-items: start;
-    padding-bottom: 3rem;
     }
 
 .form-input-field-error, p.red{
@@ -787,10 +786,8 @@ p.margin-left{
     margin: 0rem 2rem; /* gleich wie margin in rahmen */
 }
 
-
 .checkbox{
     width: auto;
-    background-color: #0059b3; /*dunkles blau*/
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -804,16 +801,23 @@ p.margin-left{
       width: 2rem;
     }
 
-
-
-
 @media only screen and (max-width: 700px) {
-.checkbox {
-width: 75%;
+
+p.margin-left{
+    margin: 0rem;
+    }
+
+.checkbox{
+    flex-direction: column;
+    }
+
+ .form-row{
+     display: flex;
+        justify-content: center;
+ }
+
 }
 
-
-}
 
 
 a.bunt{

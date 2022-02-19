@@ -64,16 +64,27 @@
                       th:object="${givenLocationASL}">
                     <fieldset>
                         <br>
-                        <p class="margin-left"> Bitte füllen Sie das Formular aus. Pflichtfelder sind mit * gekennzeichnet.
+                        <p class="margin-left"> Bitte füllen Sie das Formular aus. Pflichtfelder sind mit *
+                            gekennzeichnet.
                             <br>
                             <br>
                         </p>
+
+                        <!--Personendaten-->
                         <div class="rahmen">
 
                             <div th:replace="fragments/input :: input('text','Vor- und Nachname *:', 'vorUndNachName', 'z.B. Max Mustermann')"></div>
+                            <br>
+                            <br>
                             <div th:replace="fragments/input :: input('text','Straße HausNr *:', 'strasseHausNr', 'z.B. Darmstädter Str. 1')"></div>
+                            <br>
+                            <br>
                             <div th:replace="fragments/input :: input('text','PLZ Ort *:', 'plzOrt', 'z.B. 64380 Roßdorf')"></div>
+                            <br>
+                            <br>
                             <div th:replace="fragments/input :: input('text','Email-Adresse *:', 'emailAdresse', 'z.B. Max@Mustermann.de')"></div>
+                            <br>
+                            <br>
                             <div th:replace="fragments/input :: input('text','Telefonnummer *:', 'telefonNr', 'z.B. 06154-12345')"></div>
 
                             <div class="ueber-rahmen">
@@ -92,7 +103,7 @@
                         </div>
                         <br>
 
-
+                        <!--Location-->
                         <div class="rahmen">
                             <div class="text-in-rahmen">
                                 <p>
@@ -109,17 +120,19 @@
                             </div>
 
                             Ort:
-                            <select id="id" name="id">-->
+                            <select id="id" name="id">
                                 <option th:value="''" th:text="bitte_auswählen"></option>
                                 <option th:each="location : ${freeLocationsASL}"
                                         th:value="${location.id}"
                                         th:text="${location.getCompactIdAndName()}"></option>
                             </select>
                             <br>
+                            <br>
                             <div th:replace="fragments/input :: input('text','oder selbstgewählter Ort:', 'freeLocation', 'z.B. An der Eisernen Hand')"></div>
                         </div>
 
                         <br>
+                        <!--Checkbox Zustimmung Daten-->
                         <div class="rahmen">
 
                             <div class="text-in-rahmen">
@@ -139,16 +152,17 @@
                                 <p>
                                     Hiermit erkläre ich ausdrücklich meine freiwillige Zustimmung zur elektronischen
                                     Erfassung und Weiterverarbeitung meiner personenbezogenen Daten.
-                                    <br>
                                 </p>
                             </div>
-                            <!-- wird nur angezeigt wenn es fehler gibt -->
+
                             <div th:if="${#fields.hasErrors('${givenLocationASL.personenDaten}')}">
                                 <p class="red"><br>Bitte zustimmen</p>
                             </div>
                         </div>
 
+
                         <br>
+                        <!--Checkbox Fotos-->
                         <div class="rahmen">
 
                             <div class="text-in-rahmen">
