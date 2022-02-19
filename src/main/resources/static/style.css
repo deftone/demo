@@ -797,11 +797,20 @@ p.margin-left{
     }
 
 .checkbox-icon{
+      width: 10%;
       height: 2rem;
       width: 2rem;
     }
 
+.nebenCheckbox{
+    width: 90%;
+}
+
 @media only screen and (max-width: 700px) {
+
+.form-input-field-box{
+    align-items: center;
+    }
 
 p.margin-left{
     margin: 0rem;
@@ -809,6 +818,14 @@ p.margin-left{
 
 .checkbox{
     flex-direction: column;
+    }
+
+.checkbox-icon{
+      width: auto;
+    }
+
+.nebenCheckbox{
+    width: auto;
     }
 
 }
