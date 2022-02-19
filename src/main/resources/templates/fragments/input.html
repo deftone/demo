@@ -2,7 +2,7 @@
 <head>
 </head>
 <body>
-<div th:fragment="input(type, label, field, label2)">
+<div class="form-input-field-box" th:fragment="input(type, label, field, label2)">
     <label th:text="${label}">Firstname: </label>
     <input th:attr="type=${type}"
            th:value="*{__${field}__}" th:field="*{__${field}__}"

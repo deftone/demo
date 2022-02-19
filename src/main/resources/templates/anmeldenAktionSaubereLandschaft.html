@@ -64,44 +64,50 @@
                       th:object="${givenLocationASL}">
                     <fieldset>
                         <br>
+                        <p class="margin-left"> Bitte füllen Sie das Formular aus. Pflichtfelder sind mit * gekennzeichnet.
+                            <br>
+                            <br>
+                        </p>
                         <div class="rahmen">
 
-                            <div th:replace="fragments/input :: input('text','Vor- und Nachname:', 'vorUndNachName', 'z.B. Max Mustermann')"/>
-                            <div th:replace="fragments/input :: input('text','Straße HausNr:', 'strasseHausNr', 'z.B. Darmstädter Str. 1')"/>
-                            <div th:replace="fragments/input :: input('text','PLZ Ort:', 'plzOrt', 'z.B. 64380 Roßdorf')"/>
-                            <div th:replace="fragments/input :: input('text','Email-Adresse:', 'emailAdresse', 'z.B. Max@Mustermann.de')"/>
-                            <div th:replace="fragments/input :: input('text','Telefonnummer:', 'telefonNr', 'z.B. 05154-12345')"/>
+                            <div th:replace="fragments/input :: input('text','Vor- und Nachname *:', 'vorUndNachName', 'z.B. Max Mustermann')"></div>
+                            <div th:replace="fragments/input :: input('text','Straße HausNr *:', 'strasseHausNr', 'z.B. Darmstädter Str. 1')"></div>
+                            <div th:replace="fragments/input :: input('text','PLZ Ort *:', 'plzOrt', 'z.B. 64380 Roßdorf')"></div>
+                            <div th:replace="fragments/input :: input('text','Email-Adresse *:', 'emailAdresse', 'z.B. Max@Mustermann.de')"></div>
+                            <div th:replace="fragments/input :: input('text','Telefonnummer *:', 'telefonNr', 'z.B. 06154-12345')"></div>
 
                             <div class="ueber-rahmen">
                                 <p>
                                     <br>
-                                    Bitte geben Sie weitere Teilnehmer hier ein. Das können z.B. Familienmitglieder oder
-                                    Freunde sein. Um Doppelungen zu vermeiden, dürfen diese sich nicht selbst
-                                    registrieren.
+                                    Wenn Sie z.B. mit Ihrer Familie oder Freunden gemeinsam mitmachen wollen,
+                                    dann geben Sie bitte diese Personen hier an.
+                                    Nur den Vor- und Nachnamen.
+                                    Keine weiteren Infos sind nötig.
                                     <br>
                                     <br>
                                 </p>
                             </div>
 
-                            <div th:replace="fragments/input :: input('text','weitere Teilnehmer:', 'weitereTeilnehmer', 'z.B. Moritz Mustermann, Heinz Anders')"/>
+                            <div th:replace="fragments/input :: input('text','weitere Teilnehmer:', 'weitereTeilnehmer', 'z.B. Moritz Mustermann, Heinz Anders')"></div>
                         </div>
                         <br>
 
-                        <div class="ueber-rahmen">
-                            <p>
-                                <br>
-                                Bitte wählen Sie bei Ort vorzugsweise eine der vorgegebenen Routen aus der Liste aus.
-                                Die Orte sind <a class="bunt" href="#routen"> unten </a> nochmal gezeigt.
-                                Sie können aber auch einen selbstgewählten Ort eingeben. Wenn möglich aber nur dann,
-                                wenn alle Routen aus der Liste schon vergeben sind
-                                oder Sie einen verdreckten Ort in Roßdorf/Gundernhausen kennen, der
-                                nicht in der Liste enthalten ist.
-                                <br>
-                                <br>
-                            </p>
-                        </div>
 
                         <div class="rahmen">
+                            <div class="text-in-rahmen">
+                                <p>
+                                    Bitte wählen Sie bei Ort vorzugsweise eine der vorgegebenen Routen aus der Liste
+                                    aus.
+                                    Die Orte sind <a class="bunt" href="#routen"> unten </a> nochmal gezeigt.
+                                    Sie können aber auch einen selbstgewählten Ort eingeben. Wenn möglich aber nur dann,
+                                    wenn alle Routen aus der Liste schon vergeben sind
+                                    oder Sie einen verdreckten Ort in Roßdorf/Gundernhausen kennen, der
+                                    nicht in der Liste enthalten ist.
+                                    <br>
+                                    <br>
+                                </p>
+                            </div>
+
                             Ort:
                             <select id="id" name="id">-->
                                 <option th:value="''" th:text="bitte_auswählen"></option>
@@ -110,60 +116,62 @@
                                         th:text="${location.getCompactIdAndName()}"></option>
                             </select>
                             <br>
-                            <div th:replace="fragments/input :: input('text','oder selbstgewählter Ort:', 'freeLocation', 'z.B. An der Eisernen Hand')"/>
+                            <div th:replace="fragments/input :: input('text','oder selbstgewählter Ort:', 'freeLocation', 'z.B. An der Eisernen Hand')"></div>
                         </div>
+
                         <br>
-                        <div class="ueber-checkbox">
-                            <p>
-                                <br>
-                                Die Übertragung Ihrer Daten an uns erfolgt verschlüsselt. Sie sind zu keinem
-                                Zeitpunkt
-                                verpflichtet Daten an uns zu übermitteln, sollten Sie jedoch eine
-                                Anmeldung
-                                tätigen wollen, benötigen wir die entsprechenden Informationen.
-                                <br>
-                                <br>
-                            </p>
+                        <div class="rahmen">
+
+                            <div class="text-in-rahmen">
+                                <p>
+                                    Die Übertragung Ihrer Daten an uns erfolgt verschlüsselt. Sie sind zu keinem
+                                    Zeitpunkt
+                                    verpflichtet Daten an uns zu übermitteln, sollten Sie jedoch eine
+                                    Anmeldung
+                                    tätigen wollen, benötigen wir die entsprechenden Informationen.
+                                    <br>
+                                    <br>
+                                </p>
+                            </div>
+
+                            <div class="checkbox">
+                                <input class="checkbox-icon" type="checkbox" name="personenDaten" value="ok">
+                                <p>
+                                    Hiermit erkläre ich ausdrücklich meine freiwillige Zustimmung zur elektronischen
+                                    Erfassung und Weiterverarbeitung meiner personenbezogenen Daten.
+                                    <br>
+                                </p>
+                            </div>
+                            <!-- wird nur angezeigt wenn es fehler gibt -->
+                            <div th:if="${#fields.hasErrors('${givenLocationASL.personenDaten}')}">
+                                <p class="red"><br>Bitte zustimmen</p>
+                            </div>
                         </div>
 
-                        <div class="checkbox">
-                            <input class="checkbox-icon" type="checkbox" name="personenDaten" value="ok">
-                            <p>
-                                Hiermit erkläre ich ausdrücklich meine freiwillige Zustimmung zur elektronischen
-                                Erfassung und Weiterverarbeitung meiner personenbezogenen Daten.
-                                <br>
-                            </p>
-                        </div>
-                        <!-- wird nur angezeigt wenn es fehler gibt -->
-                        <div th:if="${#fields.hasErrors('${givenLocationASL.personenDaten}')}">
-                            <p class="red"><br>Bitte zustimmen</p>
-                        </div>
+                        <br>
+                        <div class="rahmen">
 
-
-                        <div class="ueber-checkbox">
-                            <p>
-                                <br>
-                                <br>
-                                <br>
-                                Die Gemeinde beabsichtigt Fotos aufzunehmen, auf denen die
-                                Betroffenen abgelichtet sein können.
-                                Die Fotoaufnahmen werden zukünftig für Zwecke der PR- und Öffentlichkeitsarbeit der
-                                Gemeinde eingesetzt.
-                                <br>
-                                Die Einwilligungszustimmung ist freiweillig.
-                                <br>
-                                <br>
-                            </p>
+                            <div class="text-in-rahmen">
+                                <p>
+                                    Die Gemeinde beabsichtigt Fotos aufzunehmen, auf denen die
+                                    Betroffenen abgelichtet sein können.
+                                    Die Fotoaufnahmen werden zukünftig für Zwecke der PR- und Öffentlichkeitsarbeit der
+                                    Gemeinde eingesetzt.
+                                    <br>
+                                    Die Einwilligungszustimmung ist freiweillig.
+                                    <br>
+                                    <br>
+                                </p>
+                            </div>
+                            <div class="checkbox">
+                                <input class="checkbox-icon" type="checkbox" name="fotosMachen" value="ok">
+                                <p> Hiermit erkläre ich meine Einwilligung zur Nutzung der Fotoaufnahmen meiner
+                                    Person für die oben beschriebenen Zwecke und Verwendungen. Mir ist bekannt, dass ich
+                                    für die Veröffentlichung kein Entgelt erhalte. Die Einwilligung erfolgt ausdrücklich
+                                    freiwillig.
+                                </p>
+                            </div>
                         </div>
-                        <div class="checkbox">
-                            <input class="checkbox-icon" type="checkbox" name="fotosMachen" value="ok">
-                            <p> Hiermit erkläre ich meine Einwilligung zur Nutzung der Fotoaufnahmen meiner
-                                Person für die oben beschriebenen Zwecke und Verwendungen. Mir ist bekannt, dass ich
-                                für die Veröffentlichung kein Entgelt erhalte. Die Einwilligung erfolgt ausdrücklich
-                                freiwillig.
-                            </p>
-                        </div>
-
 
                         <br/>
                         <div class="form-row">

@@ -19,6 +19,12 @@ body .main{
   color: #0059b3;  /* dunkles blau */
   }
 
+@media only screen and (max-width: 700px) {
+  body .main{
+    font-size: 1.2rem;
+  }
+}
+
 a {
   text-decoration: none;
   }
@@ -730,18 +736,12 @@ li {
     }
 
 
-/* input */
+/* input - wirklich nur das input feld!*/
 .form-input-field {
-  background-color: #fff;
-  font-size: 2rem;
-  text-align: start;
-  border-radius: 1rem;
-  width: 90%;
   padding: 0.8rem 0rem;
   margin: 2rem 1.6rem;
-  border: 1px solid white;
 }
-
+/* der error ist direkt unter dem input */
 .form-input-field-error, p.red{
     font-size: 1.5rem;
     color: red;
@@ -750,49 +750,71 @@ li {
     text-shadow: -1px -1px 0 white, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
 }
 
-.nebeneinander{
- flex-direction: row;
+@media only screen and (max-width: 700px) {
+
+/* input - wirklich nur das input feld!*/
+.form-input-field {
+  margin: 0.5rem 0rem;
 }
 
-.checkbox{
-    width: 50rem;
-    background-color: #0059b3; /*dunkles blau*/
+/* alles in der zeile: name, input (inkl error), beschreibung*/
+.form-input-field-box{
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: start;
     align-items: start;
-    border-radius: 1rem;
-    border: 1px solid white;
-    padding: 1.5rem;
+    padding-bottom: 3rem;
     }
+
+.form-input-field-error, p.red{
+    font-size: 1rem;
+    color: red;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-shadow: -1px -1px 0 white, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+    width: 10rem;
+    }
+}
 
 .rahmen{
    border-radius: 1rem;
    border: 1px solid white;
    padding: 1rem;
+   margin: 0rem 2rem;
 }
 
-.ueber-checkbox, .ueber-rahmen{
+p.margin-left{
+    margin: 0rem 2rem; /* gleich wie margin in rahmen */
+}
+
+
+.checkbox{
+    width: auto;
     background-color: #0059b3; /*dunkles blau*/
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: start;
     border-radius: 1rem;
-    }
-
-.ueber-checkbox {
-    width: 55rem;
-    }
-
-.ueber-rahmen {
-    width: 70rem;
+    padding: 1.5rem;
     }
 
 .checkbox-icon{
       height: 2rem;
       width: 2rem;
     }
+
+
+
+
+@media only screen and (max-width: 700px) {
+.checkbox {
+width: 75%;
+}
+
+
+}
+
 
 a.bunt{
     color: #ff8000;
