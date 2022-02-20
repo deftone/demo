@@ -22,9 +22,13 @@ public class SecretService {
     }
 
     public Secret addSecret(Secret secret) {
+        return secretRepo.save(verschluesselSecret(secret));
+    }
+
+    Secret verschluesselSecret(Secret secret) {
         String wordVerschluesselt = passwordEncoder.encode(secret.getName());
         secret.setName(wordVerschluesselt);
-        return secretRepo.save(secret);
+        return secret;
     }
 
     public void deleteSecret(long id) {
@@ -43,11 +47,8 @@ public class SecretService {
 
     public String getPassphrase() {
         // die passphrase wurde unter id = 1 gespeichert
+        // d.h. es ist IMMER der selbe, verschluesselte name vom secret
         Optional<Secret> byId = secretRepo.findById(1L);
-        if (byId.isPresent()){
-            return byId.get().getName();
-        }
-        //todo: bessere exception! sollte aber nie auftreten wenn einmal konfiguriert
-        throw new RuntimeException("kein secret fuer die passphrase gefunden");
+        return byId.map(Secret::getName).orElse(null);
     }
 }
