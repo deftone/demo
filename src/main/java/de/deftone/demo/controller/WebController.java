@@ -138,6 +138,7 @@ public class WebController {
         participant.setStrasseHausNr(givenLocationASL.getStrasseHausNr());
         participant.setPlzOrt(givenLocationASL.getPlzOrt());
         participant.setEmailAdresse(givenLocationASL.getEmailAdresse());
+        participant.setTelefonNr(givenLocationASL.getTelefonNr());
         participant.setWeitereTeilnehmer(givenLocationASL.getWeitereTeilnehmer());
         participant.setAngemeldetAm(LocalDate.now());
         participant.setEvent(eventService.getNextEvent());
