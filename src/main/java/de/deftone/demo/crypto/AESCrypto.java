@@ -45,6 +45,9 @@ public class AESCrypto implements IEncrypterDecrypter{
 
     @Override
     public String decrypt(String strToDecrypt, String secret) {
+        if (strToDecrypt == null){
+            return null;
+        }
         try {
             prepareSecreteKey(secret);
             Cipher cipher = Cipher.getInstance(ALGORITHM);
