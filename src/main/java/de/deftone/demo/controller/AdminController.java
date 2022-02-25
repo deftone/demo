@@ -128,6 +128,14 @@ public class AdminController {
         } else {
             return false;
         }
+    }
 
+    @PostMapping(path = "/admin/deletePersonenDataFromASLParticipant")
+    public boolean deletePersonenDataFromASLParticipant(@RequestParam long id, @RequestBody Secret secret) {
+        if (secretService.checkSecret(secret)) {
+            return participantService.deletePersonenDataFromASLParticipant(id);
+        } else {
+            return false;
+        }
     }
 }
