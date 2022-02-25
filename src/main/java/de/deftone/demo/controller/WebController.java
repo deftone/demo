@@ -111,6 +111,7 @@ public class WebController {
                                                    BindingResult bindingResult,
                                                    Model model) {
         model.addAttribute("freeLocationsASL", locationService.getFreeASLLocations());
+        model.addAttribute("locations", locationService.getAllASLLocations());
         // alle Pflichtfelder muessen gefuellt sein:
         if (bindingResult.hasErrors()
                 || keinOrtEingetragen(givenLocationASL)
