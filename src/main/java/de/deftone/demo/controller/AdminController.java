@@ -6,8 +6,11 @@ import de.deftone.demo.service.LocationService;
 import de.deftone.demo.service.ParticipantService;
 import de.deftone.demo.service.SecretService;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -32,8 +35,20 @@ public class AdminController {
     }
 
     @PostMapping(path = "/admin/addASLLocationList", consumes = "application/json")
-    public List<LocationASL> addASLLocationList(@RequestBody List<LocationASL> locations) {
-        return locationService.addASLLocationList(locations);
+    public List<LocationASL> addASLLocationList(@RequestBody Wrapper locationWithSecret) {
+        Secret secret = locationWithSecret.getSecret();
+        List<LocationASL> locations = locationWithSecret.getLocationASLList();
+        if (secretService.checkSecret(secret)) {
+            return locationService.addASLLocationList(locations);
+        }
+        return Collections.emptyList();
+    }
+
+    @Getter
+    @Setter
+    static class Wrapper {
+        private Secret secret;
+        private List<LocationASL> locationASLList;
     }
 
     //zum kontrollieren
@@ -48,9 +63,21 @@ public class AdminController {
         return locationService.resetAllLocations();
     }
 
-    @GetMapping(path = "/admin/resetAllASLLocations")
-    public List<LocationASL> resetAllASLLocations() {
-        return locationService.resetAllASLLocations();
+    @PostMapping(path = "/admin/resetAllASLLocations")
+    public List<LocationASL> resetAllASLLocations(@RequestBody Secret secret) {
+        if (secretService.checkSecret(secret)) {
+            return locationService.resetAllASLLocations();
+        }
+        return Collections.emptyList();
+    }
+
+
+    @PostMapping(path = "/admin/setASLLocation")
+    public LocationASL setASLLocations(@RequestParam long id, @RequestParam boolean free, @RequestBody Secret secret) {
+        if (secretService.checkSecret(secret)) {
+            return locationService.setLocation(id, free);
+        }
+        return new LocationASL();
     }
 
 
@@ -66,8 +93,12 @@ public class AdminController {
     }
 
     @PostMapping(path = "/admin/deleteAllASLLocation")
-    public void deleteAllASLLocation() {
-        locationService.deleteAllASLLocations();
+    public boolean deleteAllASLLocation(@RequestBody Secret secret) {
+        if (secretService.checkSecret(secret)) {
+            locationService.deleteAllASLLocations();
+            return true;
+        }
+        return false;
     }
 
 
@@ -91,16 +122,19 @@ public class AdminController {
         return participantService.getAllParticipantsForNextEvent();
     }
 
+    //todo: die kommt raus!
     @GetMapping("/admin/getSecrets")
     public List<Secret> getSecrets() {
         return secretService.getAllSecrets();
     }
 
+    // todo: die auch!
     @PostMapping("/admin/addSecret")
     public Secret setSecret(@RequestBody Secret secret) {
         return secretService.addSecret(secret);
     }
 
+    // todo: und die auch!
     @PostMapping("/admin/deleteSecret")
     public void setSecret(@RequestParam long id) {
         secretService.deleteSecret(id);
@@ -130,6 +164,7 @@ public class AdminController {
         }
     }
 
+    //Personendaten von Teilnehmer loeschen
     @PostMapping(path = "/admin/deletePersonenDataFromASLParticipant")
     public boolean deletePersonenDataFromASLParticipant(@RequestParam long id, @RequestBody Secret secret) {
         if (secretService.checkSecret(secret)) {

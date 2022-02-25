@@ -152,4 +152,14 @@ public class LocationService {
     public void deleteAllASLLocations() {
         locationASLRepo.deleteAll();
     }
+
+    public LocationASL setLocation(long id, boolean free) {
+        Optional<LocationASL> location = locationASLRepo.findById(id);
+        if (location.isEmpty()) {
+            return null;
+        } else {
+            location.get().setFree(free);
+            return locationASLRepo.save(location.get());
+        }
+    }
 }
