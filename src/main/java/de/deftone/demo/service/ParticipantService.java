@@ -68,7 +68,9 @@ public class ParticipantService {
             participantASL.setPlzOrt(aesCrypto.decrypt(participantASL.getPlzOrt(), passphrase));
             participantASL.setEmailAdresse(aesCrypto.decrypt(participantASL.getEmailAdresse(), passphrase));
             participantASL.setTelefonNr(aesCrypto.decrypt(participantASL.getTelefonNr(), passphrase));
-            participantASL.setWeitereTeilnehmer(aesCrypto.decrypt(participantASL.getWeitereTeilnehmer(), passphrase));
+            if (participantASL.getWeitereTeilnehmer() != null) {
+                participantASL.setWeitereTeilnehmer(aesCrypto.decrypt(participantASL.getWeitereTeilnehmer(), passphrase));
+            }
         }
         return encodedParticipants;
     }
@@ -92,8 +94,8 @@ public class ParticipantService {
     }
 
     public ParticipantASL addParticipantASL(ParticipantASL participant) {
-        ParticipantASL participantASL = encodeParticipantASL(participant);
-        return participantASLRepo.save(participantASL);
+        ParticipantASL encodedParticipantASL = encodeParticipantASL(participant);
+        return participantASLRepo.save(encodedParticipantASL);
     }
 
     ParticipantASL encodeParticipantASL(ParticipantASL participant) {
@@ -115,4 +117,18 @@ public class ParticipantService {
         return verschluesselterParticipant;
     }
 
+    public boolean deletePersonenDataFromASLParticipant(long id) {
+        Optional<ParticipantASL> byId = participantASLRepo.findById(id);
+        if (byId.isPresent()) {
+            ParticipantASL participantASL = byId.get();
+            participantASL.setVorUndNachName(null);
+            participantASL.setStrasseHausNr(null);
+            participantASL.setEmailAdresse(null);
+            participantASL.setTelefonNr(null);
+            participantASL.setWeitereTeilnehmer(null);
+            participantASLRepo.save(participantASL);
+            return true;
+        }
+        return false;
+    }
 }
