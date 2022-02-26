@@ -1,5 +1,6 @@
 package de.deftone.demo.controller;
 
+import de.deftone.demo.crypto.EncodingException;
 import de.deftone.demo.model.*;
 import de.deftone.demo.service.EventService;
 import de.deftone.demo.service.LocationService;
@@ -87,6 +88,10 @@ public class WebController {
         return "presse";
     }
 
+    @GetMapping("/error")
+    public String showErrorTemplate() {
+        return "error";
+    }
 
     // AKTION SAUBERE LANDSCHAFT
 
@@ -157,8 +162,12 @@ public class WebController {
             participant.setFotosMachen(true);
         }
 
-        participantService.addParticipantASL(participant);
-
+        try {
+            participantService.addParticipantASL(participant);
+        } catch (EncodingException e) {
+            //Falls beim encoding ein Fehler passiert: HTML Seite anzeigen, kein Stacktrace!
+            return "redirect:/error";
+        }
 
         return "redirect:/aktionSaubereLandschaft#mitmacher";
     }

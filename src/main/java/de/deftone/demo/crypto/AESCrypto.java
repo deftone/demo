@@ -31,7 +31,7 @@ public class AESCrypto implements IEncrypterDecrypter{
     }
 
     @Override
-    public String encrypt(String strToEncrypt, String secret) {
+    public String encrypt(String strToEncrypt, String secret) throws EncodingException {
         try {
             prepareSecreteKey(secret);
             Cipher cipher = Cipher.getInstance(ALGORITHM);
@@ -39,8 +39,8 @@ public class AESCrypto implements IEncrypterDecrypter{
             return Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes(StandardCharsets.UTF_8)));
         } catch (Exception e) {
             System.out.println("Error while encrypting: " + e.toString());
+            throw new EncodingException(e.toString());
         }
-        return null;
     }
 
     @Override
