@@ -396,6 +396,10 @@ a.button{
     display: flex-item;
     margin: 2px;
     }
+
+  .container_mitmachen input{
+    width: 90%;
+    }
 }
 
 .container_mitmachen_box .container_media_100 img{
@@ -750,14 +754,24 @@ li {
     text-shadow: -1px -1px 0 white, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
 }
 
-/*
+.container_mitmachen .form-input-field-box input{
+  background-color: white;
+  font-size: 1.5rem;
+  border-radius: .6rem;
+  width: 35%;
+  }
+
 .form-input-field-box{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: start;
-    }
-*/
+    align-items: center;
+}
+
+.container_mitmachen label{
+    width: 25%;
+}
+
 @media only screen and (max-width: 700px) {
 
 /* input - wirklich nur das input feld!*/
@@ -818,6 +832,10 @@ p.margin-left{
 
 .form-input-field-box{
     align-items: center;
+    }
+
+.container_mitmachen label{
+    width: 90%;
     }
 
 p.margin-left{
