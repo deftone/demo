@@ -750,6 +750,14 @@ li {
     text-shadow: -1px -1px 0 white, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
 }
 
+/*
+.form-input-field-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: start;
+    }
+*/
 @media only screen and (max-width: 700px) {
 
 /* input - wirklich nur das input feld!*/

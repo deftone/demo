@@ -28,7 +28,7 @@ public class GivenLocationASL {
     @Size(max = 100, message = "Bitte maximal 100 Zeichen eingeben.")
     private String telefonNr;
 
-    @Size(max = 250, message = "Bitte maximal 250 Zeichen eingeben")
+    @Size(max = 250, message = "Bitte maximal 250 Zeichen eingeben.")
     private String weitereTeilnehmer;
 
     private String id;
