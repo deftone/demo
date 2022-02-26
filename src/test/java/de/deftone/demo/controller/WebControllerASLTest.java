@@ -13,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.thymeleaf.util.StringUtils;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -304,4 +305,228 @@ class WebControllerASLTest {
         perform.andExpect(content().string(containsString("Eiserne Hand")));
         perform.andReturn().getModelAndView().getModel().containsValue("Eiserne Hand");
     }
+
+    @DisplayName("teste anmelden, name zu lang - NOK")
+    @Test
+    void testAddPerson9() throws Exception {
+        String tooLongString = createLongString(101);
+        ResultActions perform = mockMvc.perform(post("/aktionSaubereLandschaftAddPerson")
+                .param("vorUndNachName", tooLongString)
+                .param("strasseHausNr", "strasse")
+                .param("plzOrt", "12345 O")
+                .param("emailAdresse", "a@b.de")
+                .param("telefonNr", "12345")
+                .param("freeLocation", "Eiserne Hand")
+                .param("personenDaten", "true")
+        );
+        // hier ja eben kein redirect, wegen model und field errors, diese pruefen
+        perform.andExpect(content()
+                .string(containsString("Bitte maximal 100 Zeichen eingeben.")));
+        //die schon eingegebenen Pflichtfelder sind im model und html noch enthalten:
+        perform.andExpect(content().string(containsString(tooLongString)));
+        perform.andReturn().getModelAndView().getModel().containsValue(tooLongString);
+        perform.andExpect(content().string(containsString("12345 O")));
+        perform.andReturn().getModelAndView().getModel().containsValue("12345 O");
+        perform.andExpect(content().string(containsString("a@b.de")));
+        perform.andReturn().getModelAndView().getModel().containsValue("a@b.de");
+        perform.andExpect(content().string(containsString("12345")));
+        perform.andReturn().getModelAndView().getModel().containsValue("12345");
+        perform.andExpect(content().string(containsString("Eiserne Hand")));
+        perform.andReturn().getModelAndView().getModel().containsValue("Eiserne Hand");
+    }
+
+    @DisplayName("teste anmelden, name passt gerade noch - OK")
+    @Test
+    void testAddPerson10() throws Exception {
+        String longString = createLongString(100);
+        ResultActions perform = mockMvc.perform(post("/aktionSaubereLandschaftAddPerson")
+                .param("vorUndNachName", longString)
+                .param("strasseHausNr", "strasse")
+                .param("plzOrt", "12345 O")
+                .param("emailAdresse", "a@b.de")
+                .param("telefonNr", "12345")
+                .param("freeLocation", "Eiserne Hand")
+                .param("personenDaten", "true")
+        );
+        // kein fehler
+        perform.andExpect(redirectedUrl("/aktionSaubereLandschaft#mitmacher"));
+    }
+
+    @DisplayName("teste anmelden, strasse zu lang - NOK")
+    @Test
+    void testAddPerson11() throws Exception {
+        String tooLongString = createLongString(101);
+        ResultActions perform = mockMvc.perform(post("/aktionSaubereLandschaftAddPerson")
+                .param("vorUndNachName", "Jonny")
+                .param("strasseHausNr", tooLongString)
+                .param("plzOrt", "12345 O")
+                .param("emailAdresse", "a@b.de")
+                .param("telefonNr", "12345")
+                .param("freeLocation", "Eiserne Hand")
+                .param("personenDaten", "true")
+        );
+        // hier ja eben kein redirect, wegen model und field errors, diese pruefen
+        perform.andExpect(content()
+                .string(containsString("Bitte maximal 100 Zeichen eingeben.")));
+        //die schon eingegebenen Pflichtfelder sind im model und html noch enthalten:
+        perform.andExpect(content().string(containsString(tooLongString)));
+        perform.andReturn().getModelAndView().getModel().containsValue(tooLongString);
+        perform.andExpect(content().string(containsString("12345 O")));
+        perform.andReturn().getModelAndView().getModel().containsValue("12345 O");
+        perform.andExpect(content().string(containsString("a@b.de")));
+        perform.andReturn().getModelAndView().getModel().containsValue("a@b.de");
+        perform.andExpect(content().string(containsString("12345")));
+        perform.andReturn().getModelAndView().getModel().containsValue("12345");
+        perform.andExpect(content().string(containsString("Eiserne Hand")));
+        perform.andReturn().getModelAndView().getModel().containsValue("Eiserne Hand");
+    }
+
+    @DisplayName("teste anmelden, ort zu lang - NOK")
+    @Test
+    void testAddPerson12() throws Exception {
+        String tooLongString = createLongString(101);
+        ResultActions perform = mockMvc.perform(post("/aktionSaubereLandschaftAddPerson")
+                .param("vorUndNachName", "Jonny")
+                .param("strasseHausNr", "strasse 1")
+                .param("plzOrt", tooLongString)
+                .param("emailAdresse", "a@b.de")
+                .param("telefonNr", "12345")
+                .param("freeLocation", "Eiserne Hand")
+                .param("personenDaten", "true")
+        );
+        // hier ja eben kein redirect, wegen model und field errors, diese pruefen
+        perform.andExpect(content()
+                .string(containsString("Bitte maximal 100 Zeichen eingeben.")));
+        //die schon eingegebenen Pflichtfelder sind im model und html noch enthalten:
+        perform.andExpect(content().string(containsString(tooLongString)));
+        perform.andReturn().getModelAndView().getModel().containsValue(tooLongString);
+        perform.andExpect(content().string(containsString("a@b.de")));
+        perform.andReturn().getModelAndView().getModel().containsValue("a@b.de");
+        perform.andExpect(content().string(containsString("12345")));
+        perform.andReturn().getModelAndView().getModel().containsValue("12345");
+        perform.andExpect(content().string(containsString("Eiserne Hand")));
+        perform.andReturn().getModelAndView().getModel().containsValue("Eiserne Hand");
+    }
+
+    @DisplayName("teste anmelden, email zu lang - NOK")
+    @Test
+    void testAddPerson13() throws Exception {
+        String tooLongString = createLongString(101);
+        ResultActions perform = mockMvc.perform(post("/aktionSaubereLandschaftAddPerson")
+                .param("vorUndNachName", "Jonny")
+                .param("strasseHausNr", "strasse 1")
+                .param("plzOrt", "12345 ort")
+                .param("emailAdresse", tooLongString)
+                .param("telefonNr", "12345")
+                .param("freeLocation", "Eiserne Hand")
+                .param("personenDaten", "true")
+        );
+        // hier ja eben kein redirect, wegen model und field errors, diese pruefen
+        perform.andExpect(content()
+                .string(containsString("Bitte maximal 100 Zeichen eingeben.")));
+        //die schon eingegebenen Pflichtfelder sind im model und html noch enthalten:
+        perform.andExpect(content().string(containsString(tooLongString)));
+        perform.andReturn().getModelAndView().getModel().containsValue(tooLongString);
+        perform.andExpect(content().string(containsString("12345")));
+        perform.andReturn().getModelAndView().getModel().containsValue("12345");
+        perform.andExpect(content().string(containsString("Eiserne Hand")));
+        perform.andReturn().getModelAndView().getModel().containsValue("Eiserne Hand");
+    }
+
+    @DisplayName("teste anmelden, telNr zu lang - NOK")
+    @Test
+    void testAddPerson14() throws Exception {
+        String tooLongString = createLongString(101);
+        ResultActions perform = mockMvc.perform(post("/aktionSaubereLandschaftAddPerson")
+                .param("vorUndNachName", "Jonny")
+                .param("strasseHausNr", "strasse 1")
+                .param("plzOrt", "12345 o")
+                .param("emailAdresse", "a@b.de")
+                .param("telefonNr", tooLongString)
+                .param("freeLocation", "Eiserne Hand")
+                .param("personenDaten", "true")
+        );
+        // hier ja eben kein redirect, wegen model und field errors, diese pruefen
+        perform.andExpect(content()
+                .string(containsString("Bitte maximal 100 Zeichen eingeben.")));
+        //die schon eingegebenen Pflichtfelder sind im model und html noch enthalten:
+        perform.andExpect(content().string(containsString(tooLongString)));
+        perform.andReturn().getModelAndView().getModel().containsValue(tooLongString);
+        perform.andExpect(content().string(containsString("a@b.de")));
+        perform.andReturn().getModelAndView().getModel().containsValue("a@b.de");
+        perform.andExpect(content().string(containsString("Eiserne Hand")));
+        perform.andReturn().getModelAndView().getModel().containsValue("Eiserne Hand");
+    }
+
+    @DisplayName("teste anmelden, freeLocation zu lang - NOK")
+    @Test
+    void testAddPerson15() throws Exception {
+        String tooLongString = createLongString(101);
+        ResultActions perform = mockMvc.perform(post("/aktionSaubereLandschaftAddPerson")
+                .param("vorUndNachName", "Jonny")
+                .param("strasseHausNr", "strasse 1")
+                .param("plzOrt", "12345 o")
+                .param("emailAdresse", "a@b.de")
+                .param("telefonNr", "12345")
+                .param("freeLocation", tooLongString)
+                .param("personenDaten", "true")
+        );
+        // hier ja eben kein redirect, wegen model und field errors, diese pruefen
+        perform.andExpect(content()
+                .string(containsString("Bitte maximal 100 Zeichen eingeben.")));
+        //die schon eingegebenen Pflichtfelder sind im model und html noch enthalten:
+        perform.andExpect(content().string(containsString(tooLongString)));
+        perform.andReturn().getModelAndView().getModel().containsValue(tooLongString);
+        perform.andExpect(content().string(containsString("a@b.de")));
+        perform.andReturn().getModelAndView().getModel().containsValue("a@b.de");
+    }
+
+    @DisplayName("teste anmelden, weitere Teilnehmer zu lang - NOK")
+    @Test
+    void testAddPerson16() throws Exception {
+        String tooLongString = createLongString(251);
+        ResultActions perform = mockMvc.perform(post("/aktionSaubereLandschaftAddPerson")
+                .param("vorUndNachName", "Jonny")
+                .param("strasseHausNr", "strasse 1")
+                .param("plzOrt", "12345 o")
+                .param("emailAdresse", "a@b.de")
+                .param("telefonNr", "12345")
+                .param("freeLocation", "Eiserne Hand")
+                .param("personenDaten", "true")
+                .param("weitereTeilnehmer", tooLongString)
+        );
+        // hier ja eben kein redirect, wegen model und field errors, diese pruefen
+        perform.andExpect(content()
+                .string(containsString("Bitte maximal 250 Zeichen eingeben.")));
+        //die schon eingegebenen Pflichtfelder sind im model und html noch enthalten:
+        perform.andExpect(content().string(containsString(tooLongString)));
+        perform.andReturn().getModelAndView().getModel().containsValue(tooLongString);
+        perform.andExpect(content().string(containsString("a@b.de")));
+        perform.andReturn().getModelAndView().getModel().containsValue("a@b.de");
+        perform.andExpect(content().string(containsString("Eiserne Hand")));
+        perform.andReturn().getModelAndView().getModel().containsValue("Eiserne Hand");
+    }
+
+    @DisplayName("teste anmelden, weitere Teilnehmer gerade ok - OK")
+    @Test
+    void testAddPerson17() throws Exception {
+        String longString = createLongString(250);
+        ResultActions perform = mockMvc.perform(post("/aktionSaubereLandschaftAddPerson")
+                .param("vorUndNachName", "Jonny")
+                .param("strasseHausNr", "strasse 1")
+                .param("plzOrt", "12345 o")
+                .param("emailAdresse", "a@b.de")
+                .param("telefonNr", "12345")
+                .param("freeLocation", "Eiserne Hand")
+                .param("personenDaten", "true")
+                .param("weitereTeilnehmer", longString)
+        );
+        // kein fehler
+        perform.andExpect(redirectedUrl("/aktionSaubereLandschaft#mitmacher"));
+    }
+
+    private String createLongString(int length) {
+        return StringUtils.repeat('a', length);
+    }
+
 }
