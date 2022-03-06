@@ -122,23 +122,20 @@ public class AdminController {
         return participantService.getAllParticipantsForNextEvent();
     }
 
-    //todo: die kommt raus!
-    @GetMapping("/admin/getSecrets")
-    public List<Secret> getSecrets() {
-        return secretService.getAllSecrets();
-    }
+//    @GetMapping("/admin/getSecrets")
+//    public List<Secret> getSecrets() {
+//        return secretService.getAllSecrets();
+//    }
 
-    // todo: die auch!
-    @PostMapping("/admin/addSecret")
-    public Secret setSecret(@RequestBody Secret secret) {
-        return secretService.addSecret(secret);
-    }
+//    @PostMapping("/admin/addSecret")
+//    public Secret setSecret(@RequestBody Secret secret) {
+//        return secretService.addSecret(secret);
+//    }
 
-    // todo: und die auch!
-    @PostMapping("/admin/deleteSecret")
-    public void setSecret(@RequestParam long id) {
-        secretService.deleteSecret(id);
-    }
+//    @PostMapping("/admin/deleteSecret")
+//    public void setSecret(@RequestParam long id) {
+//        secretService.deleteSecret(id);
+//    }
 
     @PostMapping("/admin/getAllASLParticipantsForNextEvent")
     public List<ParticipantASL> getAllASLParticipantsForNextEvent(@RequestBody Secret secret) {
