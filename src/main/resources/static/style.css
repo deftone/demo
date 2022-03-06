@@ -574,6 +574,13 @@ a.button{
   background-color: #0059b3;   /* dunkles blau */
   }
 
+.container_presse ul, .container_presse li{
+  font-size: 1.2rem;
+  line-height: 1.25;
+  color: white;
+  list-style-type: circle;
+  margin: 1rem 1rem 0rem 1.5rem;
+}
 
 .container_presse h1,
 .container_presse h2,
