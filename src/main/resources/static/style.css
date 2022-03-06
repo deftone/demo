@@ -786,6 +786,10 @@ li {
   margin: 0.5rem 0rem;
 }
 
+.container_mitmachen .form-input-field-box input{
+  width: 95%;
+  }
+
 /* alles in der zeile: name, input (inkl error), beschreibung*/
 .form-input-field-box{
     display: flex;
