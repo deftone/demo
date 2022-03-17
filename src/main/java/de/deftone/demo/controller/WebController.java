@@ -97,7 +97,11 @@ public class WebController {
         return "error";
     }
 
-    // AKTION SAUBERE LANDSCHAFT
+    @GetMapping("/anmeldungErfolg")
+    public String showErfolgTemplate() {
+        return "anmeldungErfolg";
+    }
+        // AKTION SAUBERE LANDSCHAFT
 
     @GetMapping("/aktionSaubereLandschaft")
     public String showTemplateAktionSaubereLandschaft(Model model) {
@@ -173,7 +177,7 @@ public class WebController {
             return "redirect:/error";
         }
 
-        return "redirect:/aktionSaubereLandschaft#mitmacher";
+        return "redirect:/anmeldungErfolg";
     }
 
     private boolean keinOrtEingetragen(GivenLocationASL givenLocationASL) {
