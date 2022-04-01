@@ -111,13 +111,13 @@ public class WebController {
         return "indexAktionSaubereLandschaft";
     }
 
-    @GetMapping("/aktionSaubereLandschaftAnmelden")
-    public String anmeldenAktionSaubereLandschaft(Model model) {
-        model.addAttribute("freeLocationsASL", locationService.getFreeASLLocations());
-        model.addAttribute("locations", locationService.getAllASLLocations());
-        model.addAttribute("givenLocationASL", new GivenLocationASL());
-        return "anmeldenAktionSaubereLandschaft";
-    }
+//    @GetMapping("/aktionSaubereLandschaftAnmelden")
+//    public String anmeldenAktionSaubereLandschaft(Model model) {
+//        model.addAttribute("freeLocationsASL", locationService.getFreeASLLocations());
+//        model.addAttribute("locations", locationService.getAllASLLocations());
+//        model.addAttribute("givenLocationASL", new GivenLocationASL());
+//        return "anmeldenAktionSaubereLandschaft";
+//    }
 
     @PostMapping("/aktionSaubereLandschaftAddPerson")
     public String addPersonAktionSaubereLandschaft(@Valid @ModelAttribute GivenLocationASL givenLocationASL,
