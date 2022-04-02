@@ -1,7 +1,8 @@
 package de.deftone.demo.controller;
 
-import de.deftone.demo.crypto.EncodingException;
-import de.deftone.demo.model.*;
+import de.deftone.demo.model.FreeLocation;
+import de.deftone.demo.model.GivenLocation;
+import de.deftone.demo.model.Participant;
 import de.deftone.demo.service.EventService;
 import de.deftone.demo.service.LocationService;
 import de.deftone.demo.service.ParticipantService;
@@ -9,8 +10,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
@@ -25,67 +27,65 @@ public class WebController {
 
     @GetMapping("/")
     public String showTemplate(Model model) {
-//        model.addAttribute("nextEvent", eventService.getNextEvent().getFormattedDate());
-//        model.addAttribute("locations", locationService.getAllLocations());
-//        model.addAttribute("freeLocations", locationService.getFreeLocations());
-//        model.addAttribute("participants", participantService.getAllParticipantsForNextEvent());
-//        model.addAttribute("freeLocation", new FreeLocation());
-//        model.addAttribute("givenLocation", new GivenLocation());
-//        return "index";
-        return "redirect:/aktionSaubereLandschaft";
+        model.addAttribute("nextEvent", eventService.getNextEvent().getFormattedDate());
+        model.addAttribute("locations", locationService.getAllLocations());
+        model.addAttribute("freeLocations", locationService.getFreeLocations());
+        model.addAttribute("participants", participantService.getAllParticipantsForNextEvent());
+        model.addAttribute("freeLocation", new FreeLocation());
+        model.addAttribute("givenLocation", new GivenLocation());
+        return "index";
     }
-// die urspruenglichen endpoints vorruebergehend ausschalten:
-//
-//    @PostMapping("/addPerson")
-//    public String addPerson(@Valid @ModelAttribute GivenLocation givenLocation,
-//                            BindingResult bindingResult,
-//                            Model model) {
-//
-//        // das hier klappt, aber der fehlerrahmen erscheint nicht :(
-//        if (bindingResult.hasErrors()) {
-//            //todo: ein pop up? dass beides angegeben werden muss?
-//            // oder etwas ins html hinzufuegen?
-//            return "redirect:/#anmelden";
-//            // kein redirect!            return "index";
-//        }
-//
-//        Participant participant = new Participant();
-//        participant.setName(givenLocation.getName());
-//        participant.setAngemeldetAm(LocalDate.now());
-//        participant.setEvent(eventService.getNextEvent());
-//        participant.setLocationName(locationService.getLocationNameById(givenLocation.getIdFromString()));
-//        participantService.addParticipant(participant);
-//
-//        //und anschliessend als gebucht setzen, damit aus auswahlbox verschwindet
-//        locationService.setLocationToBooked(givenLocation.getIdFromString());
-//
-//        return "redirect:/#mitmacher";
-//    }
-//
-//    @PostMapping("/addPersonNewRoute")
-//    public String addPersonNewRoute(@Valid @ModelAttribute FreeLocation freeLocation,
-//                                    BindingResult bindingResult,
-//                                    Model model) {
-//        // das hier klappt, aber der fehlerrahmen erscheint nicht :(
-//        if (bindingResult.hasErrors()) {
-//            //todo: ein pop up? dass beides angegeben werden muss?
-//            // oder etwas ins html hinzufuegen?
-//            return "redirect:/#anmelden";
-//// kein redirect!            return "index";
-//        }
-//
-//        if (freeLocation != null
-//                && !freeLocation.getName().isEmpty()
-//                && !freeLocation.getLocation().isEmpty()) {
-//            Participant participant = new Participant();
-//            participant.setName(freeLocation.getName());
-//            participant.setAngemeldetAm(LocalDate.now());
-//            participant.setEvent(eventService.getNextEvent());
-//            participant.setLocationName(freeLocation.getLocation());
-//            participantService.addParticipant(participant);
-//        }
-//        return "redirect:/#mitmacher";
-//    }
+
+    @PostMapping("/addPerson")
+    public String addPerson(@Valid @ModelAttribute GivenLocation givenLocation,
+                            BindingResult bindingResult,
+                            Model model) {
+
+        // das hier klappt, aber der fehlerrahmen erscheint nicht :(
+        if (bindingResult.hasErrors()) {
+            //todo: ein pop up? dass beides angegeben werden muss?
+            // oder etwas ins html hinzufuegen?
+            return "redirect:/#anmelden";
+            // kein redirect!            return "index";
+        }
+
+        Participant participant = new Participant();
+        participant.setName(givenLocation.getName());
+        participant.setAngemeldetAm(LocalDate.now());
+        participant.setEvent(eventService.getNextEvent());
+        participant.setLocationName(locationService.getLocationNameById(givenLocation.getIdFromString()));
+        participantService.addParticipant(participant);
+
+        //und anschliessend als gebucht setzen, damit aus auswahlbox verschwindet
+        locationService.setLocationToBooked(givenLocation.getIdFromString());
+
+        return "redirect:/#mitmacher";
+    }
+
+    @PostMapping("/addPersonNewRoute")
+    public String addPersonNewRoute(@Valid @ModelAttribute FreeLocation freeLocation,
+                                    BindingResult bindingResult,
+                                    Model model) {
+        // das hier klappt, aber der fehlerrahmen erscheint nicht :(
+        if (bindingResult.hasErrors()) {
+            //todo: ein pop up? dass beides angegeben werden muss?
+            // oder etwas ins html hinzufuegen?
+            return "redirect:/#anmelden";
+// kein redirect!            return "index";
+        }
+
+        if (freeLocation != null
+                && !freeLocation.getName().isEmpty()
+                && !freeLocation.getLocation().isEmpty()) {
+            Participant participant = new Participant();
+            participant.setName(freeLocation.getName());
+            participant.setAngemeldetAm(LocalDate.now());
+            participant.setEvent(eventService.getNextEvent());
+            participant.setLocationName(freeLocation.getLocation());
+            participantService.addParticipant(participant);
+        }
+        return "redirect:/#mitmacher";
+    }
 
     @GetMapping({"/presse"})
     public String presse() {
@@ -97,97 +97,4 @@ public class WebController {
         return "error";
     }
 
-    @GetMapping("/anmeldungErfolg")
-    public String showErfolgTemplate() {
-        return "anmeldungErfolg";
-    }
-        // AKTION SAUBERE LANDSCHAFT
-
-    @GetMapping("/aktionSaubereLandschaft")
-    public String showTemplateAktionSaubereLandschaft(Model model) {
-        model.addAttribute("nextEvent", eventService.getNextEvent().getFormattedDate());
-        model.addAttribute("locations", locationService.getAllASLLocations());
-        model.addAttribute("participantsASL", participantService.getAllASLParticipantsForNextEvent());
-        return "indexAktionSaubereLandschaft";
-    }
-
-//    @GetMapping("/aktionSaubereLandschaftAnmelden")
-//    public String anmeldenAktionSaubereLandschaft(Model model) {
-//        model.addAttribute("freeLocationsASL", locationService.getFreeASLLocations());
-//        model.addAttribute("locations", locationService.getAllASLLocations());
-//        model.addAttribute("givenLocationASL", new GivenLocationASL());
-//        return "anmeldenAktionSaubereLandschaft";
-//    }
-
-    @PostMapping("/aktionSaubereLandschaftAddPerson")
-    public String addPersonAktionSaubereLandschaft(@Valid @ModelAttribute GivenLocationASL givenLocationASL,
-                                                   BindingResult bindingResult,
-                                                   Model model) {
-        model.addAttribute("freeLocationsASL", locationService.getFreeASLLocations());
-        model.addAttribute("locations", locationService.getAllASLLocations());
-        // alle Pflichtfelder muessen gefuellt sein:
-        if (bindingResult.hasErrors()
-                || keinOrtEingetragen(givenLocationASL)
-                || datenCheckboxFehlt(givenLocationASL)
-        ) {
-            if (keinOrtEingetragen(givenLocationASL)) {
-                bindingResult.addError(new FieldError("givenLocationASL",
-                        "freeLocation",
-                        "Bitte eine Route aus der Liste auswählen oder einen selbstgewählten Ort eintragen"));
-            }
-            if (datenCheckboxFehlt(givenLocationASL)) {
-                bindingResult.addError(new FieldError("givenLocationASL",
-                        "personenDaten",
-                        "Bitte zustimmen"));
-            }
-            // damit die fehlermeldungen an den input boxen angezeigt werden, KEIN redirekt sonder das template zurueck geben!!
-            // allerdings ist man dann ganz oben, daher evtl eine eigene neue seite, wo man sich anmelden kann
-            // oder ich finde heraus, wie man an die stelle #anmelden kommt, hier mit href arbeiten klappt aber nicht
-            // macht aber evtl eh sinn, die ganze anmelde formalitaet auf einer eigenen seite zu machen
-            return "anmeldenAktionSaubereLandschaft";
-        }
-
-        ParticipantASL participant = new ParticipantASL();
-        participant.setVorUndNachName(givenLocationASL.getVorUndNachName());
-        participant.setStrasseHausNr(givenLocationASL.getStrasseHausNr());
-        participant.setPlzOrt(givenLocationASL.getPlzOrt());
-        participant.setEmailAdresse(givenLocationASL.getEmailAdresse());
-        participant.setTelefonNr(givenLocationASL.getTelefonNr());
-        participant.setWeitereTeilnehmer(givenLocationASL.getWeitereTeilnehmer());
-        participant.setAngemeldetAm(LocalDate.now());
-        participant.setEvent(eventService.getNextEvent());
-        // check was gefuellt ist
-        if (givenLocationASL.getIdFromString() != -1L) {
-            String locationNameById = locationService.getASLLocationNameById(givenLocationASL.getIdFromString());
-            participant.setLocationName(locationNameById);
-            // und anschliessend als gebucht setzen, damit aus auswahlbox verschwindet
-            // nein, nicht machen, ich setze die routen auf "gebucht"
-            // locationService.setASLLocationToBooked(givenLocationASL.getIdFromString());
-        } else {
-            participant.setLocationName(givenLocationASL.getFreeLocation());
-        }
-        if (givenLocationASL.getFotosMachen() != null) {
-            participant.setFotosMachen(true);
-        }
-
-        try {
-            participantService.addParticipantASL(participant);
-        } catch (EncodingException e) {
-            //Falls beim encoding ein Fehler passiert: HTML Seite anzeigen, kein Stacktrace!
-            return "redirect:/error";
-        }
-
-        return "redirect:/anmeldungErfolg";
-    }
-
-    private boolean keinOrtEingetragen(GivenLocationASL givenLocationASL) {
-        return givenLocationASL.getIdFromString() == -1L &&
-                (givenLocationASL.getFreeLocation() == null
-                        || givenLocationASL.getFreeLocation().isBlank()
-                        || givenLocationASL.getFreeLocation().isEmpty());
-    }
-
-    private boolean datenCheckboxFehlt(GivenLocationASL givenLocationASL) {
-        return givenLocationASL.getPersonenDaten() == null;
-    }
 }
