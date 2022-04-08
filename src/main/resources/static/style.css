@@ -767,6 +767,11 @@ a.button{
   font-size: 3rem;
   }
 
+  .container_contact p{
+    font-size: 1.5rem;
+    padding: 0 4rem;
+  }
+
 .container_contact .padding-top{
   padding-top: 2rem;
   }
@@ -824,6 +829,18 @@ a.button{
     font-size: 1rem;
     }
  }
+
+.bilder{
+    display: flex;
+    display: row;
+    justify-content: center;
+}
+
+.rundesBild {
+  width: 12rem;
+  border-radius: 50%;
+  padding: 2rem;
+}
 
 .with-dots {
   padding: 2rem;
