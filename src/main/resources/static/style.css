@@ -832,8 +832,22 @@ a.button{
 
 .bilder{
     display: flex;
-    display: row;
+    flex-direction: row;
     justify-content: center;
+}
+
+@media only screen and (max-width: 700px) {
+  .bilder{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    }
+
+    .rundesBild {
+      width: 5rem;
+      border-radius: 50%;
+      padding: 0rem;
+    }
 }
 
 .rundesBild {
