@@ -28,12 +28,18 @@ public class WebController {
     @GetMapping("/")
     public String showTemplate(Model model) {
         model.addAttribute("nextEvent", eventService.getNextEvent().getFormattedDate());
+        model.addAttribute("participants", participantService.getAllParticipantsForNextEvent());
+        return "index";
+    }
+
+    @GetMapping({"/mitmachen"})
+    public String mitmachen(Model model) {
+        model.addAttribute("nextEvent", eventService.getNextEvent().getFormattedDate());
         model.addAttribute("locations", locationService.getAllLocations());
         model.addAttribute("freeLocations", locationService.getFreeLocations());
-        model.addAttribute("participants", participantService.getAllParticipantsForNextEvent());
         model.addAttribute("freeLocation", new FreeLocation());
         model.addAttribute("givenLocation", new GivenLocation());
-        return "index";
+        return "mitmachen";
     }
 
     @PostMapping("/addPerson")
@@ -87,9 +93,24 @@ public class WebController {
         return "redirect:/#mitmacher";
     }
 
+    @GetMapping("/navigation")
+    public String addNavigation() {
+        return "navigation";
+    }
+
     @GetMapping({"/presse"})
     public String presse() {
         return "presse";
+    }
+
+    @GetMapping({"/galerie"})
+    public String galerie() {
+        return "galerie";
+    }
+
+    @GetMapping({"/contact"})
+    public String contact() {
+        return "contact";
     }
 
     @GetMapping("/error")

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <title>CleanUp</title>
+    <link rel="stylesheet" href="style.css" th:href="@{/style.css}"/>
+    <link rel="stylesheet" href="reset.css" th:href="@{/reset.css}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/favicon.ico"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(function(){
+         $('.navigation').load("navigation");
+         });
+    </script>
+</head>
+
+<body>
+
+<div class="navigation"></div>
+
+<main>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="container_contact">
+
+
+            <h1 class="title"> Kontakt </h1>
+
+            <div class="contact_info">
+                <div>
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <span> Orga-Team: </span>
+                    <p> Katrin Rose, Kristina Wallmichrath, Rüdiger Dunker & Manuel Montag </p>
+                </div>
+
+                <div>
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                    <span> E-Mail: </span>
+                    <p> info@cleanup-rossdorf.de </p>
+                </div>
+
+                <div>
+                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                    <span> facebook: </span>
+                    <p><a href="https://www.facebook.com/groups/cleanuprossdorfgundernhausen/ " target="_blank">
+                        CleanUp Gruppe - Roßdorf Gundernhausen
+                    </a></p>
+                </div>
+
+                <div>
+                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                    <span> instagram: </span>
+                    <p><a href="https://www.instagram.com/cleanup_rossdorf/ " target="_blank">
+                        cleanup_rossdorf
+                    </a></p>
+                </div>
+
+
+                <div>
+                    <i class="fa fa-linux" aria-hidden="true"></i>
+                    <span> Webmaster: </span>
+                    <p> Katrin Rose </p>
+                </div>
+
+                <div>
+                    <i class="fa fa-server" aria-hidden="true"></i>
+                    <span> Sponsor: </span>
+                    <p><a href="https://www.objectix.de/" target="_blank"> <img src="images/objectix-logo.png"></a></p>
+                </div>
+            </div>
+            <h3 class="padding-top">Dies ist eine private Initiative. Diese Webseite wird nicht für kommerzielle Zwecke
+                genutzt. <br> Bild: iStock-Illustration-ID:1001374964, Bildnachweis:Lisitsa</h3>
+        </div>
+    </section>
+
+
+    <section class="box">
+        <section class="box-50 container_contact container_media_padding">
+            <img src="images/kathrinUndKatrin.jpg">
+
+            <p id="podcast"><br> Wir sind Kathrin (links) und Katrin (rechts). Kathrin hat die blühenden Ideen und
+                Katrin
+                hat die technischen Skills. Mehr von uns könnt ihr in unserem Erkläraudio hören :)</p>
+            <br>
+            <audio controls>
+                <source src="erklaerAudio.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </section>
+
+    </section>
+
+
+    <section class="box">
+        <section class="box-50 container_contact">
+            <div>
+                <p><i class="fa fa-user" aria-hidden="true"></i>
+                    <span> Organisatoren: </span></p>
+                <p> Kathrin Larivi&egrave;omre & Katrin Rose </p>
+            </div>
+
+            <div>
+                <p><i class="fa fa-envelope" aria-hidden="true"></i>
+                    <span> E-Mail: </span></p>
+                <p> info@rossdorf-blueht-auf.de </p>
+            </div>
+
+            <div>
+                <p><i class="fa fa-linux" aria-hidden="true"></i>
+                    <span> Webmaster: </span></p>
+                <p> Katrin Rose </p>
+            </div>
+
+            <div>
+                <p><i class="fa fa-server" aria-hidden="true"></i>
+                    <span> Sponsor: </span></p>
+                <p><a href="https://www.objectix.de/" target="_blank"> <img src="images/objectix-logo.png"></a></p>
+            </div>
+        </section>
+    </section>
+
+    <section class="box">
+        <section class="text-unten">
+            <p>
+                <i id="hidden_mobile" class="fa fa-info-circle" aria-hidden="true"></i> Dies ist eine private Initiative
+                zum Erhalt
+                der
+                Artenvielfalt. Diese Webseite wird nicht für kommerzielle Zwecke
+                genutzt. Wir nutzen
+                keine Cookies und erstellen keine Statistiken (außer anonymen Blühpunkten ;).</p>
+        </section>
+    </section>
+</main>
+
+
+</body>
+</html>

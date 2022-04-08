@@ -12,10 +12,19 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="images/favicon.ico"/>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(function(){
+         $('.navigation').load("navigation");
+         });
+    </script>
 </head>
 <body>
-<div class="main">
+
+<div class="navigation"></div>
+
+<main>
+
     <!-- BANNER -->
     <section class="container_banner" role="banner">
         <div class="container_main_60">
@@ -28,164 +37,56 @@
             <h1> CleanUp Roßdorf - Gundernhausen</h1>
             <h2> Wir machen Roßdorf und Gundernhausen sauber!</h2>
             <h5> Wir treffen uns jeden ersten Sonntag im Monat und sammeln
-                von ca. 11:00 bis 13:00 Müll auf. <br>
-                Dabei sorgen wir für den Transport der „Beute" zum Bauhof.
-                Euch entstehen keine Kosten!<br></h5>
-            <a href="#anmelden" role="button">Mitmachen</a>
+                von ca. 11:00 bis 13:00 Wildmüll auf.
+                <br>
+                <br>
+                Jede:r kann mitmachen! Alles was du brauchst ist ein Müllbeutel, einen Greifer
+                oder Handschuhe und Lust dich an der frischen Luft zu bewegen.
+                <br>
+                <br></h5>
+            <a href="#info" role="button">Mehr Infos</a>
         </div>
     </section>
 
     <!-- MITMACHEN -->
-    <section class="container_mitmachen" id="mitmachen">
-        <h1 class="title"> Mitmachen </h1>
+    <section id="info" class="container_mitmachen">
+        <h1 class="title"> Wann/Wie/Wo? </h1>
 
         <div class="mitmachen-panel">
 
             <p class="bold">Die nächste Aktion ist am Sonntag, den <span th:text="${nextEvent}"></span>.</p>
             <br>
+
             <p>Damit möglichst viele - und keine doppelten - Stellen abgesammelt werden haben wir eine Liste
-                mit Orten erstellt, für welche ihr euch anmelden könnt. Ihr könnt aber auch einen eigenen Ort
-                zum Sammeln angeben. Siehe weiter unten.
+                mit Orten erstellt, für welche ihr euch
+                <a class="bunt" href="/mitmachen">anmelden</a> könnt.
+                Ihr könnt aber auch einen eigenen Ort zum Sammeln angeben.
                 <br/><br/>
-                Achtet beim Sammeln an der Hauptstraße in Roßdorf darauf, dass ihr nur jeweils auf einer Straßenseite
-                sammeln müsst,
-                da wir die Straße verschiedenen Routen (3, 4a, 4b und 5) zugeordnet haben.
+                Ihr müsst nicht Sonntags um 11:00 starten, d.h. ihr könnt also auch kürzer oder länger, oder auch schon
+                am Samstag sammeln.
+
+                Hauptsache ihr seid am Sonntag, den <span th:text="${nextEvent}"></span> rechtzeitig am Sammelpunkt zum
+                Abliefern eurer Beute :)
                 <br/><br/>
-                Wenn ihr Feedback zu den Routen habt,
-                gerne eine Mail an info@cleanup-rossdorf.de schicken, danke!</p>
-            <br>
-        </div>
-
-        <div class="subcontainer_mitmachen">
-
-            <div class="mitmachen_text">
-
-
-                <table id="hidden_mobile">
-                    <thead>
-                    <tr>
-                        <th class="tablerow">Kürzel</th>
-                        <th class="tablerow">Ort</th>
-                        <th class="tablerow">frei</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="location : ${locations}">
-                        <td class="tablerow" th:text="${location.idString}"></td>
-                        <td class="tablerow" th:text="${location.name}"></td>
-                        <td class="tablerow" th:text="${location.getFrei()}"></td>
-                    </tr>
-                    </tbody>
-                </table>
-
-                <table id="hidden_desktop">
-                    <thead>
-                    <tr>
-                        <th class="tablerow">Kürzel</th>
-                        <th class="tablerow">Ort</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="location : ${locations}">
-                        <td class="tablerow" th:text="${location.idString}"></td>
-                        <td class="tablerow" th:text="${location.name}"></td>
-                    </tr>
-                    </tbody>
-                </table>
-
-
-            </div>
-            <div class="container_side_50" id="hidden_mobile">
-                <a href="" class="container_mitmachen_box">
-                    <div class="container_media_100">
-                        <img src="images/Gundernhausen.png" alt="">
-                    </div>
-                </a>
-
-                <a href="" class="container_mitmachen_box">
-                    <div class="container_media_100">
-                        <img src="images/RossdorfNeu2.png" alt="">
-                    </div>
-                </a>
-            </div>
-        </div>
-
-
-        <div id="hidden_desktop">
-            <a href="" class="container_mitmachen_box">
-                <div class="container_media_100">
-                    <img src="images/Gundernhausen.png" alt="">
-                </div>
-                <p>Routen in Gundernhausen Gx</p>
-            </a>
-
-            <a href="" class="container_mitmachen_box">
-                <div class="container_media_100">
-                    <img src="images/RossdorfNeu2.png" alt="">
-                    <p>Routen in Roßdorf Rx</p>
-                    <br>
-                </div>
-            </a>
-        </div>
-
-        <div class="mitmachen-panel">
-            <p class="padding-top">
+            </p>
 
             <p class="bold">
                 Sammelpunkt zum Abgeben des Mülls ist gegen 13:00 am Freibad in Roßdorf
                 und ca. 15 min später am Kerbplatz in Gundernhausen.
+                <br/><br/>
             </p>
-            <p>
-                <br>
-                Ihr müsst nicht um 11:00 starten, d.h. ihr könnt also auch kürzer oder länger, oder auch schon am
-                Samstag
-                sammeln.
-                Hauptsache ihr seid am jeweiligen Sonntag rechtzeitig am Sammelpunkt zum Abliefern :)
 
-                <br><br>
+            <p>
                 Rüdiger oder Manuel kommen mit ihrem Hänger zu diesen Orten gefahren, sammeln alles ein und bringen es
-                am Folgetag zum Bauhof.
-                <br><br id="anmelden">
-            </p>
-            <p class="bold">Mach auch mit!</p>
-            <br>
-            <p>
-                Gib deinen Namen (gerne auch nur Vornamen) ein und
-                wähle einen freien Ort aus, wo du Müll sammeln möchtest.
+                am Folgetag zum Bauhof. Ihr müsst den gesammelten Müll also nicht privat entsorgen.
+                <br/><br/>
             </p>
 
-
-            <form class="mitmachen_form" method="POST" th:action="@{/addPerson}" th:object="${givenLocation}">
-
-                <div class="mitmachen_select">
-                    Name: <input name="name"/>
-                    Ort:
-                    <select id="id" name="id">
-                        <option th:value="''" th:text="bitte_auswählen"></option>
-                        <option th:each="location : ${freeLocations}"
-                                th:value="${location.id}"
-                                th:text="${location.getCompactIdAndName()}"></option>
-                    </select>
-                </div>
-
-                <button type="submit">Anmelden</button>
-            </form>
-
-            <p>
-                Alle Routen schon vergeben? Oder du möchtest gerne woanders Müll sammeln?
-                Dann trage hier deinen Namen und einen selbstgewählten Ort ein:
+            <p class="bold">Mach auch mit und such dir eine Route aus!
+                <br/><br/>
             </p>
-
-
-            <form class="mitmachen_form" method="POST" th:action="@{/addPersonNewRoute}" th:object="${freeLocation}">
-
-                <div class="mitmachen_select">
-                    Name: <input th:field="*{name}"/>
-                    Ort: <input th:field="*{location}"/>
-                </div>
-
-                <button type="submit">Anmelden</button>
-            </form>
+            <a class="button" href="/mitmachen" role="button">Mitmachen</a>
+            <br/><br/>
         </div>
     </section>
 
@@ -237,80 +138,7 @@
         </div>
     </section>
 
-    <!-- PRESSE -->
-    <section class="container_banner" role="banner">
-        <div class="container_main_60">
-            <div class="container_media_padding">
-                <img src="images/CleanUpBanner2.jpg">
-            </div>
-        </div>
 
-        <div class="container_side_40">
-            <h1> Presse</h1>
-            <h2> Hier könnt ihr unsere Artikel nochmal nachlesen (veröffentlicht im Roßdörfer Anzeiger)</h2>
-            <a href="/presse" role="button">Lesen</a>
-        </div>
-
-
-
-    </section>
-
-
-    <!-- CONTACT -->
-    <section id="contact">
-        <div class="container_contact">
-
-
-            <h1 class="title"> Kontakt </h1>
-
-            <div class="contact_info">
-                <div>
-                    <i class="fa fa-user" aria-hidden="true"></i>
-                    <span> Orga-Team: </span>
-                    <p> Katrin Rose, Kristina Wallmichrath, Rüdiger Dunker & Manuel Montag </p>
-                </div>
-
-                <div>
-                    <i class="fa fa-envelope" aria-hidden="true"></i>
-                    <span> E-Mail: </span>
-                    <p> info@cleanup-rossdorf.de </p>
-                </div>
-
-                <div>
-                    <i class="fa fa-facebook" aria-hidden="true"></i>
-                    <span> facebook: </span>
-                    <p><a href="https://www.facebook.com/groups/cleanuprossdorfgundernhausen/ " target="_blank">
-                        CleanUp Gruppe - Roßdorf Gundernhausen
-                    </a></p>
-                </div>
-
-                <div>
-                    <i class="fa fa-instagram" aria-hidden="true"></i>
-                    <span> instagram: </span>
-                    <p><a href="https://www.instagram.com/cleanup_rossdorf/ " target="_blank">
-                        cleanup_rossdorf
-                    </a></p>
-                </div>
-
-
-                <div>
-                    <i class="fa fa-linux" aria-hidden="true"></i>
-                    <span> Webmaster: </span>
-                    <p> Katrin Rose </p>
-                </div>
-
-                <div>
-                    <i class="fa fa-server" aria-hidden="true"></i>
-                    <span> Sponsor: </span>
-                    <p><a href="https://www.objectix.de/" target="_blank"> <img src="images/objectix-logo.png"></a></p>
-                </div>
-            </div>
-            <h3 class="padding-top">Dies ist eine private Initiative. Diese Webseite wird nicht für kommerzielle Zwecke
-                genutzt. <br> Bild: iStock-Illustration-ID:1001374964, Bildnachweis:Lisitsa</h3>
-        </div>
-    </section>
-
-</div>
-
+</main>
 </body>
 </html>

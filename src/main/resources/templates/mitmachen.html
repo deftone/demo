@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:Name="http://www.w3.org/1999/xhtml"
+      th:lang="${#locale.language}">
+<head>
+    <meta charset="utf-8"/>
+    <title>CleanUp</title>
+    <link rel="stylesheet" href="style.css" th:href="@{/style.css}"/>
+    <link rel="stylesheet" href="reset.css" th:href="@{/reset.css}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/favicon.ico"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(function(){
+         $('.navigation').load("navigation");
+         });
+    </script>
+</head>
+<body>
+
+<div class="navigation"></div>
+
+<main>
+
+    <!-- MITMACHEN -->
+    <section class="container_mitmachen" id="mitmachen">
+        <h1 class="title"> Mitmachen </h1>
+
+        <div class="mitmachen-panel">
+
+            <p>Damit möglichst viele - und keine doppelten - Stellen abgesammelt werden haben wir eine Liste
+                mit Orten erstellt, für welche ihr euch anmelden könnt. Ihr könnt aber auch einen eigenen Ort
+                zum Sammeln angeben. Siehe weiter unten.
+                <br/><br/>
+                Achtet beim Sammeln an der Hauptstraße in Roßdorf darauf, dass ihr nur jeweils auf einer Straßenseite
+                sammeln müsst,
+                da wir die Straße verschiedenen Routen (3, 4a, 4b und 5) zugeordnet haben.
+                <br/><br/>
+                Wenn ihr Feedback zu den Routen habt,
+                gerne eine Mail an info@cleanup-rossdorf.de schicken, danke!</p>
+            <br>
+        </div>
+
+        <div class="subcontainer_mitmachen">
+
+            <div class="mitmachen_text">
+
+
+                <table id="hidden_mobile">
+                    <thead>
+                    <tr>
+                        <th class="tablerow">Kürzel</th>
+                        <th class="tablerow">Ort</th>
+                        <th class="tablerow">frei</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="location : ${locations}">
+                        <td class="tablerow" th:text="${location.idString}"></td>
+                        <td class="tablerow" th:text="${location.name}"></td>
+                        <td class="tablerow" th:text="${location.getFrei()}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <table id="hidden_desktop">
+                    <thead>
+                    <tr>
+                        <th class="tablerow">Kürzel</th>
+                        <th class="tablerow">Ort</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="location : ${locations}">
+                        <td class="tablerow" th:text="${location.idString}"></td>
+                        <td class="tablerow" th:text="${location.name}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+            <div class="container_side_50" id="hidden_mobile">
+                <a href="" class="container_mitmachen_box">
+                    <div class="container_media_100">
+                        <img src="images/Gundernhausen.png" alt="">
+                    </div>
+                </a>
+
+                <a href="" class="container_mitmachen_box">
+                    <div class="container_media_100">
+                        <img src="images/RossdorfNeu2.png" alt="">
+                    </div>
+                </a>
+            </div>
+        </div>
+
+
+        <div id="hidden_desktop">
+            <a href="" class="container_mitmachen_box">
+                <div class="container_media_100">
+                    <img src="images/Gundernhausen.png" alt="">
+                </div>
+                <p>Routen in Gundernhausen Gx</p>
+            </a>
+
+            <a href="" class="container_mitmachen_box">
+                <div class="container_media_100">
+                    <img src="images/RossdorfNeu2.png" alt="">
+                    <p>Routen in Roßdorf Rx</p>
+                    <br>
+                </div>
+            </a>
+        </div>
+
+        <div class="mitmachen-panel">
+
+
+            <p>
+                Gib deinen Namen (gerne auch nur Vornamen) ein und
+                wähle einen freien Ort aus, wo du Müll sammeln möchtest.
+            </p>
+
+
+            <form class="mitmachen_form" method="POST" th:action="@{/addPerson}" th:object="${givenLocation}">
+
+                <div class="mitmachen_select">
+                    Name: <input name="name"/>
+                    Ort:
+                    <select id="id" name="id">
+                        <option th:value="''" th:text="bitte_auswählen"></option>
+                        <option th:each="location : ${freeLocations}"
+                                th:value="${location.id}"
+                                th:text="${location.getCompactIdAndName()}"></option>
+                    </select>
+                </div>
+
+                <button type="submit">Anmelden</button>
+            </form>
+
+            <p>
+                Alle Routen schon vergeben? Oder du möchtest gerne woanders Müll sammeln?
+                Dann trage hier deinen Namen und einen selbstgewählten Ort ein:
+            </p>
+
+
+            <form class="mitmachen_form" method="POST" th:action="@{/addPersonNewRoute}" th:object="${freeLocation}">
+
+                <div class="mitmachen_select">
+                    <!--                    <div th:replace="fragments/input :: input('text','Name:', 'vorUndNachName', '')"/>-->
+
+                    Name: <input th:field="*{name}"/>
+                    Ort: <input th:field="*{location}"/>
+                </div>
+
+                <button type="submit">Anmelden</button>
+            </form>
+        </div>
+    </section>
+
+
+</main>
+
+</body>
+</html>
