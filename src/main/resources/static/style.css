@@ -662,6 +662,10 @@ a.button{
   transition-timing-function: ease-in;
   }
 
+.oranger_hintergrund {
+  background-color: #ff8000;   /* orange */
+  }
+
 .blauer_hintergrund {
   background-color: #0080ff;   /* mittleres blau */
   }
@@ -768,11 +772,12 @@ a.button{
   }
 
 #contact .container_contact {
-  background-color: #ff8000;
+  background-color: #00305F;
   color: white;
   padding-bottom: 2rem;
   text-align: center;
   }
+
 #contact .contact_info {
   width: 90%;
   margin: auto;
