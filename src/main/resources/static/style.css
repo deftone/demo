@@ -286,7 +286,7 @@ li {
     margin-bottom: 1.5rem;
     }
 
-  .container_main_60 {
+  .container_main_60, .container_side_50 {
     width: 100%;
     }
 
@@ -360,11 +360,6 @@ tbody tr .tablerow{
   color: white;
   }
 
-.container_mitmachen .prototyp{
-  padding: 2rem;
-  font-size: 1.3rem;
-  }
-
 .container_mitmachen h1{
   font-size: 3rem;
   }
@@ -402,6 +397,11 @@ tbody tr .tablerow{
     justify-content: center;
     flex-direction: column;
     }
+
+.container_mitmachen .mitmachen_text {
+  width: 100%;
+  padding: 1rem
+  }
 
   .container_mitmachen a.button{
         display: flex;
@@ -846,8 +846,10 @@ a.button{
     padding: 1rem 0;
     }
 
-  #contact {
+  #small_letters {
     font-size: 1.2rem;
+    width: 90%;
+    padding: 0 1rem;
     }
 
   #contact h3{
@@ -863,15 +865,13 @@ a.button{
 
 @media only screen and (max-width: 700px) {
   .bilder{
-    display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
     }
 
     .rundesBild {
       width: 5rem;
       border-radius: 50%;
-      padding: 0rem;
     }
 }
 
@@ -903,16 +903,6 @@ li {
     border: 1px solid white;
     }
 
-
-.box-25{
- background-color: #0059b3; /*dunkles blau*/
-    flex-direction: row;
-    border-radius: 1rem;
-    padding: 2rem;
-    margin: 1rem;
-    border: 1px solid white;
-    width: 25%;
-    }
 
 /* input - wirklich nur das input feld!*/
 .form-input-field {
@@ -1056,4 +1046,35 @@ a.bunt{
     justify-content: center;
     align-items: center;
     padding: 0.2rem 0.4rem;
+}
+
+.box-25{
+  background-color: #0059b3; /*dunkles blau*/
+  flex-direction: row;
+  border-radius: 1rem;
+  padding: 2rem;
+  margin: 1rem;
+  border: 1px solid white;
+  width: 25%;
   }
+
+@media only screen and (max-width: 850px) {
+
+ .galerie_box {
+  flex-direction: column;
+  padding: 0.5rem;
+  }
+
+ .box-25, {
+  width: 100%;
+  justify-content: start;
+  }
+
+  .galerie_box .container_media_padding{
+    width: 100%;
+    padding: 0rem;
+    margin: .5rem 0;
+
+  }
+
+}
