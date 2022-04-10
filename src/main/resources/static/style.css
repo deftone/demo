@@ -674,6 +674,10 @@ a.button{
   background-color: #0059b3;   /* dunkles blau */
   }
 
+.sehrdunkelblauer_hintergrund {
+  background-color: #00305F;   /* sehr dunkles blau */
+  }
+
 .container_presse ul, .container_presse li{
   font-size: 1.2rem;
   line-height: 1.25;
@@ -871,13 +875,23 @@ li {
 .box{
     background-color: #0059b3; /*dunkles blau*/
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     border-radius: 1rem;
     border: 1px solid white;
     }
 
+
+.box-25{
+ background-color: #0059b3; /*dunkles blau*/
+    flex-direction: row;
+    border-radius: 1rem;
+    padding: 2rem;
+    margin: 1rem;
+    border: 1px solid white;
+    width: 25%;
+    }
 
 /* input - wirklich nur das input feld!*/
 .form-input-field {
@@ -1008,3 +1022,17 @@ p.margin-left{
 a.bunt{
     color: #ff8000;
 }
+
+.galerie_text{
+    padding-top: 1rem;
+    align: center;
+    text-align: center;
+}
+
+.galerie_box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0.2rem 0.4rem;
+  }
