@@ -30,7 +30,7 @@ header {
 
 @media only screen and (max-width: 850px) {
   header {
-    height: 4rem;
+    height: 2rem;
     border-bottom: 1px solid #38B0CC;
     }
   }
@@ -52,6 +52,7 @@ main {
 @media only screen and (max-width: 700px) {
   body main{
     font-size: 1.2rem;
+    padding-top: 2rem;
   }
 }
 
@@ -109,21 +110,28 @@ li {
 }
 
 @media only screen and (max-width: 850px) {
-  i {
-    padding: 1rem;
-    padding-right: 2rem;
+  nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
     color: white;
-    cursor: pointer; }
+    cursor: pointer;
+    }
 
   nav li {
-    float: none; }
+    float: none;
+    }
 
   .menu_items {
     position: absolute;
-    right: 0rem; }
+    right: 0rem;
+    }
 
   .hidden {
-    display: none; } }
+    display: none;
+    }
+}
 
 /*** GENERAL: CONTAINER MEDIA ***/
 .container_media_padding img, .container_media_100 img{
