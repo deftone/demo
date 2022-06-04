@@ -80,6 +80,11 @@ public class AdminController {
         return new LocationASL();
     }
 
+    @PostMapping(path = "/admin/setLocationToBooked")
+    public void setLocationToBooked(@RequestParam long id) {
+        locationService.setLocationToBooked(id);
+    }
+
 
     //zum loeschen
     @PostMapping(path = "/admin/deleteLocation")
