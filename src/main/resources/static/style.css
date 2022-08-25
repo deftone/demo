@@ -60,6 +60,9 @@ a {
   text-decoration: none;
   }
 
+.container_side_40 h2.red{
+color: blue;
+}
 
 /*** GENERAL: NAVIGATION ***/
 nav a {
