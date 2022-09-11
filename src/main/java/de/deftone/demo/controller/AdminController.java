@@ -120,6 +120,12 @@ public class AdminController {
         return eventService.getAllEvents();
     }
 
+    //zum loeschen
+    @PostMapping(path = "/admin/deleteEvent")
+    public void deleteEvent(@RequestParam long id) {
+        eventService.deleteEventById(id);
+    }
+
     // ***** Participant *******
 
     @GetMapping("/admin/getAllParticipantsForNextEvent")

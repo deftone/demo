@@ -67,4 +67,11 @@ public class EventService {
     public List<Event> getAllEvents() {
         return eventRepo.findAll();
     }
+
+    public void deleteEventById(long id) {
+        Event event = eventRepo.findById(id)
+                //todo: bessere exception
+                .orElseThrow(() -> new RuntimeException("Kein Event mit id " + id));
+        eventRepo.delete(event);
+    }
 }
