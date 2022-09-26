@@ -59,7 +59,7 @@ public class AdminController {
     }
 
     //zum kontrollieren
-    @GetMapping("/admin/getLocations")
+    @PostMapping("/admin/getLocations")
     public List<Location> getLocations(@RequestBody Secret secret) {
         if (secretService.checkSecret(secret)) {
             return locationService.getAllLocations();
@@ -70,7 +70,7 @@ public class AdminController {
     }
 
     //zum zuruecksetzen
-    @GetMapping(path = "/admin/resetAllLocations")
+    @PostMapping(path = "/admin/resetAllLocations")
     public List<Location> resetAllLocations(@RequestBody Secret secret) {
         if (secretService.checkSecret(secret)) {
             return locationService.resetAllLocations();
@@ -141,7 +141,7 @@ public class AdminController {
     }
 
     //zum kontrollieren
-    @GetMapping("/admin/getEvents")
+    @PostMapping("/admin/getEvents")
     public List<Event> getEvents(@RequestBody Secret secret) {
         if (secretService.checkSecret(secret)) {
             return eventService.getAllEvents();
@@ -160,7 +160,7 @@ public class AdminController {
 
     // ***** Participant *******
 
-    @GetMapping("/admin/getAllParticipantsForNextEvent")
+    @PostMapping("/admin/getAllParticipantsForNextEvent")
     public List<Participant> getAllParticipantsForNextEvent(@RequestBody Secret secret) {
         if (secretService.checkSecret(secret)) {
             return participantService.getAllParticipantsForNextEvent();
