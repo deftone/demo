@@ -24,18 +24,25 @@ public class AdminController {
 
     // ****** Location ******
     //zum erstellen
-    @PostMapping(path = "/admin/addLocation", consumes = "application/json")
-    public Location addLocation(@RequestBody Location location) {
-        return locationService.addLocation(location);
+    @PostMapping(path = "/admin/addLocationList", consumes = "application/json")
+    public List<Location> addLocationList(@RequestBody Wrapper locationWithSecret) {
+        Secret secret = locationWithSecret.getSecret();
+        List<Location> locations = locationWithSecret.getLocationList();
+        if (secretService.checkSecret(secret)) {
+            return locationService.addLocationList(locations);
+        }
+        return Collections.emptyList();
     }
 
-    @PostMapping(path = "/admin/addLocationList", consumes = "application/json")
-    public List<Location> addLocationList(@RequestBody List<Location> locations) {
-        return locationService.addLocationList(locations);
+    @Getter
+    @Setter
+    static class Wrapper {
+        private Secret secret;
+        private List<Location> locationList;
     }
 
     @PostMapping(path = "/admin/addASLLocationList", consumes = "application/json")
-    public List<LocationASL> addASLLocationList(@RequestBody Wrapper locationWithSecret) {
+    public List<LocationASL> addASLLocationList(@RequestBody WrapperASL locationWithSecret) {
         Secret secret = locationWithSecret.getSecret();
         List<LocationASL> locations = locationWithSecret.getLocationASLList();
         if (secretService.checkSecret(secret)) {
@@ -46,21 +53,30 @@ public class AdminController {
 
     @Getter
     @Setter
-    static class Wrapper {
+    static class WrapperASL {
         private Secret secret;
         private List<LocationASL> locationASLList;
     }
 
     //zum kontrollieren
     @GetMapping("/admin/getLocations")
-    public List<Location> getLocations() {
-        return locationService.getAllLocations();
+    public List<Location> getLocations(@RequestBody Secret secret) {
+        if (secretService.checkSecret(secret)) {
+            return locationService.getAllLocations();
+        } else {
+            return Collections.emptyList();
+        }
+
     }
 
     //zum zuruecksetzen
     @GetMapping(path = "/admin/resetAllLocations")
-    public List<Location> resetAllLocations() {
-        return locationService.resetAllLocations();
+    public List<Location> resetAllLocations(@RequestBody Secret secret) {
+        if (secretService.checkSecret(secret)) {
+            return locationService.resetAllLocations();
+        } else {
+            return Collections.emptyList();
+        }
     }
 
     @PostMapping(path = "/admin/resetAllASLLocations")
@@ -81,20 +97,26 @@ public class AdminController {
     }
 
     @PostMapping(path = "/admin/setLocationToBooked")
-    public void setLocationToBooked(@RequestParam long id) {
-        locationService.setLocationToBooked(id);
+    public void setLocationToBooked(@RequestParam long id, @RequestBody Secret secret) {
+        if (secretService.checkSecret(secret)) {
+            locationService.setLocationToBooked(id);
+        }
     }
 
 
     //zum loeschen
     @PostMapping(path = "/admin/deleteLocation")
-    public void deleteLocation(@RequestParam long id) {
-        locationService.deleteLocation(id);
+    public void deleteLocation(@RequestParam long id, @RequestBody Secret secret) {
+        if (secretService.checkSecret(secret)) {
+            locationService.deleteLocation(id);
+        }
     }
 
     @PostMapping(path = "/admin/deleteAllLocation")
-    public void deleteAllLocation() {
-        locationService.deleteAllLocations();
+    public void deleteAllLocation(@RequestBody Secret secret) {
+        if (secretService.checkSecret(secret)) {
+            locationService.deleteAllLocations();
+        }
     }
 
     @PostMapping(path = "/admin/deleteAllASLLocation")
@@ -110,27 +132,41 @@ public class AdminController {
     // ****** Event *******
     //zum erstellen
     @PostMapping(path = "/admin/addEvent")
-    public Event addEvent(@RequestParam String datumInYYYY_MM_DD) {
-        return eventService.addEvent(datumInYYYY_MM_DD);
+    public Event addEvent(@RequestParam String datumInYYYY_MM_DD, @RequestBody Secret secret) {
+        if (secretService.checkSecret(secret)) {
+            return eventService.addEvent(datumInYYYY_MM_DD);
+        } else {
+            return null;
+        }
     }
 
     //zum kontrollieren
     @GetMapping("/admin/getEvents")
-    public List<Event> getEvents() {
-        return eventService.getAllEvents();
+    public List<Event> getEvents(@RequestBody Secret secret) {
+        if (secretService.checkSecret(secret)) {
+            return eventService.getAllEvents();
+        } else {
+            return Collections.emptyList();
+        }
     }
 
     //zum loeschen
     @PostMapping(path = "/admin/deleteEvent")
-    public void deleteEvent(@RequestParam long id) {
-        eventService.deleteEventById(id);
+    public void deleteEvent(@RequestParam long id, @RequestBody Secret secret) {
+        if (secretService.checkSecret(secret)) {
+            eventService.deleteEventById(id);
+        }
     }
 
     // ***** Participant *******
 
     @GetMapping("/admin/getAllParticipantsForNextEvent")
-    public List<Participant> getAllParticipantsForNextEvent() {
-        return participantService.getAllParticipantsForNextEvent();
+    public List<Participant> getAllParticipantsForNextEvent(@RequestBody Secret secret) {
+        if (secretService.checkSecret(secret)) {
+            return participantService.getAllParticipantsForNextEvent();
+        } else {
+            return Collections.emptyList();
+        }
     }
 
 //    @GetMapping("/admin/getSecrets")
@@ -159,8 +195,12 @@ public class AdminController {
 
     //Teilnehmer loeschen
     @PostMapping(path = "/admin/deleteParticipant")
-    public boolean deleteParticipant(@RequestParam long id) {
-        return participantService.deleteParticipant(id);
+    public boolean deleteParticipant(@RequestParam long id, @RequestBody Secret secret) {
+        if (secretService.checkSecret(secret)) {
+            return participantService.deleteParticipant(id);
+        } else {
+            return false;
+        }
     }
 
     @PostMapping(path = "/admin/deleteASLParticipant")
