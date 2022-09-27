@@ -164,25 +164,5 @@ public class LocationService {
         }
     }
 
-    public boolean checkExpression(String expressionToCheck) {
-        // damit niemand sql injection oder andere boese sachen macht:
-        if (expressionToCheck.contains("\""))
-            return false;
-        if (expressionToCheck.contains("'"))
-            return false;
-        if (expressionToCheck.contains("select"))
-            return false;
-        if (expressionToCheck.contains("sleep"))
-            return false;
-        if (expressionToCheck.contains("delay"))
-            return false;
-        if (expressionToCheck.contains("XOR"))
-            return false;
-        if (expressionToCheck.contains("\\"))
-            return false;
-        if (expressionToCheck.contains("/"))
-            return false;
 
-        return true;
-    }
 }
