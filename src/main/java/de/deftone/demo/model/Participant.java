@@ -49,10 +49,10 @@ public class Participant {
 
         if (ohneBoeseWoerter.equals(expressionToCheck.toLowerCase())) {
             return expressionToCheck
-                    .replaceAll("[^a-zA-Z0-9.,&\\s\\u00c4\\u00e4\\u00d6\\u00f6\\u00dc\\u00fc\\u00df]", "-");
+                    .replaceAll("[^a-zA-Z0-9.,&()\\s\\u00c4\\u00e4\\u00d6\\u00f6\\u00dc\\u00fc\\u00df]", "-");
         } else {
             return ohneBoeseWoerter
-                    .replaceAll("[^a-zA-Z0-9.,&\\s\\u00c4\\u00e4\\u00d6\\u00f6\\u00dc\\u00fc\\u00df]", "-");
+                    .replaceAll("[^a-zA-Z0-9\\s\\u00c4\\u00e4\\u00d6\\u00f6\\u00dc\\u00fc\\u00df]", "-");
         }
     }
 }

@@ -23,7 +23,7 @@ class ParticipantTest {
             "umlautOköÖäÄüÜ, umlautOköÖäÄüÜ",
             "Kathrin & Katrin, Kathrin & Katrin",
             "Kathrin && Katrin, Kathrin && Katrin",
-            "Team Kat(h)rin, Team Kat-h-rin"
+            "Team Kat(h)rin, Team Kat(h)rin"
     })
     void check(String expression, String expected) {
         assertEquals(expected, Participant.cleanUserInput(expression));
@@ -38,7 +38,7 @@ class ParticipantTest {
             "DeLaY, --",
             " 1' OR 2+776-776-1=0+0+0+1 or 'EryZMk78'=' , 1- OR 2-776-776-1-0-0-0-1 or -EryZMk78---",
             "-1\\\" OR 2+844-844-1=0+0+0+1 -- \" , -1-- OR 2-844-844-1-0-0-0-1 -- -",
-            " if(now()=sysdate() , if-now---sysdate--",
+            " if(now()=sysdate() , if(now()-sysdate()",
             " -1; waitfor delay '0:0:15' -- , -1- waitfor -- -0-0-15- --",
             " (select(0)from(select(sleep(15)))v)/*'+(select(0)from(select(sleep(15)))v)+'\"+(select(0)from(select(sleep(15)))v)+\"*/ " +
                     ", ----0-from-------15---v---------0-from-------15---v---------0-from-------15---v-----"
@@ -50,7 +50,7 @@ class ParticipantTest {
     @Test
     void kommasTesten() {
         String expression = "#0'XOR(if(now()=sysdate(),Sleep(15),0))XOR'Z";
-        String expected__ = "-0-xor-if-now---sysdate--,---15-,0--xor-z";
+        String expected__ = "-0-xor-if-now---sysdate------15--0--xor-z";
         assertEquals(expected__, Participant.cleanUserInput(expression));
     }
 
