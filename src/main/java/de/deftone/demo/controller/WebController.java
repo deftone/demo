@@ -108,9 +108,9 @@ public class WebController {
         return "galerie";
     }
 
-    @GetMapping({"/contact"})
+    @GetMapping({"/about"})
     public String contact() {
-        return "contact";
+        return "about";
     }
 
     @GetMapping("/error")

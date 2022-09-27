@@ -1,5 +1,6 @@
 package de.deftone.demo.service;
 
+import de.deftone.demo.model.GivenLocation;
 import de.deftone.demo.model.Location;
 import de.deftone.demo.model.LocationASL;
 import de.deftone.demo.repo.LocationASLRepo;
@@ -161,5 +162,27 @@ public class LocationService {
             location.get().setFree(free);
             return locationASLRepo.save(location.get());
         }
+    }
+
+    public boolean checkExpression(String expressionToCheck) {
+        // damit niemand sql injection oder andere boese sachen macht:
+        if (expressionToCheck.contains("\""))
+            return false;
+        if (expressionToCheck.contains("'"))
+            return false;
+        if (expressionToCheck.contains("select"))
+            return false;
+        if (expressionToCheck.contains("sleep"))
+            return false;
+        if (expressionToCheck.contains("delay"))
+            return false;
+        if (expressionToCheck.contains("XOR"))
+            return false;
+        if (expressionToCheck.contains("\\"))
+            return false;
+        if (expressionToCheck.contains("/"))
+            return false;
+
+        return true;
     }
 }
