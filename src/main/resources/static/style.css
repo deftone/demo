@@ -1109,7 +1109,7 @@ position: fixed;
 z-index: 101;
 }
 .cnt223{
-min-width: 600px;
+min-width: 200px;
 width: 600px;
 min-height: 150px;
 margin: 100px auto;
@@ -1120,6 +1120,15 @@ padding: 15px 35px;
 border-radius: 5px;
 box-shadow: 0 2px 5px #000;
 }
+
+@media only screen and (max-width: 700px) {
+    .cnt223{
+    min-width: 60%;
+    width: 100px;
+    margin: 50px auto;
+    }
+}
+
 .cnt223 p{
 clear: both;
     color: #555555;
@@ -1127,6 +1136,13 @@ clear: both;
     font-size: 20px;
     font-family: sans-serif;
 }
+
+@media only screen and (max-width: 700px) {
+    .cnt223 p{
+    font-size: 15px;
+    }
+}
+
 .cnt223 p a{
 color: #d91900;
 font-weight: bold;
