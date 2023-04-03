@@ -37,7 +37,7 @@ class LocationServiceTest {
         when(locationRepoMock.findAll()).thenReturn(createLocations());
         try {
             //testet auch indirekt den trimm!
-            service.addLocation(new Location(4L, "R2", "  rehBERg ", false));
+            service.addLocation(new Location(4L, "R2", "  rehBERg", false));
             fail();
         } catch (RuntimeException e) {
             assertEquals("Location rehBERg already exists!", e.getMessage());
@@ -83,4 +83,6 @@ class LocationServiceTest {
         list.add(new Location(3L, "R3", "Rehberg", true));
         return list;
     }
+
+
 }
