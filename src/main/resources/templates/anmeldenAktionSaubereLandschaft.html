@@ -19,8 +19,8 @@
     <!-- BANNER -->
     <section class="container_banner blue" role="banner">
         <h1>
-<!--            Aktion Saubere Landschaft - Anmelden</h1>-->
-            Herbstputz- Anmelden</h1>
+            <!--            Aktion Saubere Landschaft - Anmelden</h1>-->
+            Herbstputz - Anmeldung</h1>
     </section>
 
     <!-- ANMELDEN -->
@@ -33,23 +33,32 @@
             </p>
             <ul class="with-dots">
                 <li> Anmeldeschluss ist Mittwoch, der 15.September 2023</li>
-<!--                <li> Die Veranstaltung ist auf 50 Personen beschränkt</li>-->
-<!--                <li>Für die Teilnahme an der Aktion Saubere Landschaft bringen Sie bitte eine Mund- -->
-<!--                    Nasen-Abdeckung mit.-->
-<!--                </li>-->
-<!--                <li>Sollten Sie Anzeichen von Erkältungskrankheiten vorweisen, ist eine Teilnahme-->
-<!--                    nicht möglich.-->
-<!--                </li>-->
-<!--                <li>Urlaubsrückkehrer: Sollten Sie sich in den 2 Wochen vor der Veranstaltung in einem ausgewiesenen-->
-<!--                    Corona-Risiko-Gebiet aufgehalten haben, ist die Teilnahme nicht möglich.-->
-<!--                </li>-->
-                <li>Für die Teilnahme am Herbstputz ist die Erfassung von
-                    Teilnehmerdaten zwingend erforderlich. Bitte füllen Sie dieses Formular vollständig
-                    aus und stimmen Sie der elektronischen Erfassung zu. Um die Nachverfolgung
-                    von Infektionen zu ermöglichen, müssen wir als Veranstalter nach § 1 der Corona-
-                    Kontakt- und Betriebsbeschränkungsverordnung des Landes Hessen Daten unserer
-                    Teilnehmenden erfassen. Selbstverständlich achten wir hierbei auf den Schutz Ihrer
-                    Daten. Wir danken Ihnen für Ihre Mithilfe.
+                <!--                <li> Die Veranstaltung ist auf 50 Personen beschränkt</li>-->
+                <!--                <li>Für die Teilnahme an der Aktion Saubere Landschaft bringen Sie bitte eine Mund- -->
+                <!--                    Nasen-Abdeckung mit.-->
+                <!--                </li>-->
+                <!--                <li>Sollten Sie Anzeichen von Erkältungskrankheiten vorweisen, ist eine Teilnahme-->
+                <!--                    nicht möglich.-->
+                <!--                </li>-->
+                <!--                <li>Urlaubsrückkehrer: Sollten Sie sich in den 2 Wochen vor der Veranstaltung in einem ausgewiesenen-->
+                <!--                    Corona-Risiko-Gebiet aufgehalten haben, ist die Teilnahme nicht möglich.-->
+                <!--                </li>-->
+                <!--                <li>Für die Teilnahme am Herbstputz ist die Erfassung von-->
+                <!--                    Teilnehmerdaten zwingend erforderlich. Bitte füllen Sie dieses Formular vollständig-->
+                <!--                    aus und stimmen Sie der elektronischen Erfassung zu. Um die Nachverfolgung-->
+                <!--                    von Infektionen zu ermöglichen, müssen wir als Veranstalter nach § 1 der Corona- -->
+                <!--                    Kontakt- und Betriebsbeschränkungsverordnung des Landes Hessen Daten unserer-->
+                <!--                    Teilnehmenden erfassen. Selbstverständlich achten wir hierbei auf den Schutz Ihrer-->
+                <!--                    Daten. Wir danken Ihnen für Ihre Mithilfe.-->
+                <!--                </li>-->
+                <li>
+                    Wir bitten um Angabe Ihres Namens und Ihrer E-Mail Adresse (zwecks Kommunikation) und wieviele Kinder
+                    und/oder Erwachsene Sie zusätzlich (d.h. ohne Sie selbst) anmelden.
+                    <br>
+                    Grund: alle Helferinnen und Helfer bekommen als Anerkennung ein kleines Dankeschön vom ZAW.
+                </li>
+                <li>
+                    Die Übertragung Ihrer Daten an uns erfolgt verschlüsselt.
                 </li>
             </ul>
 
@@ -79,30 +88,32 @@
                             <div th:replace="fragments/input :: input('text','Vor- und Nachname *:', 'vorUndNachName', 'z.B. Max Mustermann')"></div>
                             <br>
                             <br>
-                            <div th:replace="fragments/input :: input('text','Straße HausNr *:', 'strasseHausNr', 'z.B. Darmstädter Str. 1')"></div>
-                            <br>
-                            <br>
-                            <div th:replace="fragments/input :: input('text','PLZ Ort *:', 'plzOrt', 'z.B. 64380 Roßdorf')"></div>
-                            <br>
-                            <br>
+<!--                            <div th:replace="fragments/input :: input('text','Straße HausNr *:', 'strasseHausNr', 'z.B. Darmstädter Str. 1')"></div>-->
+<!--                            <br>-->
+<!--                            <br>-->
+<!--                            <div th:replace="fragments/input :: input('text','PLZ Ort *:', 'plzOrt', 'z.B. 64380 Roßdorf')"></div>-->
+<!--                            <br>-->
+<!--                            <br>-->
                             <div th:replace="fragments/input :: input('text','Email-Adresse *:', 'emailAdresse', 'z.B. Max@Mustermann.de')"></div>
                             <br>
                             <br>
-                            <div th:replace="fragments/input :: input('text','Telefonnummer *:', 'telefonNr', 'z.B. 06154-12345')"></div>
+<!--                            <div th:replace="fragments/input :: input('text','Telefonnummer *:', 'telefonNr', 'z.B. 06154-12345')"></div>-->
 
                             <div class="ueber-rahmen">
                                 <p>
                                     <br>
                                     Wenn Sie z.B. mit Mitgliedern Ihrer Familie oder Freunden gemeinsam sammeln wollen,
-                                    dann geben Sie diese Person(en) bitte  hier an.
-                                    Nur den Vor- und Nachnamen.
-                                    Es sind keine weiteren Infos nötig, da Sie als Kontaktperson hinterlegt sind.
+                                    dann geben Sie die Anzahl dieser zusätzlichen Personen bitte hier an. Relevant für das Dankeschön vom ZAW.
+<!--                                    Nur den Vor- und Nachnamen.-->
+<!--                                    Es sind keine weiteren Infos nötig, da Sie als Kontaktperson hinterlegt sind.-->
                                     <br>
                                     <br>
                                 </p>
                             </div>
 
-                            <div th:replace="fragments/input :: input('text','weitere Teilnehmer:', 'weitereTeilnehmer', 'z.B. Moritz Mustermann, Heinz Anders')"></div>
+<!--                            <div th:replace="fragments/input :: input('text','weitere Teilnehmer:', 'weitereTeilnehmer', 'z.B. Moritz Mustermann, Heinz Anders')"></div>-->
+                            <div th:replace="fragments/input :: input('text','Anzahl Erwachsene', 'weitereErwachsene', 'z.B. 0')"></div>
+                            <div th:replace="fragments/input :: input('text','Anzahl Kinder:', 'weitereKinder', 'z.B. 2')"></div>
                         </div>
                         <br>
 
@@ -134,34 +145,34 @@
                             <div th:replace="fragments/input :: input('text','oder selbstgewählter Ort:', 'freeLocation', 'z.B. An der Eisernen Hand')"></div>
                         </div>
 
-                        <br>
+<!--                        <br>-->
                         <!--Checkbox Zustimmung Daten-->
-                        <div class="rahmen">
+<!--                        <div class="rahmen">-->
 
-                            <div class="text-in-rahmen">
-                                <p>
-                                    Die Übertragung Ihrer Daten an uns erfolgt verschlüsselt. Sie sind zu keinem
-                                    Zeitpunkt
-                                    verpflichtet Daten an uns zu übermitteln, sollten Sie jedoch eine
-                                    Anmeldung
-                                    tätigen wollen, benötigen wir die entsprechenden Informationen.
-                                    <br>
-                                    <br>
-                                </p>
-                            </div>
+<!--                            <div class="text-in-rahmen">-->
+<!--                                <p>-->
+<!--                                    Die Übertragung Ihrer Daten an uns erfolgt verschlüsselt. Sie sind zu keinem-->
+<!--                                    Zeitpunkt-->
+<!--                                    verpflichtet Daten an uns zu übermitteln, sollten Sie jedoch eine-->
+<!--                                    Anmeldung-->
+<!--                                    tätigen wollen, benötigen wir die entsprechenden Informationen.-->
+<!--                                    <br>-->
+<!--                                    <br>-->
+<!--                                </p>-->
+<!--                            </div>-->
 
-                            <div class="checkbox">
-                                <input class="checkbox-icon" type="checkbox" name="personenDaten" value="ok">
-                                <p class="nebenCheckbox">
-                                    * Hiermit erkläre ich ausdrücklich meine freiwillige Zustimmung zur elektronischen
-                                    Erfassung und Weiterverarbeitung meiner personenbezogenen Daten.
-                                </p>
-                            </div>
+<!--                            <div class="checkbox">-->
+<!--                                <input class="checkbox-icon" type="checkbox" name="personenDaten" value="ok">-->
+<!--                                <p class="nebenCheckbox">-->
+<!--                                    * Hiermit erkläre ich ausdrücklich meine freiwillige Zustimmung zur elektronischen-->
+<!--                                    Erfassung und Weiterverarbeitung meiner personenbezogenen Daten.-->
+<!--                                </p>-->
+<!--                            </div>-->
 
-                            <div th:if="${#fields.hasErrors('${givenLocationASL.personenDaten}')}">
-                                <p class="red"><br>Bitte zustimmen</p>
-                            </div>
-                        </div>
+<!--                            <div th:if="${#fields.hasErrors('${givenLocationASL.personenDaten}')}">-->
+<!--                                <p class="red"><br>Bitte zustimmen</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
 
 
                         <br>
@@ -182,7 +193,8 @@
                             </div>
                             <div class="checkbox">
                                 <input class="checkbox-icon" type="checkbox" name="fotosMachen" value="ok">
-                                <p class="nebenCheckbox"> Hiermit erkläre ich meine Einwilligung zur Nutzung der Fotoaufnahmen meiner
+                                <p class="nebenCheckbox"> Hiermit erkläre ich meine Einwilligung zur Nutzung der
+                                    Fotoaufnahmen meiner
                                     Person für die oben beschriebenen Zwecke und Verwendungen. Mir ist bekannt, dass ich
                                     für die Veröffentlichung kein Entgelt erhalte. Die Einwilligung erfolgt ausdrücklich
                                     freiwillig.

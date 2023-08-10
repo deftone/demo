@@ -64,13 +64,13 @@ public class ParticipantService {
                 .collect(Collectors.toList());
         for (ParticipantASL participantASL : encodedParticipants) {
             participantASL.setVorUndNachName(aesCrypto.decrypt(participantASL.getVorUndNachName(), passphrase));
-            participantASL.setStrasseHausNr(aesCrypto.decrypt(participantASL.getStrasseHausNr(), passphrase));
-            participantASL.setPlzOrt(aesCrypto.decrypt(participantASL.getPlzOrt(), passphrase));
+//            participantASL.setStrasseHausNr(aesCrypto.decrypt(participantASL.getStrasseHausNr(), passphrase));
+//            participantASL.setPlzOrt(aesCrypto.decrypt(participantASL.getPlzOrt(), passphrase));
             participantASL.setEmailAdresse(aesCrypto.decrypt(participantASL.getEmailAdresse(), passphrase));
-            participantASL.setTelefonNr(aesCrypto.decrypt(participantASL.getTelefonNr(), passphrase));
-            if (participantASL.getWeitereTeilnehmer() != null) {
-                participantASL.setWeitereTeilnehmer(aesCrypto.decrypt(participantASL.getWeitereTeilnehmer(), passphrase));
-            }
+//            participantASL.setTelefonNr(aesCrypto.decrypt(participantASL.getTelefonNr(), passphrase));
+//            if (participantASL.getWeitereTeilnehmer() != null) {
+//                participantASL.setWeitereTeilnehmer(aesCrypto.decrypt(participantASL.getWeitereTeilnehmer(), passphrase));
+//            }
         }
         return encodedParticipants;
     }
@@ -102,18 +102,20 @@ public class ParticipantService {
         String passphrase = getPassphrase();
         ParticipantASL verschluesselterParticipant = new ParticipantASL();
         verschluesselterParticipant.setVorUndNachName(aesCrypto.encrypt(participant.getVorUndNachName(), passphrase));
-        verschluesselterParticipant.setStrasseHausNr(aesCrypto.encrypt(participant.getStrasseHausNr(), passphrase));
-        verschluesselterParticipant.setPlzOrt(aesCrypto.encrypt(participant.getPlzOrt(), passphrase));
+//        verschluesselterParticipant.setStrasseHausNr(aesCrypto.encrypt(participant.getStrasseHausNr(), passphrase));
+//        verschluesselterParticipant.setPlzOrt(aesCrypto.encrypt(participant.getPlzOrt(), passphrase));
         verschluesselterParticipant.setEmailAdresse(aesCrypto.encrypt(participant.getEmailAdresse(), passphrase));
-        verschluesselterParticipant.setTelefonNr(aesCrypto.encrypt(participant.getTelefonNr(), passphrase));
-        if (participant.getWeitereTeilnehmer() != null && !participant.getWeitereTeilnehmer().isEmpty()) {
-            verschluesselterParticipant.setWeitereTeilnehmer(aesCrypto.encrypt(participant.getWeitereTeilnehmer(), passphrase));
-        }
+//        verschluesselterParticipant.setTelefonNr(aesCrypto.encrypt(participant.getTelefonNr(), passphrase));
+//        if (participant.getWeitereTeilnehmer() != null && !participant.getWeitereTeilnehmer().isEmpty()) {
+//            verschluesselterParticipant.setWeitereTeilnehmer(aesCrypto.encrypt(participant.getWeitereTeilnehmer(), passphrase));
+//        }
         //der Rest ist nicht verschluesselt:
         verschluesselterParticipant.setAngemeldetAm(participant.getAngemeldetAm());
         verschluesselterParticipant.setEvent(participant.getEvent());
         verschluesselterParticipant.setLocationName(participant.getLocationName());
         verschluesselterParticipant.setFotosMachen(participant.isFotosMachen());
+        verschluesselterParticipant.setWeitereErwachsene(participant.getWeitereErwachsene());
+        verschluesselterParticipant.setWeitereKinder(participant.getWeitereKinder());
         return verschluesselterParticipant;
     }
 
@@ -122,10 +124,10 @@ public class ParticipantService {
         if (byId.isPresent()) {
             ParticipantASL participantASL = byId.get();
             participantASL.setVorUndNachName(null);
-            participantASL.setStrasseHausNr(null);
+//            participantASL.setStrasseHausNr(null);
             participantASL.setEmailAdresse(null);
-            participantASL.setTelefonNr(null);
-            participantASL.setWeitereTeilnehmer(null);
+//            participantASL.setTelefonNr(null);
+//            participantASL.setWeitereTeilnehmer(null);
             participantASLRepo.save(participantASL);
             return true;
         }

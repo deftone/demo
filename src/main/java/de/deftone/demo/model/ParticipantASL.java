@@ -23,16 +23,18 @@ public class ParticipantASL {
 
     @Column(length = 300)
     private String vorUndNachName;
-    @Column(length = 300)
-    private String strasseHausNr;
-    @Column(length = 300)
-    private String plzOrt;
-    @Column(length = 300)
-    private String telefonNr;
+//    @Column(length = 300)
+//    private String strasseHausNr;
+//    @Column(length = 300)
+//    private String plzOrt;
+//    @Column(length = 300)
+//    private String telefonNr;
     @Column(length = 300)
     private String emailAdresse;
-    @Column(length = 1000)
-    private String weitereTeilnehmer;
+//    @Column(length = 1000)
+//    private String weitereTeilnehmer;
+    private Integer weitereErwachsene = 0;
+    private Integer weitereKinder = 0;
     @Column(length = 300)
     private String locationName;
     private boolean fotosMachen;

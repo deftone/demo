@@ -56,18 +56,18 @@ public class WebASLController {
         // alle Pflichtfelder muessen gefuellt sein:
         if (bindingResult.hasErrors()
                 || keinOrtEingetragen(givenLocationASL)
-                || datenCheckboxFehlt(givenLocationASL)
+//                || datenCheckboxFehlt(givenLocationASL)
         ) {
             if (keinOrtEingetragen(givenLocationASL)) {
                 bindingResult.addError(new FieldError("givenLocationASL",
                         "freeLocation",
                         "Bitte eine Route aus der Liste auswählen oder einen selbstgewählten Ort eintragen"));
             }
-            if (datenCheckboxFehlt(givenLocationASL)) {
-                bindingResult.addError(new FieldError("givenLocationASL",
-                        "personenDaten",
-                        "Bitte zustimmen"));
-            }
+//            if (datenCheckboxFehlt(givenLocationASL)) {
+//                bindingResult.addError(new FieldError("givenLocationASL",
+//                        "personenDaten",
+//                        "Bitte zustimmen"));
+//            }
             // damit die fehlermeldungen an den input boxen angezeigt werden, KEIN redirekt sonder das template zurueck geben!!
             // allerdings ist man dann ganz oben, daher evtl eine eigene neue seite, wo man sich anmelden kann
             // oder ich finde heraus, wie man an die stelle #anmelden kommt, hier mit href arbeiten klappt aber nicht
@@ -77,11 +77,13 @@ public class WebASLController {
 
         ParticipantASL participant = new ParticipantASL();
         participant.setVorUndNachName(givenLocationASL.getVorUndNachName());
-        participant.setStrasseHausNr(givenLocationASL.getStrasseHausNr());
-        participant.setPlzOrt(givenLocationASL.getPlzOrt());
+//        participant.setStrasseHausNr(givenLocationASL.getStrasseHausNr());
+//        participant.setPlzOrt(givenLocationASL.getPlzOrt());
         participant.setEmailAdresse(givenLocationASL.getEmailAdresse());
-        participant.setTelefonNr(givenLocationASL.getTelefonNr());
-        participant.setWeitereTeilnehmer(givenLocationASL.getWeitereTeilnehmer());
+//        participant.setTelefonNr(givenLocationASL.getTelefonNr());
+//        participant.setWeitereTeilnehmer(givenLocationASL.getWeitereTeilnehmer());
+        participant.setWeitereErwachsene(givenLocationASL.getWeitereErwachsene());
+        participant.setWeitereKinder(givenLocationASL.getWeitereKinder());
         participant.setAngemeldetAm(LocalDate.now());
         participant.setEvent(eventService.getNextEvent());
         // check was gefuellt ist
@@ -89,8 +91,7 @@ public class WebASLController {
             String locationNameById = locationService.getASLLocationNameById(givenLocationASL.getIdFromString());
             participant.setLocationName(locationNameById);
             // und anschliessend als gebucht setzen, damit aus auswahlbox verschwindet
-            // nein, nicht machen, ich setze die routen auf "gebucht"
-            // locationService.setASLLocationToBooked(givenLocationASL.getIdFromString());
+             locationService.setASLLocationToBooked(givenLocationASL.getIdFromString());
         } else {
             participant.setLocationName(givenLocationASL.getFreeLocation());
         }
@@ -115,7 +116,7 @@ public class WebASLController {
                         || givenLocationASL.getFreeLocation().isEmpty());
     }
 
-    private boolean datenCheckboxFehlt(GivenLocationASL givenLocationASL) {
-        return givenLocationASL.getPersonenDaten() == null;
-    }
+//    private boolean datenCheckboxFehlt(GivenLocationASL givenLocationASL) {
+//        return givenLocationASL.getPersonenDaten() == null;
+//    }
 }
