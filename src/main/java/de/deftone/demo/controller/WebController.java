@@ -25,6 +25,12 @@ public class WebController {
     private final EventService eventService;
     private final ParticipantService participantService;
 
+    // sobald das clean up am 3.9. stattgefunden hat dieses redirect scharf schalten:
+//    @GetMapping("/")
+//    public String showTemplateRedirekt(Model model) {
+//        return "redirect:/aktionSaubereLandschaft";
+//    }
+    // und das hier auskommentieren:
     @GetMapping("/")
     public String showTemplate(Model model) {
         model.addAttribute("nextEvent", eventService.getNextEvent().getFormattedDate());

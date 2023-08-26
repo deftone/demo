@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -66,6 +67,10 @@ public class EventService {
 
     public List<Event> getAllEvents() {
         return eventRepo.findAll();
+    }
+
+    public Optional<Event> getEventById(long id) {
+        return eventRepo.findById(id);
     }
 
     public void deleteEventById(long id) {

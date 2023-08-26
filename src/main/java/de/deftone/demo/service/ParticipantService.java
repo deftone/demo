@@ -75,6 +75,25 @@ public class ParticipantService {
         return encodedParticipants;
     }
 
+    public List<ParticipantASL> getAllASLParticipantsForEvent(long id) {
+        Optional<Event> optionalEvent = eventService.getEventById(id);
+        if (optionalEvent.isEmpty()) {
+            throw new RuntimeException("es gibt kein Event fuer id " + id);
+        } else {
+            Event requestedEvent = optionalEvent.get();
+            String passphrase = getPassphrase();
+            List<ParticipantASL> encodedParticipants = participantASLRepo.findAll()
+                    .stream()
+                    .filter(p -> p.getEvent().getId().equals(requestedEvent.getId()))
+                    .collect(Collectors.toList());
+            for (ParticipantASL participantASL : encodedParticipants) {
+                participantASL.setVorUndNachName(aesCrypto.decrypt(participantASL.getVorUndNachName(), passphrase));
+                participantASL.setEmailAdresse(aesCrypto.decrypt(participantASL.getEmailAdresse(), passphrase));
+            }
+            return encodedParticipants;
+        }
+    }
+
     public boolean deleteParticipant(long id) {
         Optional<Participant> byId = participantRepo.findById(id);
         if (byId.isPresent()) {

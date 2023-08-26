@@ -193,6 +193,15 @@ public class AdminController {
         }
     }
 
+    @PostMapping("/admin/getAllASLParticipantsForEventWithId")
+    public List<ParticipantASL> getAllASLParticipantsForEvent(@RequestParam long id, @RequestBody Secret secret) {
+        if (secretService.checkSecret(secret)) {
+            return participantService.getAllASLParticipantsForEvent(id);
+        } else {
+            return null;
+        }
+    }
+
     //Teilnehmer loeschen
     @PostMapping(path = "/admin/deleteParticipant")
     public boolean deleteParticipant(@RequestParam long id, @RequestBody Secret secret) {
