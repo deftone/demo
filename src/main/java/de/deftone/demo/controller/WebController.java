@@ -24,19 +24,20 @@ public class WebController {
     private final LocationService locationService;
     private final EventService eventService;
     private final ParticipantService participantService;
+//    private final MailService mailService;
 
     // sobald das clean up am 1.9. stattgefunden hat dieses redirect scharf schalten:
-//    @GetMapping("/")
-//    public String showTemplateRedirekt(Model model) {
-//        return "redirect:/aktionSaubereLandschaft";
-//    }
-    // und das hier auskommentieren:
     @GetMapping("/")
-    public String showTemplate(Model model) {
-        model.addAttribute("nextEvent", eventService.getNextEvent().getFormattedDate());
-        model.addAttribute("participants", participantService.getAllParticipantsForNextEvent());
-        return "index";
+    public String showTemplateRedirekt(Model model) {
+        return "redirect:/aktionSaubereLandschaft";
     }
+    // und das hier auskommentieren:
+//    @GetMapping("/")
+//    public String showTemplate(Model model) {
+//        model.addAttribute("nextEvent", eventService.getNextEvent().getFormattedDate());
+//        model.addAttribute("participants", participantService.getAllParticipantsForNextEvent());
+//        return "index";
+//    }
 
     @GetMapping({"/mitmachen"})
     public String mitmachen(Model model) {
@@ -71,6 +72,14 @@ public class WebController {
         //und anschliessend als gebucht setzen, damit aus auswahlbox verschwindet
         locationService.setLocationToBooked(givenLocation.getIdFromString());
 
+        //und eine mail schicken
+
+//        try {
+        //muss asynch sein, falls es funktioniert
+//            mailService.sendMail( "katrin.rose@posteo.de");
+//        } catch (MessagingException e) {
+//            e.printStackTrace();
+//        }
         return "redirect:/#mitmacher";
     }
 
