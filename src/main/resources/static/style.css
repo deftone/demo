@@ -60,6 +60,10 @@ a {
   text-decoration: none;
   }
 
+.red{
+  color:red;
+}
+
 .container_side_40 h2.red{
 color: blue;
 }
